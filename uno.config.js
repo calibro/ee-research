@@ -1,7 +1,7 @@
 import { defineConfig, presetMini } from "unocss"
 import transformerDirectives from "@unocss/transformer-directives"
 
-import { breakpoint, space, color } from "./assets/css/tokens.json"
+import { breakpoint, space, color } from "./tokens.json"
 
 const rules = [
 	[
