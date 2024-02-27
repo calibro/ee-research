@@ -1,10 +1,8 @@
-import postcssGetTokens from "./postcss-get-tokens.js"
 import postcssNested from "postcss-nested"
 import postcssPresetEnv from "postcss-preset-env"
 
 const config = {
 	plugins: [
-		postcssGetTokens({ path: "./tokens.json" }),
 		postcssNested(),
 		postcssPresetEnv({
 			stage: 0,
