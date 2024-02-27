@@ -1,4 +1,7 @@
 <script>
+  import "virtual:uno.css"
+	import "~/app.css"
+  
 	import { onMount } from "svelte"
 
   onMount(() => {

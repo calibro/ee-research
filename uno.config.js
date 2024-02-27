@@ -1,5 +1,6 @@
 import { defineConfig, presetMini } from "unocss"
 import transformerDirectives from "@unocss/transformer-directives"
+import extractorSvelte from "@unocss/extractor-svelte"
 
 import { breakpoint, space, color } from "./tokens.json"
 
@@ -158,6 +159,7 @@ export default defineConfig({
 			grid: "grid-12-gap",
 		},
 	],
+	extractors: [extractorSvelte()],
 	safelist: [
 		...Array.from({ length: 12 }, (_, i) => `grid-${i + 1}`),
 		...Object.keys(space).map((e) => `pb-${e}`),

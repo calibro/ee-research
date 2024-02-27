@@ -2,12 +2,14 @@
 	import Logo from "~/assets/icons/logo.svg?component";
 </script>
 
-<div class="homepage p-l ">
-	<div class="p-xl col-[span-12]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi doloribus velit cupiditate nemo temporibus explicabo neque sequi eos, dolorem assumenda eaque quisquam cum quod soluta omnis facilis, accusamus eligendi quas.</div>
-	<div class="col-[span-12]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi doloribus velit cupiditate nemo temporibus explicabo neque sequi eos, dolorem assumenda eaque quisquam cum quod soluta omnis facilis, accusamus eligendi quas.</div>
+<div class="homepage">
 	<div class="col-[span-12]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi doloribus velit cupiditate nemo temporibus explicabo neque sequi eos, dolorem assumenda eaque quisquam cum quod soluta omnis facilis, accusamus eligendi quas.</div>
 </div>
 
 <style>
-
+	.homepage {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: repeat(auto-fill, 100px)
+	}
 </style>
