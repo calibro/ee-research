@@ -1,11 +1,9 @@
 <script>
-	import "../app.css"
-</script>
+	import { onMount } from "svelte"
 
-<nav>
-	<a href="/">Home</a>
-	<a href="/about">About</a>
-	<a href="/page-that-doesnt-exist">Settings</a>
-</nav>
+  onMount(() => {
+    console.log('app mounted: apply vh fix here')
+  })
+</script>
 
 <slot />
