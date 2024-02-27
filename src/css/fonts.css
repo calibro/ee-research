@@ -1,0 +1,7 @@
+@font-face {
+	font-family: "Public Sans";
+	src: url("/fonts/PublicSans/PublicSans-Regular.woff") format("woff"),
+		url("/fonts/PublicSans/PublicSans-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-stretch: normal;
+}
