@@ -6,7 +6,6 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
 	plugins: [
-		sveltekit(),
 		UnoCSS(),
 		svg({
 			includePaths: ["./src/assets/icons/"],
@@ -14,5 +13,6 @@ export default defineConfig({
 				plugins: [{ name: "removeAttrs", params: { attrs: "(width|height)" } }],
 			},
 		}),
+		sveltekit(),
 	],
 })
