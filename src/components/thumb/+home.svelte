@@ -1,5 +1,5 @@
 <script>
-	import Text from "../+text.svelte"
+	import Text from "../elements/+text.svelte"
 
 	export let title = ""
 	export let description = ""

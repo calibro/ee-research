@@ -1,6 +1,6 @@
 <script>
 	import Logo from "~/assets/icons/logo.svg?component"
-	import Text from "~/components/+text.svelte"
+	import Text from "~/components/elements/+text.svelte"
 	import ThumbHome from "~/components/thumb/+home.svelte"
 </script>
 
