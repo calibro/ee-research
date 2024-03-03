@@ -2,6 +2,8 @@ import { defineConfig, presetMini } from "unocss"
 import transformerDirectives from "@unocss/transformer-directives"
 import extractorSvelte from "@unocss/extractor-svelte"
 
+import { breakpoint, space, color } from "./tokens.json"
+
 const rules = [
 	[
 		/^grid-(.*)-?(.*)?$/,
@@ -15,10 +17,26 @@ const rules = [
 		},
 	],
 	[
+		/^gradient-(.*)$/,
+		([, c]) => {
+			return {
+				background: `var(--gradient-linear-${c || "90"})`,
+			}
+		},
+	],
+	[
 		/^col-(.*)$/,
 		([, c]) => {
 			return {
 				"grid-column": c.replace(/\[|\]|\-/g, " "),
+			}
+		},
+	],
+	[
+		/^row-(.*)$/,
+		([, c]) => {
+			return {
+				"grid-row": c.replace(/\[|\]|\-/g, " "),
 			}
 		},
 	],
@@ -139,6 +157,10 @@ const rules = [
 ]
 
 export default defineConfig({
+	theme: {
+		colors: color,
+		breakpoints: breakpoint,
+	},
 	rules: rules,
 	presets: [
 		presetMini({
@@ -154,5 +176,8 @@ export default defineConfig({
 		},
 	],
 	extractors: [extractorSvelte()],
-	safelist: [...Array.from({ length: 12 }, (_, i) => `grid-${i + 1}`)],
+	safelist: [
+		...Array.from({ length: 12 }, (_, i) => `grid-${i + 1}`),
+		...Object.keys(space).map((e) => `pb-${e}`),
+	],
 })

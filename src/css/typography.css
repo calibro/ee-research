@@ -3,27 +3,43 @@
 		font-family: "Public Sans", sans-serif;
 		font-size: 12px;
 		letter-spacing: 0.05em;
+		@media (--m) {
+			font-size: 1.17vmin;
+		}
 	}
 	&-2 {
 		font-family: "Public Sans", sans-serif;
 		font-size: 16px;
 		letter-spacing: 0.03em;
+		@media (--m) {
+			font-size: 1.56vmin;
+		}
 	}
 	&-3 {
 		font-family: "Public Sans", sans-serif;
 		font-size: 20px;
 		line-height: 23px;
 		letter-spacing: 0.02em;
+		@media (--m) {
+			font-size: 1.95vmin;
+			line-height: 2.25vmin;
+		}
 	}
 	&-4 {
 		font-family: "Public Sans", sans-serif;
 		font-size: 32px;
 		letter-spacing: 0.04em;
+		@media (--m) {
+			font-size: 3.125vmin;
+		}
 	}
 	&-5 {
 		font-family: "Public Sans", sans-serif;
 		font-size: 64px;
 		letter-spacing: 0.02em;
+		@media (--m) {
+			font-size: 6.25vmin;
+		}
 	}
 }
 
