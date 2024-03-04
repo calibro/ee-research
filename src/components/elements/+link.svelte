@@ -27,11 +27,11 @@
 	{#if $$slots.default}
 		<slot />
 	{:else}
-		<div>{@html text}</div>
+		<div class="content">{@html text}</div>
 	{/if}
 </svelte:element>
 
-<style>
+<style lang="postcss">
 	button {
 		display: flex;
 		background-color: transparent;
@@ -44,9 +44,35 @@
 
 	.link {
 		display: block;
+
+		/* THEMES */
 		&.thumb {
 			width: 100%;
 			height: 100%;
+			&:hover {
+				background-color: var(--color-black);
+				color: var(--color-white);
+			}
+		}
+
+		&.nav {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: var(--space-s) var(--space-m);
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			width: 100%;
+			.content {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+
+			&:not(:last-child) {
+				border-right: var(--border-default);
+			}
 			&:hover {
 				background-color: var(--color-black);
 				color: var(--color-white);
