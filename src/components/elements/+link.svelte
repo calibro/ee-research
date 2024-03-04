@@ -13,25 +13,23 @@
 	const isExternal = download || external
 </script>
 
-<template>
-	<svelte:element
-		this={component}
-		href={to}
-		target={download ? "_blank" : external ? "_blank" : "_self"}
-		rel={isExternal ? "external" : undefined}
-		class="link {theme}"
-		download={download ? true : undefined}
-		on:click={fn}
-    role="button"
-    tabindex="0"    
-	>
-		{#if $$slots.default}
-			<slot />
-		{:else}
-			<div>{@html text}</div>
-		{/if}
-	</svelte:element>
-</template>
+<svelte:element
+	this={component}
+	href={to}
+	target={download ? "_blank" : external ? "_blank" : "_self"}
+	rel={isExternal ? "external" : undefined}
+	class="link {theme} {$$restProps.class}"
+	download={download ? true : undefined}
+	on:click={fn}
+	role="button"
+	tabindex="0"
+>
+	{#if $$slots.default}
+		<slot />
+	{:else}
+		<div>{@html text}</div>
+	{/if}
+</svelte:element>
 
 <style>
 	button {
@@ -42,5 +40,17 @@
 		text-align: inherit;
 		cursor: pointer;
 		font-weight: inherit;
+	}
+
+	.link {
+		display: block;
+		&.thumb {
+			width: 100%;
+			height: 100%;
+			&:hover {
+				background-color: var(--color-black);
+				color: var(--color-white);
+			}
+		}
 	}
 </style>

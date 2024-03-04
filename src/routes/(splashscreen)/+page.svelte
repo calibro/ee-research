@@ -1,5 +1,6 @@
 <script>
 	import Logo from "~/assets/icons/logo.svg?component"
+	import Link from "~/components/elements/+link.svelte"
 	import Text from "~/components/elements/+text.svelte"
 	import ThumbHome from "~/components/thumb/+home.svelte"
 </script>
@@ -7,11 +8,15 @@
 <div class="homepage">
 	<div class="top grid">
 		<div class="item col-[span-1] row-[span-2] flex-center-center">
-			<div class="logo">
-				<Logo width="100%" />
-			</div>
+			<Link url="/">
+				<div class="logo">
+					<Logo width="100%" />
+				</div>
+			</Link>
 		</div>
-		<div class="item flex-start-center gradient-180 p-l col-[span-11] row-[span-2]">
+		<div
+			class="item flex-start-center gradient-180 p-l col-[span-11] row-[span-2]"
+		>
 			<div>
 				<Text tag="h1" content="Embodied ecologies" typo="5" />
 				<Text tag="h2" content="– online mapping" typo="4" class="case-upper" />
@@ -52,7 +57,11 @@
 				description="By which web pages are the most significant stock photos used?"
 			/>
 		</div>
-		<div class="item col-[span-5] flex-start-center">About</div>
+		<div class="item col-[span-5] flex-start-center p-l case-upper">
+			<Link url="/about">
+				<Text tag="h3" content="About" typo="2" />
+			</Link>
+		</div>
 		<div class="item"></div>
 		<div class="item col-[span-11]"></div>
 	</div>
