@@ -1,7 +1,7 @@
 <script>
 	import { getRelativeUrl } from "$lib"
 
-	export let url
+	export let url = null
 	export let theme = "default"
 	export let external = false
 	export let text = ""
@@ -43,10 +43,12 @@
 	}
 
 	.link {
-		display: block;
-
 		/* THEMES */
+		&.default {
+		}
+
 		&.thumb {
+			display: block;
 			width: 100%;
 			height: 100%;
 			&:hover {

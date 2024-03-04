@@ -1,8 +1,8 @@
 <script>
 	import Logo from "~/assets/icons/logo.svg?component"
-	import Link from "~/components/elements/+link.svelte"
-	import Text from "~/components/elements/+text.svelte"
-	import ThumbHome from "~/components/thumb/+home.svelte"
+	import Link from "~/components/elements/link.svelte"
+	import Text from "~/components/elements/text.svelte"
+	import ThumbHome from "~/components/thumb/home.svelte"
 </script>
 
 <div class="homepage">
@@ -75,10 +75,6 @@
 <style lang="postcss">
 	.logo {
 		width: 42px;
-
-		@media (--m) {
-			width: 4.1vmin;
-		}
 	}
 
 	.homepage {
@@ -90,6 +86,7 @@
 		height: 50%;
 	}
 	.item {
-		border: 0 0 var(--border-default);
+		border-right: var(--border-default);
+		border-bottom: var(--border-default);
 	}
 </style>

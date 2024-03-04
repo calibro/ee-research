@@ -1,5 +1,5 @@
 <script>
-	import Navbar from "~/components/ui/+navbar.svelte"
+	import Navbar from "~/components/ui/navbar.svelte"
 </script>
 
 <div class="layout">
@@ -12,7 +12,7 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr;
-    align-items: start;
+		align-items: start;
 		height: 100%;
 	}
 </style>

@@ -1,6 +1,6 @@
 <script>
 	import Logo from "~/assets/icons/logo.svg?component"
-	import Link from "../elements/+link.svelte"
+	import Link from "../elements/link.svelte"
 
 	const items = [
 		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/tiktok" },
@@ -21,7 +21,12 @@
 	</div>
 	<div class="col-[span-11] flex">
 		{#each items as item}
-			<Link url={item.url} theme="nav" class="col-[span-2]" text={item.title} />
+			<Link
+				url={item.url}
+				theme="nav"
+				class="daniele col-[span-2]"
+				text={item.title}
+			/>
 		{/each}
 	</div>
 </nav>
@@ -29,20 +34,16 @@
 <style lang="postcss">
 	nav {
 		border-bottom: var(--border-default);
-	}
 
-	.logo {
-		width: 42px;
-
-		@media (--m) {
-			width: 4.1vmin;
+		.logo {
+			width: 42px;
 		}
-	}
 
-	.item {
-		padding: var(--space-s) var(--space-m);
-		&:not(:last-child) {
-			border-right: var(--border-default);
+		.item {
+			padding: var(--space-s) var(--space-m);
+			&:not(:last-child) {
+				border-right: var(--border-default);
+			}
 		}
 	}
 </style>

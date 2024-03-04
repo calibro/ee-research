@@ -1,6 +1,6 @@
 <script>
-	import Link from "../elements/+link.svelte"
-	import Text from "../elements/+text.svelte"
+	import Link from "../elements/link.svelte"
+	import Text from "../elements/text.svelte"
 
 	export let title = ""
 	export let description = ""
