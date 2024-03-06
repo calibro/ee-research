@@ -2,13 +2,13 @@ import { csvParse } from "d3-dsv"
 import { slugify } from "$lib"
 
 export async function load({ params, fetch }) {
-	const response = await fetch("/tiktok/clusters/dutch.csv")
+	const response = await fetch("/tiktok/FR/prototype/clusters_fr.csv")
 	const result = await response.text()
 
-	const data = csvParse(result)
+	const entries = csvParse(result)
 	const tempQueries = []
 
-	data.forEach((el) => {
+	entries.forEach((el) => {
 		if (!tempQueries.includes(el.query)) {
 			tempQueries.push(el.query)
 		}
@@ -23,5 +23,6 @@ export async function load({ params, fetch }) {
 
 	return {
 		queries,
+		entries,
 	}
 }

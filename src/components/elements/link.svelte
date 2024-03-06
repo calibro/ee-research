@@ -18,7 +18,9 @@
 	href={to}
 	target={download ? "_blank" : external ? "_blank" : "_self"}
 	rel={isExternal ? "external" : undefined}
-	class="link {theme} {$$restProps.class}"
+	class="link {theme} {theme === 'download'
+		? 'typo-1 case-upper'
+		: 'typo-2'} {$$restProps.class}"
 	download={download ? true : undefined}
 	on:click={fn}
 	role="button"
@@ -75,6 +77,18 @@
 			&:not(:last-child) {
 				border-right: var(--border-default);
 			}
+			&:hover {
+				background-color: var(--color-black);
+				color: var(--color-white);
+			}
+		}
+
+		&.download {
+			display: inline-flex;
+			padding: 3px 8px 4px 8px;
+			border: var(--border-default);
+			border-radius: 8px;
+			width: fit-content;
 			&:hover {
 				background-color: var(--color-black);
 				color: var(--color-white);

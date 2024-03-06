@@ -1,23 +1,25 @@
 <script>
 	export let items
-	export let value = items?.[0]?.slug
+	export let value = null
+
+	$: computedItems = !Array.isArray(items) ? Object.values(items) : items
 </script>
 
 <div role="radiogroup" class="flex flex-wrap items-center gap-xs">
-	{#each items as { title, slug, color }}
+	{#each computedItems as { label, code, color }}
 		<input
 			class="sr-only"
 			type="radio"
-			id={slug}
+			id={code}
 			bind:group={value}
-			value={slug}
+			value={code}
 		/>
 		<label
 			class="typo-1 case-upper"
-			for={slug}
+			for={code}
 			style={`--background: var(--color-${color})`}
 		>
-			{title}
+			{label}
 		</label>
 	{/each}
 </div>
