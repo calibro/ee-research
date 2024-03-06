@@ -10,6 +10,7 @@
 
 	const component = url ? "a" : "button"
 	const to = getRelativeUrl(url)
+
 	const isExternal = download || external
 </script>
 
@@ -19,7 +20,7 @@
 	target={download ? "_blank" : external ? "_blank" : "_self"}
 	rel={isExternal ? "external" : undefined}
 	class="link {theme} {theme === 'download'
-		? 'typo-1 case-upper'
+		? 'typo-1'
 		: 'typo-2'} {$$restProps.class}"
 	download={download ? true : undefined}
 	on:click={fn}

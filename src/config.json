@@ -1,25 +1,25 @@
 {
   "languages": {
-    "US": {
-      "code": "US",
+    "us": {
+      "code": "us",
       "fileName": "clusters_us.csv",
       "label": "English",
       "color": "sky"
     },
-    "NL": {
-      "code": "NL",
+    "nl": {
+      "code": "nl",
       "fileName": "clusters_nl.csv",
       "label": "Dutch",
       "color": "blue"
     },
-    "FR": {
-      "code": "FR",
+    "fr": {
+      "code": "fr",
       "fileName": "clusters_fr.csv",
       "label": "French",
       "color": "pink"
     },
-    "PH": {
-      "code": "PH",
+    "ph": {
+      "code": "ph",
       "fileName": "clusters_ph.csv",
       "label": "Tagalog",
       "color": "red"

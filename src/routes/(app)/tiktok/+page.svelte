@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from "svelte"
+	import DownloadIcon from "~/assets/icons/download.svg?component"
 	import Dropdown from "~/components/elements/dropdown.svelte"
 	import Text from "~/components/elements/text.svelte"
 	import { csvParse } from "d3-dsv"
@@ -35,7 +36,6 @@
 			type: "text",
 		})
 
-		// console.log(dataFetch)
 		entries = dataFetch ? csvParse(dataFetch) : undefined
 		loading = false
 
@@ -59,7 +59,15 @@
 		</div>
 		<div class="group flex flex-col gap-xs">
 			<Text typo="1" content="Resources" class="case-upper" />
-			<Link to={url} download theme="download">Download</Link>
+			<div class="flex gap-xs">
+				<Link {url} theme="download" class="flex gap-xxs items-center">
+					<Text typo="1" content="data" />
+					<DownloadIcon width="8" />
+				</Link>
+				<Link {url} theme="download" class="flex gap-xs items-center">
+					<Text typo="1" content="view protocol" />
+				</Link>
+			</div>
 		</div>
 	</div>
 	<div class="container">
@@ -87,6 +95,6 @@
 	.container {
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
+		overflow: auto;
 	}
 </style>
