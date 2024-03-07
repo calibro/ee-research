@@ -1,14 +1,13 @@
 <script>
-	import { onMount } from "svelte"
 	import DownloadIcon from "~/assets/icons/download.svg?component"
 	import Dropdown from "~/components/elements/dropdown.svelte"
 	import Text from "~/components/elements/text.svelte"
-	import { csvParse } from "d3-dsv"
-	import { queryParam } from "sveltekit-search-params"
 	import Radio from "~/components/elements/radio.svelte"
+	import Link from "~/components/elements/link.svelte"
+	import { queryParam } from "sveltekit-search-params"
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
-	import Link from "~/components/elements/link.svelte"
+	import { csvParse } from "d3-dsv"
 
 	export let data
 
@@ -74,8 +73,6 @@
 		{#if showEntries}
 			{JSON.stringify(filteredEntries)}
 		{/if}
-		<!-- <h1>Welcome to About</h1>
-		<p>Visit <a href="/">kit.svelte.dev</a> to read the documentation</p> -->
 	</div>
 </div>
 

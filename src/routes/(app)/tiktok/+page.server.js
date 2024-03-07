@@ -2,7 +2,7 @@ import { csvParse } from "d3-dsv"
 import { slugify } from "$lib"
 
 export async function load({ params, fetch }) {
-	const response = await fetch("/tiktok/FR/prototype/clusters_fr.csv")
+	const response = await fetch("/tiktok/fr/prototype/clusters_fr.csv")
 	const result = await response.text()
 
 	const entries = csvParse(result)

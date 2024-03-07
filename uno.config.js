@@ -1,5 +1,4 @@
 import { defineConfig, presetMini } from "unocss"
-import transformerDirectives from "@unocss/transformer-directives"
 import extractorSvelte from "@unocss/extractor-svelte"
 
 import { breakpoint, space, color } from "./tokens.json"
@@ -169,7 +168,6 @@ export default defineConfig({
 			preflight: false,
 		}),
 	],
-	transformers: [transformerDirectives()],
 	shortcuts: [
 		{
 			grid: "grid-12-gap",

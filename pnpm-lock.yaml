@@ -20,6 +20,9 @@ devDependencies:
   '@unocss/extractor-svelte':
     specifier: ^0.58.5
     version: 0.58.5
+  '@unocss/postcss':
+    specifier: ^0.58.5
+    version: 0.58.5(postcss@8.4.35)
   '@unocss/transformer-directives':
     specifier: ^0.58.5
     version: 0.58.5

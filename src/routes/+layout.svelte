@@ -1,5 +1,4 @@
 <script>
-	import "uno.css"
 	import "~/app.css"
 
 	import { onMount } from "svelte"
