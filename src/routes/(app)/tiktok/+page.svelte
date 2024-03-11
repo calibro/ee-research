@@ -8,6 +8,7 @@
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
 	import { csvParse } from "d3-dsv"
+	import CirclePacking from "~/components/graphs/circlePacking.svelte"
 
 	export let data
 
@@ -22,28 +23,45 @@
 	$: selectedLang = languages?.[$lang]
 	$: filteredEntries = entries?.filter?.((entry) => entry?.query === $query)
 
-	$: url = selectedLang
-		? `/tiktok/${selectedLang.code}/prototype/${selectedLang.fileName}`
-		: null
+	$: baseUrl = `/tiktok/${selectedLang?.code}/prototype/`
+
+	$: dataUrl = selectedLang ? `${baseUrl}/${selectedLang.fileName}` : null
 
 	const watchLang = async (lang) => {
 		if (loading || !lang) return
+		if (!dataUrl) {
+			entries = null
+		}
 		loading = true
 		const { data: dataFetch, error: errorFetch } = await getAsyncData({
-			key: `tiktok-${lang}`,
-			url,
+			key: `tiktok-${lang}-data`,
+			url: dataUrl,
 			type: "text",
 		})
 
-		entries = dataFetch ? csvParse(dataFetch) : undefined
+		if (dataFetch) {
+			entries = csvParse(dataFetch)
+		} else {
+			entries = null
+		}
+
 		loading = false
 
-		if (selectedLang.code !== lang) {
+		if (selectedLang?.code !== lang) {
 			watchLang(selectedLang?.code)
 		}
 	}
 
 	$: watchLang(selectedLang?.code)
+
+	$: clusters = filteredEntries?.reduce((acc, entry) => {
+		const { cluster } = entry
+		if (!acc[cluster]) {
+			acc[cluster] = { name: cluster, children: [] }
+		}
+		acc[cluster]?.children.push(entry)
+		return acc
+	}, {})
 </script>
 
 <div class="page flex">
@@ -59,20 +77,20 @@
 		<div class="group flex flex-col gap-xs">
 			<Text typo="1" content="Resources" class="case-upper" />
 			<div class="flex gap-xs">
-				<Link {url} theme="download" class="flex gap-xxs items-center">
+				<Link url={dataUrl} theme="download" class="flex gap-xxs items-center">
 					<Text typo="1" content="data" />
 					<DownloadIcon width="8" />
 				</Link>
-				<Link {url} theme="download" class="flex gap-xs items-center">
+				<Link url={dataUrl} theme="download" class="flex gap-xs items-center">
 					<Text typo="1" content="view protocol" />
 				</Link>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		{#if showEntries}
-			{JSON.stringify(filteredEntries)}
-		{/if}
+	<div class="container grid-3-m">
+		{#each Object.keys(clusters) as key}
+			<CirclePacking cluster={clusters[key]} />
+		{/each}
 	</div>
 </div>
 
