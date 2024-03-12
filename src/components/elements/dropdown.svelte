@@ -14,7 +14,7 @@
 		menuOpen = false
 	}
 
-	$: selectedItem = items.find((item) => item.slug === value)
+	$: selectedItem = items?.find?.((item) => item.slug === value)
 
 	let dropdownRef
 
@@ -39,21 +39,23 @@
 	>
 		<Text
 			class={!selectedItem ? "opacity-50" : ""}
-			content={selectedItem?.title || "Select"}
+			content={!items?.length ? "Loading..." : selectedItem?.title || "Select"}
 			typo="2"
 		/>
 		<ArrowDown width={12} />
 	</Link>
 
-	<div class:show={menuOpen} class="list scrollbar-hide">
-		{#each items as item}
-			<Link
-				class={`button p-xs ${item.slug === value ? "selected" : ""}`}
-				text={item.title}
-				fn={() => handleLink(item.slug)}
-			/>
-		{/each}
-	</div>
+	{#if items?.length}
+		<div class:show={menuOpen} class="list scrollbar-hide">
+			{#each items as item}
+				<Link
+					class={`button p-xs ${item.slug === value ? "selected" : ""}`}
+					text={item.title}
+					fn={() => handleLink(item.slug)}
+				/>
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">

@@ -7,7 +7,10 @@
 	const createCirclePacking = (data, width, height) => {
 		const layout = pack().size([width, height]).padding(5)
 
-		const root = hierarchy(data).sum((d) => d.videosNumber)
+		const root = hierarchy(data, (d) => (Array.isArray(d) ? d[1] : null)).sum(
+			(d) => d.videosNumber
+		)
+
 		const nodes = layout(root).descendants()
 
 		// Remove parent node from nodes
@@ -17,9 +20,10 @@
 	}
 </script>
 
-<div class="circle-packing ratio-square flex-col-center-center p-l">
-	<Text typo="2" content={cluster.name} />
-	<svg width="100%" height="100%" viewBox="0 0 200 200">
+<div class="circle-packing flex-col-center-center p-l">
+	<!-- TODO: group with title and not as array -->
+	<Text typo="2" content={cluster?.[0]} />
+	<svg width="100%" viewBox="0 0 200 200" class="ratio-square">
 		{#each createCirclePacking(cluster, 200, 200) as node}
 			<g>
 				<circle cx={node.x} cy={node.y} r={node.r} />

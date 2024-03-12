@@ -1,5 +1,3 @@
-import { setContext, getContext } from "svelte"
-
 export const getAsyncData = async (
 	{ key, url, type = "json" },
 	fetchFn = fetch
@@ -23,6 +21,7 @@ export const getAsyncData = async (
 		}
 	} catch (e) {
 		error = e
+		console.error(e)
 	}
 	// }
 

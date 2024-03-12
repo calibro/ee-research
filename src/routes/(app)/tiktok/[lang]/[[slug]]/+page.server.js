@@ -1,25 +1,29 @@
 import { languages } from "~/config.json"
+import { group, csvParse } from "d3"
 import { error, redirect } from "@sveltejs/kit"
 import { getAsyncData } from "~/lib/data"
 
 /** @type {import('../$types').PageLoad} */
-export function load({ params, fetch }) {
+export async function load({ params, fetch }) {
 	const { lang, slug } = params
 	const selectedLang = languages[lang]
 
 	if (!selectedLang) redirect(301, "/tiktok")
 
-	const {data: clusetersData} = await getAsyncData({
-		key: `tiktok:${lang}:${slug}:clusters`,
-		url: `/tiktok/${selectedLang.code}/prototype/${selectedLang.fileName}`,
-	})
+	const { data: clustersData } = await getAsyncData(
+		{
+			key: `tiktok:${lang}:${slug}:clusters`,
+			url: `/tiktok/${selectedLang.code}/prototype/${selectedLang.fileName}`,
+			type: "text",
+		},
+		fetch
+	)
 
-	const {data: videoData} = await getAsyncData({
-		key: `tiktok:${lang}:${slug}:video`,
-		url: `/tiktok/${selectedLang.code}/prototype/videos.csv`,
-	})
+	const data = csvParse(clustersData)
+	const clusters = group(data, (d) => d.cluster)
 
 	return {
 		lang,
+		clusters,
 	}
 }

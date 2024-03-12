@@ -7,31 +7,27 @@
 	import { queryParam } from "sveltekit-search-params"
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
-	import { csvParse } from "d3-dsv"
+	import { csvParse, group } from "d3"
 	import CirclePacking from "~/components/graphs/circlePacking.svelte"
+	import { browser } from "$app/environment"
 
-	export let data
-
-	const { queries } = data
-	let { entries } = data
-
-	let loading = false
-	let query = queryParam("query")
-	let lang = queryParam("lang")
+	let queries,
+		entries,
+		loading = false,
+		query = queryParam("query"),
+		lang = queryParam("lang")
 
 	$: showEntries = entries?.length && $query && $lang
-	$: selectedLang = languages?.[$lang]
-	$: filteredEntries = entries?.filter?.((entry) => entry?.query === $query)
+	$: selectedLang = languages?.[$lang] || languages?.us
+	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
 
-	$: baseUrl = `/tiktok/${selectedLang?.code}/prototype/`
+	$: baseUrl = `/tiktok/${selectedLang?.code}/prototype`
 
 	$: dataUrl = selectedLang ? `${baseUrl}/${selectedLang.fileName}` : null
 
-	const watchLang = async (lang) => {
-		if (loading || !lang) return
-		if (!dataUrl) {
-			entries = null
-		}
+	const watchLang = async (lang = "us") => {
+		if (loading || !browser) return
+
 		loading = true
 		const { data: dataFetch, error: errorFetch } = await getAsyncData({
 			key: `tiktok-${lang}-data`,
@@ -41,27 +37,27 @@
 
 		if (dataFetch) {
 			entries = csvParse(dataFetch)
+			if (!queries?.length) {
+				queries = []
+				entries.forEach((el) => {
+					if (!queries.find((query) => query.slug === el.querySlug)) {
+						queries.push({ slug: el.querySlug, title: el.query })
+					}
+				})
+			}
 		} else {
 			entries = null
 		}
 
 		loading = false
 
-		if (selectedLang?.code !== lang) {
-			watchLang(selectedLang?.code)
-		}
+		// if (selectedLang?.code !== lang) {
+		// 	watchLang(selectedLang?.code)
+		// }
 	}
 
 	$: watchLang(selectedLang?.code)
-
-	$: clusters = filteredEntries?.reduce((acc, entry) => {
-		const { cluster } = entry
-		if (!acc[cluster]) {
-			acc[cluster] = { name: cluster, children: [] }
-		}
-		acc[cluster]?.children.push(entry)
-		return acc
-	}, {})
+	$: clusters = showEntries ? group(filteredEntries, (d) => d.cluster) : []
 </script>
 
 <div class="page flex">
@@ -87,20 +83,24 @@
 			</div>
 		</div>
 	</div>
-	<div class="container grid-3-m">
-		{#each Object.keys(clusters) as key}
-			<CirclePacking cluster={clusters[key]} />
-		{/each}
-	</div>
+	{#if showEntries}
+		<div class="container m:grid-3-m">
+			{#each clusters as cluster}
+				<CirclePacking {cluster} />
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">
 	.page {
 		height: 100%;
 		width: 100%;
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 	.sidebar {
+		position: sticky;
+		top: 0;
 		border-right: var(--border-default);
 		@media (--m) {
 			width: 23vw;
@@ -108,8 +108,6 @@
 	}
 
 	.container {
-		width: 100%;
-		height: 100%;
-		overflow: auto;
+		flex: 1 1 0;
 	}
 </style>

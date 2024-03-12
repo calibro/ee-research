@@ -3,6 +3,10 @@
 	import DonwloadIcon from "~/assets/icons/download.svg?component"
 	import Close from "~/assets/icons/close.svg?component"
 	import Link from "~/components/elements/link.svelte"
+	import { onMount } from "svelte"
+
+	export let data
+	const { clusters } = data
 </script>
 
 <div class="page">
