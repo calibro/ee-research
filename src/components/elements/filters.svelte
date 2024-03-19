@@ -15,7 +15,6 @@
 	let query = queryParam("query"),
 		lang = queryParam("lang")
 
-	let innerWidth, innerHeight
 	let openFilters = false
 
 	$: browser
@@ -29,12 +28,7 @@
 		: undefined
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight />
-
-<div
-	class="{openFilters ? 'show' : undefined} 
-  filters px-s py-m m:p-0"
->
+<div class:show={openFilters} class="filters px-s py-m m:p-0">
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="Query" class="case-upper" />
 		<Dropdown items={queries} bind:value={$query} />
@@ -44,8 +38,12 @@
 		<Radio items={languages} bind:value={$lang} />
 	</div>
 </div>
-<div class="cta m:hidden">
-	<Link class="button" fn={() => (openFilters = !openFilters)} theme="cta">
+<div class="cta pointer-events-none m:hidden">
+	<Link
+		class="button pointer-events-initial"
+		fn={() => (openFilters = !openFilters)}
+		theme="cta"
+	>
 		{#if openFilters}
 			<Text content="Confirm" typo="small" />
 		{:else}
@@ -61,7 +59,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: 200;
+		z-index: 100;
 		background: var(--color-white);
 		display: none;
 		&.show {
@@ -87,7 +85,7 @@
 		padding: var(--space-m) var(--space-s);
 		display: flex;
 		justify-content: center;
-		z-index: 201;
+		z-index: 101;
 
 		@media (--m) {
 			display: none;

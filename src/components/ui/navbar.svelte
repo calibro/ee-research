@@ -4,7 +4,8 @@
 	import Close from "~/assets/icons/close.svg?component"
 	import Link from "../elements/link.svelte"
 	import { browser } from "$app/environment"
-	import Text from "../elements/text.svelte"
+	import { breakpoint } from "~/css/tokens.json"
+	import { extractNumber } from "~/lib"
 
 	const items = [
 		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/tiktok" },
@@ -16,11 +17,17 @@
 
 	let navHeight
 
-	$: browser
-		? document.body.style.setProperty("--nav-height", `${navHeight}px`)
-		: null
-
 	let openMenu = false
+
+	$: {
+		if (browser) {
+			document.body.style.setProperty("--nav-height", `${navHeight}px`)
+			document.body.classList.toggle("scroll-lock", openMenu)
+			if (innerWidth > extractNumber(breakpoint.m)) {
+				openMenu = false
+			}
+		}
+	}
 </script>
 
 <nav class="grid" bind:clientHeight={navHeight}>
@@ -40,7 +47,7 @@
 			{/if}
 		</Link>
 	</div>
-	<div class="items col-[span-11] {openMenu ? 'show' : undefined}">
+	<div class:show={openMenu} class="items col-[span-11]">
 		{#each items as item}
 			<Link url={item.url} theme="nav" class="col-[span-2]" text={item.title} />
 		{/each}
@@ -53,7 +60,7 @@
 		background: var(--color-white);
 		top: 0;
 		border-bottom: var(--border-default);
-		z-index: 10;
+		z-index: 200;
 
 		.logo {
 			width: 42px;
@@ -68,22 +75,23 @@
 	}
 
 	.items {
-		position: absolute;
-		top: var(--nav-height);
+		position: fixed;
+		top: calc(var(--nav-height) + 1px);
 		left: 0;
 		display: none;
 		width: 100%;
+		height: calc(100% - var(--nav-height) - 1px);
 		background: var(--color-white);
-		border-top: 1px solid var(--color-black);
+		overflow: auto;
 		&.show {
-			display: flex;
-			flex-direction: column;
+			display: block;
 		}
 		@media (--m) {
 			position: static;
 			display: flex;
 			border-top: none;
 			flex-direction: row;
+			height: auto;
 		}
 	}
 </style>
