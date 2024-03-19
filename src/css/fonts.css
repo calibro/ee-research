@@ -1,7 +1,15 @@
 @font-face {
-	font-family: "Public Sans";
-	src: url("/fonts/PublicSans/PublicSans-Regular.woff") format("woff"),
-		url("/fonts/PublicSans/PublicSans-Regular.woff2") format("woff2");
+	font-family: "IBMPlexSans", sans-serif;
+	src: url("/fonts/IMBPlex/sans/woff/IBMPlexSans-Regular.woff") format("woff"),
+		url("/fonts/IMBPlex/sans/woff/IBMPlexSans-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-stretch: normal;
+}
+
+@font-face {
+	font-family: "IBMPlexMono", monospace;
+	src: url("/fonts/IMBPlex/mono/woff/IBMPlexMono-Regular.woff") format("woff"),
+		url("/fonts/IMBPlex/mono/woff/IBMPlexMono-Regular.woff2") format("woff2");
 	font-style: normal;
 	font-stretch: normal;
 }
