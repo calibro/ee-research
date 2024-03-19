@@ -1,9 +1,4 @@
 <script>
-	import DownloadIcon from "~/assets/icons/download.svg?component"
-	import Dropdown from "~/components/elements/dropdown.svelte"
-	import Text from "~/components/elements/text.svelte"
-	import Radio from "~/components/elements/radio.svelte"
-	import Link from "~/components/elements/link.svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
@@ -76,9 +71,11 @@
 
 <style lang="postcss">
 	.container {
-		border-left: var(--border-default);
 		flex: 1 1 0;
 		min-height: calc(var(--vh) * 100 - var(--nav-height) - 1px);
 		background: var(--color-grey);
+		@media (--m) {
+			border-left: var(--border-default);
+		}
 	}
 </style>

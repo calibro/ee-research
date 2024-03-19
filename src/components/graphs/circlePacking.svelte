@@ -46,10 +46,13 @@
 <style lang="postcss">
 	.circle-packing {
 		width: 100%;
-		aspect-ratio: 1 / 1;
 		background: var(--color-white);
 		border-radius: var(--border-radius);
 		transition: box-shadow 0.3s;
+		overflow: hidden;
+		svg {
+			aspect-ratio: 1 / 1;
+		}
 		circle {
 			fill: var(--color-grey);
 			stroke: var(--color-grey-dark);

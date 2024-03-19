@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		<Link url="/" class="p-s flex-center-center" theme="nav">
-			<Close width={26} />
+			<Close width="26" />
 		</Link>
 	</div>
 </div>

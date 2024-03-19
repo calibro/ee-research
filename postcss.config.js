@@ -6,7 +6,7 @@ import unoPostCss from "@unocss/postcss"
 const config = {
 	plugins: [
 		unoPostCss(),
-		postcssGetTokens({ path: "./tokens.json" }),
+		postcssGetTokens({ path: "./src/css/tokens.json" }),
 		postcssNested(),
 		postcssPresetEnv({
 			stage: 0,

@@ -27,3 +27,8 @@ export const slugify = (string) => {
 		.replace(/^-+/, "") // Trim - from start of text
 		.replace(/-+$/, "") // Trim - from end of text
 }
+
+export const extractNumber = (str) => {
+	var num = str.replace(/[^0-9]/g, "")
+	return parseInt(num, 10)
+}

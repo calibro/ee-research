@@ -1,7 +1,7 @@
 import { defineConfig, presetMini } from "unocss"
 import extractorSvelte from "@unocss/extractor-svelte"
 
-import { breakpoint, space, color } from "./tokens.json"
+import { breakpoint, space, color } from "./src/css/tokens.json"
 
 const rules = [
 	[

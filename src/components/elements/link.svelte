@@ -75,12 +75,16 @@
 				overflow: hidden;
 			}
 
-			&:not(:last-child) {
-				border-right: var(--border-default);
+			border-bottom: var(--border-default);
+			@media (--m) {
+				border-left: var(--border-default);
+				border-bottom: none;
 			}
-			&:hover {
-				background-color: var(--color-black);
-				color: var(--color-white);
+			@media (--hover) {
+				&:hover {
+					background-color: var(--color-black);
+					color: var(--color-white);
+				}
 			}
 		}
 

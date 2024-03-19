@@ -3,7 +3,7 @@ import { createRequire } from "module"
 const require = createRequire(import.meta.url)
 
 const loadTokensFile = (path) => {
-	const filePath = path || "./tokens.json"
+	const filePath = path || "./src/css/tokens.json"
 	if (!path) {
 		console.log(
 			`\u{1F92F} WARN: Tokens path missing! Try to get it from ${filePath}`
