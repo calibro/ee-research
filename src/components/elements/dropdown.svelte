@@ -40,7 +40,7 @@
 		<Text
 			class={!selectedItem ? "opacity-50" : ""}
 			content={!items?.length ? "Loading..." : selectedItem?.title || "Select"}
-			typo="2"
+			typo="p"
 		/>
 		<ArrowDown width={12} />
 	</Link>
@@ -76,7 +76,7 @@
 		:global(.cta) {
 			width: 100%;
 			border: var(--border-default);
-			border-radius: 8px;
+			border-radius: var(--border-radius);
 			@media (--hover) {
 				&:hover {
 					background: var(--color-ice);
@@ -95,7 +95,7 @@
 		width: 100%;
 		border: var(--border-default);
 		margin-top: var(--space-xxs);
-		border-radius: 8px;
+		border-radius: var(--border-radius);
 		z-index: 1;
 		max-height: calc(var(--vh) * 20);
 		overflow: auto;

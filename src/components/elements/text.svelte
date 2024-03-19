@@ -1,7 +1,7 @@
 <script>
 	export let tag = "p"
 	export let content = ""
-	export let typo = "3"
+	export let typo = "p"
 </script>
 
 {#if $$slots.default}

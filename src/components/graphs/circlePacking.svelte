@@ -20,9 +20,7 @@
 	}
 </script>
 
-<div class="circle-packing flex-col-center-center p-l">
-	<!-- TODO: group with title and not as array -->
-	<Text typo="2" content={cluster?.[0]} />
+<div class="circle-packing flex-col-center-start">
 	<svg width="100%" viewBox="0 0 200 200" class="ratio-square">
 		{#each createCirclePacking(cluster, 200, 200) as node}
 			<g>
@@ -39,14 +37,29 @@
 			</g>
 		{/each}
 	</svg>
+	<!-- TODO: group with title and not as array -->
+	<div class="title">
+		<Text typo="p" content={cluster?.[0]} class="px-m py-xs" />
+	</div>
 </div>
 
 <style lang="postcss">
 	.circle-packing {
 		width: 100%;
 		aspect-ratio: 1 / 1;
+		background: var(--color-white);
+		border-radius: var(--border-radius);
 		circle {
-			fill: var(--color-sky);
+			fill: var(--color-grey);
+			stroke: var(--color-grey-dark);
 		}
+		text {
+			color: var(--color-black);
+		}
+	}
+
+	.title {
+		width: 100%;
+		border-top: 1px solid var(--color-grey);
 	}
 </style>

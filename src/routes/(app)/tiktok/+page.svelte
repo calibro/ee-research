@@ -10,6 +10,7 @@
 	import { csvParse, group } from "d3"
 	import CirclePacking from "~/components/graphs/circlePacking.svelte"
 	import { browser } from "$app/environment"
+	import Sidebar from "~/components/elements/sidebar.svelte"
 
 	let queries,
 		entries,
@@ -60,31 +61,10 @@
 	$: clusters = showEntries ? group(filteredEntries, (d) => d.cluster) : []
 </script>
 
-<div class="page flex">
-	<div class="sidebar flex flex-col gap-l pt-l px-m">
-		<div class="group flex flex-col gap-xs">
-			<Text typo="1" content="Query" class="case-upper" />
-			<Dropdown items={queries} bind:value={$query} />
-		</div>
-		<div class="group flex flex-col gap-xs">
-			<Text typo="1" content="Language" class="case-upper" />
-			<Radio items={languages} bind:value={$lang} />
-		</div>
-		<div class="group flex flex-col gap-xs">
-			<Text typo="1" content="Resources" class="case-upper" />
-			<div class="flex gap-xs">
-				<Link url={dataUrl} theme="download" class="flex gap-xxs items-center">
-					<Text typo="1" content="data" />
-					<DownloadIcon width="8" />
-				</Link>
-				<Link url={dataUrl} theme="download" class="flex gap-xs items-center">
-					<Text typo="1" content="view protocol" />
-				</Link>
-			</div>
-		</div>
-	</div>
+<div class="page flex-start-start">
+	<Sidebar {queries} {dataUrl} />
 	{#if showEntries}
-		<div class="container m:grid-3-m">
+		<div class="container m:grid-3-m p-m">
 			{#each clusters as cluster}
 				<CirclePacking {cluster} />
 			{/each}
@@ -93,21 +73,10 @@
 </div>
 
 <style lang="postcss">
-	.page {
-		height: 100%;
-		width: 100%;
-		overflow-x: hidden;
-	}
-	.sidebar {
-		position: sticky;
-		top: 0;
-		border-right: var(--border-default);
-		@media (--m) {
-			width: 23vw;
-		}
-	}
-
 	.container {
+		border-left: var(--border-default);
 		flex: 1 1 0;
+		min-height: calc(var(--vh) * 100 - var(--nav-height) - 1px);
+		background: var(--color-grey);
 	}
 </style>

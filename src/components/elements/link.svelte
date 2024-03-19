@@ -20,8 +20,8 @@
 	target={download ? "_blank" : external ? "_blank" : "_self"}
 	rel={isExternal ? "external" : undefined}
 	class="link {theme} {theme === 'download'
-		? 'typo-1'
-		: 'typo-2'} {$$restProps.class}"
+		? 'typo-label'
+		: 'typo-p'} {$$restProps.class}"
 	download={download ? true : undefined}
 	on:click={fn}
 	role="button"
@@ -86,9 +86,9 @@
 
 		&.download {
 			display: inline-flex;
-			padding: 3px 8px 4px 8px;
+			padding: 4px 8px 5px 8px;
 			border: var(--border-default);
-			border-radius: 8px;
+			border-radius: var(--border-radius);
 			width: fit-content;
 			&:hover {
 				background-color: var(--color-black);

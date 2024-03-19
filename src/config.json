@@ -4,7 +4,7 @@
       "code": "us",
       "fileName": "clusters_us.csv",
       "label": "English",
-      "color": "sky"
+      "color": "green"
     },
     "nl": {
       "code": "nl",
@@ -16,13 +16,13 @@
       "code": "fr",
       "fileName": "clusters_fr.csv",
       "label": "French",
-      "color": "pink"
+      "color": "yellow"
     },
     "ph": {
       "code": "ph",
       "fileName": "clusters_ph.csv",
       "label": "Tagalog",
-      "color": "red"
+      "color": "pink"
     }
   }
 }

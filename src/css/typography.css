@@ -1,29 +1,44 @@
 .typo {
-	&-1 {
-		font-family: "Public Sans", sans-serif;
+	&-label {
+		font-family: "IBMPlexMono", monospace;
+		font-size: 14px;
+		letter-spacing: 0.02em;
+		@media (--m) {
+			font-size: 12px;
+		}
+	}
+	&-small {
+		font-family: "IBMPlexSans", sans-serif;
 		font-size: 12px;
-		letter-spacing: 0.05em;
+		@media (--m) {
+			font-size: 12px;
+		}
 	}
-	&-2 {
-		font-family: "Public Sans", sans-serif;
-		font-size: 16px;
-		letter-spacing: 0.03em;
+	&-p {
+		font-family: "IBMPlexSans", sans-serif;
+		font-size: 18px;
+		@media (--m) {
+			font-size: 16px;
+		}
 	}
-	&-3 {
-		font-family: "Public Sans", sans-serif;
-		font-size: 20px;
-		line-height: 23px;
-		letter-spacing: 0.02em;
+	&-h1 {
+		font-family: "IBMPlexSans", sans-serif;
+		font-size: 40px;
+		@media (--m) {
+			font-size: 64px;
+		}
 	}
-	&-4 {
-		font-family: "Public Sans", sans-serif;
+	&-h2 {
+		font-family: "IBMPlexSans", sans-serif;
 		font-size: 32px;
-		letter-spacing: 0.04em;
+		line-height: 1.125;
+		@media (--m) {
+			font-size: 36px;
+		}
 	}
-	&-5 {
-		font-family: "Public Sans", sans-serif;
-		font-size: 64px;
-		letter-spacing: 0.02em;
+	&-h3 {
+		font-family: "IBMPlexSans", sans-serif;
+		font-size: 24px;
 	}
 }
 

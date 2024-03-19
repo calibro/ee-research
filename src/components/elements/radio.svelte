@@ -15,7 +15,7 @@
 			value={code}
 		/>
 		<label
-			class="typo-1 case-upper"
+			class="typo-small"
 			for={code}
 			style={`--background: var(--color-${color})`}
 		>
@@ -29,8 +29,9 @@
 		user-select: none;
 		line-height: 1;
 		background: var(--background);
-		padding: 3px 8px 5px 8px;
-		border-radius: 8px;
+		padding: 5px 10px 8px 10px;
+		border-radius: var(--border-radius);
+		cursor: pointer;
 	}
 
 	.sr-only {
@@ -72,8 +73,8 @@
 		display: block;
 		width: 0.6em;
 		height: 0.6em;
-		top: calc(4px + 0.2em);
-		left: calc(8px + 0.2em);
+		top: calc(6.2px + 0.2em);
+		left: calc(10px + 0.2em);
 		background: var(--color-black);
 		border-radius: 100%;
 		opacity: 0;
