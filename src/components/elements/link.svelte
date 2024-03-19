@@ -95,5 +95,14 @@
 				color: var(--color-white);
 			}
 		}
+
+		&.cta {
+			display: block;
+			border-radius: var(--border-radius);
+			border: 1px solid var(--color-black);
+			padding: var(--space-xs) var(--space-m);
+			background: var(--color-black);
+			color: var(--color-white);
+		}
 	}
 </style>

@@ -49,12 +49,25 @@
 		aspect-ratio: 1 / 1;
 		background: var(--color-white);
 		border-radius: var(--border-radius);
+		transition: box-shadow 0.3s;
 		circle {
 			fill: var(--color-grey);
 			stroke: var(--color-grey-dark);
+			transition:
+				fill 0.3s,
+				stroke-width 0.3s;
 		}
 		text {
 			color: var(--color-black);
+		}
+		@media (--hover) {
+			&:hover {
+				box-shadow: 0px 8px 8px 0 var(--color-ice);
+				circle {
+					fill: var(--color-ice);
+					stroke-width: 0;
+				}
+			}
 		}
 	}
 

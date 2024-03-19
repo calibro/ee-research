@@ -34,7 +34,7 @@
 
 <div class="dropdown" ref={dropdownRef}>
 	<Link
-		class={`cta flex-btw-center p-xs ${menuOpen ? "active" : ""}`}
+		class={`dropdown-btn flex-btw-center p-xs ${menuOpen ? "active" : ""}`}
 		fn={() => (menuOpen = !menuOpen)}
 	>
 		<Text
@@ -73,7 +73,7 @@
 			}
 		}
 
-		:global(.cta) {
+		:global(.dropdown-btn) {
 			width: 100%;
 			border: var(--border-default);
 			border-radius: var(--border-radius);
@@ -83,7 +83,7 @@
 				}
 			}
 		}
-		:global(.cta.active) {
+		:global(.dropdown-btn.active) {
 			background: var(--color-grey);
 		}
 	}

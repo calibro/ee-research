@@ -61,10 +61,12 @@
 	$: clusters = showEntries ? group(filteredEntries, (d) => d.cluster) : []
 </script>
 
-<div class="page flex-start-start">
+<div class="page m:flex-start-start">
 	<Sidebar {queries} {dataUrl} />
 	{#if showEntries}
-		<div class="container m:grid-3-m p-m">
+		<div
+			class="container flex-col-start-start gap-m py-m px-s m:grid-3-m m:p-m"
+		>
 			{#each clusters as cluster}
 				<CirclePacking {cluster} />
 			{/each}
