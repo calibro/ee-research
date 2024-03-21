@@ -13,7 +13,7 @@ export async function load({ params, fetch }) {
 	const { data: clustersData } = await getAsyncData(
 		{
 			key: `tiktok:${lang}:${slug}:clusters`,
-			url: `/tiktok/${selectedLang.code}/prototype/${selectedLang.fileName}`,
+			url: `/tiktok/${selectedLang.code}/${selectedLang.fileName}`,
 			type: "text",
 		},
 		fetch

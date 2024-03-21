@@ -17,7 +17,7 @@
 	$: selectedLang = languages?.[$lang] || languages?.us
 	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
 
-	$: baseUrl = `/tiktok/${selectedLang?.code}/prototype`
+	$: baseUrl = `/tiktok/${selectedLang?.code}`
 
 	$: dataUrl = selectedLang ? `${baseUrl}/${selectedLang.fileName}` : null
 
@@ -76,6 +76,7 @@
 		background: var(--color-grey);
 		@media (--m) {
 			border-left: var(--border-default);
+			grid-template-rows: min-content;
 		}
 	}
 </style>
