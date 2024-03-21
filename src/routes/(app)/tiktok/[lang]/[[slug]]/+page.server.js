@@ -1,6 +1,6 @@
 import { languages } from "~/config.json"
 import { group, csvParse } from "d3"
-import { error, redirect } from "@sveltejs/kit"
+import { redirect } from "@sveltejs/kit"
 import { getAsyncData } from "~/lib/data"
 
 /** @type {import('../$types').PageLoad} */

@@ -4,6 +4,7 @@
 
 	export let cluster
 
+	console.log(cluster);
 	const createCirclePacking = (data, width, height) => {
 		const layout = pack().size([width, height]).padding(5)
 
@@ -39,6 +40,7 @@
 	</svg>
 	<!-- TODO: group with title and not as array -->
 	<div class="title">
+		{JSON.stringify(cluster)}
 		<Text typo="p" content={cluster?.[0]} class="px-m py-xs" />
 	</div>
 </div>
