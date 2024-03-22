@@ -6,6 +6,7 @@
 	import CirclePacking from "~/components/graphs/circlePacking.svelte"
 	import { browser } from "$app/environment"
 	import Sidebar from "~/components/elements/sidebar.svelte"
+	import Link from "~/components/elements/link.svelte"
 
 	let queries,
 		entries,
@@ -54,6 +55,11 @@
 
 	$: watchLang(selectedLang?.code)
 	$: clusters = showEntries ? group(filteredEntries, (d) => d.cluster) : []
+
+	const getUrl = (cluster) => {
+		const clusterSlug = cluster?.[0]
+		return `${baseUrl}/${$query}/${clusterSlug}`
+	}
 </script>
 
 <div class="page m:flex-start-start">
@@ -63,7 +69,9 @@
 			class="container flex-col-start-start gap-m py-m px-s m:grid-3-m m:p-m"
 		>
 			{#each clusters as cluster}
-				<CirclePacking {cluster} />
+				<Link url={getUrl(cluster)} class="contents">
+					<CirclePacking {cluster} />
+				</Link>
 			{/each}
 		</div>
 	{/if}

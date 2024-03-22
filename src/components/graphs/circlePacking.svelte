@@ -56,6 +56,7 @@
 		circle {
 			fill: var(--color-grey);
 			stroke: var(--color-grey-dark);
+			stroke-width: 0;
 			transition:
 				fill 0.3s,
 				stroke-width 0.3s;
@@ -63,9 +64,15 @@
 		text {
 			color: var(--color-black);
 		}
+		.title {
+			transition: background 0.3s;
+		}
 		@media (--hover) {
 			&:hover {
 				box-shadow: 0px 8px 8px 0 var(--color-ice);
+				.title {
+					background: var(--color-ice);
+				}
 				circle {
 					fill: var(--color-ice);
 					stroke-width: 0;
