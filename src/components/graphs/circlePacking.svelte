@@ -39,7 +39,12 @@
 	</svg>
 	<!-- TODO: group with title and not as array -->
 	<div class="title">
-		<Text typo="p" content={cluster[1][0].clusterLabel} class="px-m py-xs" />
+		<Text
+			typo="p"
+			content={cluster[1][0].clusterLabel}
+			class="px-m py-xs"
+			ellipsis={true}
+		/>
 	</div>
 </div>
 

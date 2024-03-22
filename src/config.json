@@ -2,25 +2,21 @@
   "languages": {
     "us": {
       "code": "us",
-      "fileName": "clusters_us.csv",
       "label": "English",
       "color": "green"
     },
     "nl": {
       "code": "nl",
-      "fileName": "clusters_nl.csv",
       "label": "Dutch",
       "color": "blue"
     },
     "fr": {
       "code": "fr",
-      "fileName": "clusters_fr.csv",
       "label": "French",
       "color": "yellow"
     },
     "ph": {
       "code": "ph",
-      "fileName": "clusters_ph.csv",
       "label": "Tagalog",
       "color": "pink"
     }

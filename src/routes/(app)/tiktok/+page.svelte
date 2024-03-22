@@ -20,20 +20,22 @@
 
 	$: baseUrl = `/tiktok/${selectedLang?.code}`
 
-	$: dataUrl = selectedLang ? `${baseUrl}/${selectedLang.fileName}` : null
+	$: dataUrl = selectedLang
+		? `${baseUrl}/clusters_${selectedLang.code}.csv`
+		: null
 
 	const watchLang = async (lang = "us") => {
 		if (loading || !browser) return
 
 		loading = true
-		const { data: dataFetch, error: errorFetch } = await getAsyncData({
+		const { data, error } = await getAsyncData({
 			key: `tiktok-${lang}-data`,
 			url: dataUrl,
 			type: "text",
 		})
 
-		if (dataFetch) {
-			entries = csvParse(dataFetch)
+		if (data) {
+			entries = csvParse(data)
 			if (!queries?.length) {
 				queries = []
 				entries.forEach((el) => {
@@ -68,7 +70,7 @@
 		<div
 			class="container flex-col-start-start gap-m py-m px-s m:grid-3-m m:p-m"
 		>
-			{#each clusters as cluster}
+			{#each clusters as cluster (cluster?.[0])}
 				<Link url={getUrl(cluster)} class="contents">
 					<CirclePacking {cluster} />
 				</Link>
