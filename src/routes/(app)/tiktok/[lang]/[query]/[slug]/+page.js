@@ -73,5 +73,5 @@ export async function load({ params, fetch }) {
 		videosIds.includes(video.id)
 	)
 
-	return { videos, cluster }
+	return { videos, cluster, lang, query }
 }

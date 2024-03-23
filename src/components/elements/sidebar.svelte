@@ -42,5 +42,8 @@
 			top: var(--nav-height, 74px);
 			width: 360px;
 		}
+		@media (--xxl) {
+			width: 400px;
+		}
 	}
 </style>

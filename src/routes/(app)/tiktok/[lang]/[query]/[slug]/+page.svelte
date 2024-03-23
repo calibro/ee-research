@@ -9,7 +9,7 @@
 
 	export let data
 
-	const { videos, cluster } = data
+	const { videos, cluster, query, lang } = data
 
 	const viewCount = sum(videos, (d) => d.view_count)
 	const likeCount = sum(videos, (d) => d.like_count)
@@ -35,13 +35,16 @@
 				</Link> -->
 			</div>
 		</div>
-		<Link url="/" class="p-s flex-center-center">
+		<Link
+			url="/tiktok/?lang={lang}&query={query}"
+			class="p-s flex-center-center"
+		>
 			<Close width="26" />
 		</Link>
 	</div>
 	<div class="container">
 		<div
-			class="grid-1-m p-s s:grid-2-s m:grid-3-s l:grid-4-s xl:grid-5-s xxl:grid-6-s"
+			class="p-s grid-1-s s:grid-2-s m:grid-3-s l:grid-4-s xl:grid-5-s xxl:grid-6-s"
 		>
 			{#each videos as video}
 				<TiktokThumb {video} />

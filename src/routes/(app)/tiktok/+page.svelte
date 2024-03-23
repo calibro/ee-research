@@ -66,7 +66,7 @@
 
 <div class="page l:flex-start-start">
 	<Sidebar {queries} {dataUrl} />
-	<div class="container flex-col-start-start gap-m py-m px-s l:grid-3-m l:p-m">
+	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
 		{#if showEntries}
 			{#each clusters as cluster (cluster?.[0])}
 				<Link url={getUrl(cluster)} class="contents">
