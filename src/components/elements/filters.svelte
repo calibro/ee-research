@@ -18,7 +18,7 @@
 	let openFilters = false
 
 	$: browser
-		? innerWidth > extractNumber(breakpoint.m)
+		? innerWidth > extractNumber(breakpoint.l)
 			? (openFilters = false)
 			: undefined
 		: undefined
@@ -28,7 +28,7 @@
 		: undefined
 </script>
 
-<div class:show={openFilters} class="filters px-s py-m m:p-0">
+<div class:show={openFilters} class="filters px-s py-m l:p-0">
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="Query" class="case-upper" />
 		<Dropdown items={queries} bind:value={$query} />
@@ -38,7 +38,7 @@
 		<Radio items={languages} bind:value={$lang} />
 	</div>
 </div>
-<div class="cta pointer-events-none m:hidden">
+<div class="cta pointer-events-none l:hidden">
 	<Link
 		class="button pointer-events-initial"
 		fn={() => (openFilters = !openFilters)}
@@ -59,7 +59,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: 100;
+		z-index: 200;
 		background: var(--color-white);
 		display: none;
 		&.show {
@@ -68,7 +68,7 @@
 			gap: var(--space-l);
 		}
 
-		@media (--m) {
+		@media (--l) {
 			position: static;
 			width: auto;
 			height: auto;
@@ -85,9 +85,9 @@
 		padding: var(--space-m) var(--space-s);
 		display: flex;
 		justify-content: center;
-		z-index: 101;
+		z-index: 201;
 
-		@media (--m) {
+		@media (--l) {
 			display: none;
 		}
 	}

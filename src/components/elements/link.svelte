@@ -76,7 +76,7 @@
 			}
 
 			border-bottom: var(--border-default);
-			@media (--m) {
+			@media (--l) {
 				border-left: var(--border-default);
 				border-bottom: none;
 			}

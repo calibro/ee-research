@@ -3,28 +3,28 @@
 		font-family: "IBMPlexMono", monospace;
 		font-size: 14px;
 		letter-spacing: 0.02em;
-		@media (--m) {
+		@media (--l) {
 			font-size: 12px;
 		}
 	}
 	&-small {
 		font-family: "IBMPlexSans", sans-serif;
 		font-size: 14px;
-		@media (--m) {
+		@media (--l) {
 			font-size: 12px;
 		}
 	}
 	&-p {
 		font-family: "IBMPlexSans", sans-serif;
 		font-size: 18px;
-		@media (--m) {
+		@media (--l) {
 			font-size: 16px;
 		}
 	}
 	&-h1 {
 		font-family: "IBMPlexSans", sans-serif;
 		font-size: 40px;
-		@media (--m) {
+		@media (--l) {
 			font-size: 64px;
 		}
 	}
@@ -32,7 +32,7 @@
 		font-family: "IBMPlexSans", sans-serif;
 		font-size: 32px;
 		line-height: 1.125;
-		@media (--m) {
+		@media (--l) {
 			font-size: 36px;
 		}
 	}

@@ -64,19 +64,17 @@
 	}
 </script>
 
-<div class="page m:flex-start-start">
+<div class="page l:flex-start-start">
 	<Sidebar {queries} {dataUrl} />
-	{#if showEntries}
-		<div
-			class="container flex-col-start-start gap-m py-m px-s m:grid-3-m m:p-m"
-		>
+	<div class="container flex-col-start-start gap-m py-m px-s l:grid-3-m l:p-m">
+		{#if showEntries}
 			{#each clusters as cluster (cluster?.[0])}
 				<Link url={getUrl(cluster)} class="contents">
 					<CirclePacking {cluster} />
 				</Link>
 			{/each}
-		</div>
-	{/if}
+		{/if}
+	</div>
 </div>
 
 <style lang="postcss">
@@ -84,7 +82,7 @@
 		flex: 1 1 0;
 		min-height: calc(var(--vh) * 100 - var(--nav-height) - 1px);
 		background: var(--color-grey);
-		@media (--m) {
+		@media (--l) {
 			border-left: var(--border-default);
 			grid-template-rows: min-content;
 		}

@@ -23,7 +23,7 @@
 		if (browser) {
 			document.body.style.setProperty("--nav-height", `${navHeight}px`)
 			document.body.classList.toggle("scroll-lock", openMenu)
-			if (innerWidth > extractNumber(breakpoint.m)) {
+			if (innerWidth > extractNumber(breakpoint.l)) {
 				openMenu = false
 			}
 		}
@@ -38,7 +38,7 @@
 			</div>
 		</Link>
 	</div>
-	<div class="item col-[10/span-3] m:hidden flex-center-center">
+	<div class="item col-[10/span-3] l:hidden flex-end-center">
 		<Link fn={() => (openMenu = !openMenu)}>
 			{#if openMenu}
 				<Close width="26" />
@@ -67,8 +67,8 @@
 		}
 
 		.item {
-			padding: var(--space-xs) var(--space-m);
-			@media (--m) {
+			padding: var(--space-xs) var(--space-s);
+			@media (--l) {
 				padding: var(--space-s) var(--space-m);
 			}
 		}
@@ -86,7 +86,7 @@
 		&.show {
 			display: block;
 		}
-		@media (--m) {
+		@media (--l) {
 			position: static;
 			display: flex;
 			border-top: none;

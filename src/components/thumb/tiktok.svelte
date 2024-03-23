@@ -8,7 +8,10 @@
 	let isOpen = false
 </script>
 
-<button on:click={() => (isOpen = true)} class="thumb p-s flex-col-start gap-s">
+<button
+	on:click={() => (isOpen = true)}
+	class="thumb p-s flex-col-start-btw gap-s text-left"
+>
 	<div class="img">
 		<img src="/tiktok/thumbs/{video.id}.webp" alt={video.title} />
 	</div>
@@ -63,12 +66,13 @@
 		border-radius: var(--border-radius);
 		transition:
 			box-shadow 0.3s,
-			background 0.3s,
-			color 0.3s;
+			filter 0.3s;
 		cursor: pointer;
+		filter: grayscale(1);
 		@media (--hover) {
 			&:hover {
 				box-shadow: 0px 8px 8px 0 var(--color-ice);
+				filter: grayscale(0);
 			}
 		}
 		.img {
@@ -90,6 +94,8 @@
 			-webkit-line-clamp: 3; /* number of lines to show */
 			line-clamp: 3;
 			-webkit-box-orient: vertical;
+			min-height: 3lh;
+			width: 100%;
 		}
 	}
 </style>

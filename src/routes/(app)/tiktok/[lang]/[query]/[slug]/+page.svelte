@@ -59,5 +59,6 @@
 		align-items: center;
 		border-bottom: var(--border-default);
 		background: var(--color-white);
+		z-index: 100;
 	}
 </style>

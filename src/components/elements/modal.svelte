@@ -31,6 +31,7 @@
 		height: 100%;
 		background: color-mix(in srgb, var(--color-white) 50%, transparent);
 		backdrop-filter: blur(5px);
+		z-index: 200;
 		&-content {
 			background: var(--color-white);
 			border-radius: var(--border-radius);
