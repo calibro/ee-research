@@ -53,6 +53,7 @@
 		width: 100%;
 		background: var(--color-white);
 		border-radius: var(--border-radius);
+		box-shadow: 0px 0px 0px 0px var(--color-ice);
 		transition: box-shadow 0.3s;
 		overflow: hidden;
 		svg {
@@ -75,9 +76,9 @@
 		@media (--hover) {
 			&:hover {
 				box-shadow: 0px 8px 8px 0 var(--color-ice);
-				.title {
+				/* .title {
 					background: var(--color-ice);
-				}
+				} */
 				circle {
 					fill: var(--color-ice);
 					stroke-width: 0;

@@ -25,7 +25,7 @@
 		<Text typo="label" content="Resources" class="case-upper" />
 		<div class="flex gap-xs">
 			<Link url={dataUrl} theme="download" class="flex gap-xxs items-center">
-				<Text typo="small" content="Download data" />
+				<Text typo="small" content="download data" />
 				<DownloadIcon width="8" />
 			</Link>
 			<Link url={dataUrl} theme="download" class="flex gap-xs items-center">

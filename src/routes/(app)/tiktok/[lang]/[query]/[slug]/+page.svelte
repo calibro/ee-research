@@ -36,7 +36,7 @@
 				<Text tag="h3" typo="h3" content={likeCount} />
 			</div>
 			<div class="col-[span-2] xl:col-[10/span-2] py-s px-s xl:px-0">
-				<Text content="Resources" typo="label" class="case-upper" />
+				<Text content="Resources" typo="label" class="case-upper pb-xxs" />
 				<Link theme="download" class="flex gap-xxs items-center">
 					<Text typo="1" content="download data" />
 					<DonwloadIcon width="8" />
