@@ -1,6 +1,6 @@
 <script>
 	import "~/app.css"
-	import "uno.css"
+	// import "uno.css"
 
 	import { onMount } from "svelte"
 	import { setVh, setViewport } from "$lib/viewport"

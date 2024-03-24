@@ -90,10 +90,11 @@
 
 		&.download {
 			display: inline-flex;
-			padding: 4px 8px 5px 8px;
+			padding: 3px 8px 4px 8px;
 			border: var(--border-default);
 			border-radius: var(--border-radius);
 			width: fit-content;
+			margin-top: 0.3em;
 			&:hover {
 				background-color: var(--color-black);
 				color: var(--color-white);

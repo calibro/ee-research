@@ -111,7 +111,7 @@ const rules = [
 		{ autocomplete: "px|py|mx|my-<var>-<var>" },
 	],
 	[
-		/^flex-(row|col|start|center|end|btw)-?(start|center|end|btw)?-?(start|center|end|btw)?$/,
+		/^flex-(row|col|start|center|end|btw)-?(start|center|end|btw|stretch)?-?(start|center|end|btw|stretch)?$/,
 		(match) => {
 			const [, directionOrJustify, justifyOrAlign, align] = match
 			let directionValue = directionOrJustify
@@ -130,6 +130,7 @@ const rules = [
 				center: "center",
 				end: "flex-end",
 				btw: "space-between",
+				stretch: "stretch",
 			}
 
 			return {

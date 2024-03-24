@@ -67,7 +67,7 @@
 		}
 
 		.item {
-			padding: var(--space-xs) var(--space-s);
+			padding: var(--space-s) var(--space-s);
 			@media (--l) {
 				padding: var(--space-s) var(--space-m);
 			}

@@ -10,9 +10,10 @@
 
 	let queries,
 		entries,
-		loading = false,
-		query = queryParam("query"),
-		lang = queryParam("lang")
+		loading = false
+
+	let query = queryParam("query")
+	let lang = queryParam("lang")
 
 	$: showEntries = entries?.length && $query && $lang
 	$: selectedLang = languages?.[$lang] || languages?.us
@@ -24,12 +25,12 @@
 		? `${baseUrl}/clusters_${selectedLang.code}.csv`
 		: null
 
-	const watchLang = async (lang = "us") => {
+	const watchLang = async (langVal = Object.keys(languages)?.[0]) => {
 		if (loading || !browser) return
 
 		loading = true
 		const { data, error } = await getAsyncData({
-			key: `tiktok-${lang}-data`,
+			key: `tiktok-${langVal}-data`,
 			url: dataUrl,
 			type: "text",
 		})
@@ -43,6 +44,12 @@
 						queries.push({ slug: el.querySlug, title: el.query })
 					}
 				})
+				if (!$query) {
+					$query = queries[0]?.slug
+				}
+				if (!$lang) {
+					$lang = langVal
+				}
 			}
 		} else {
 			entries = null
@@ -68,7 +75,7 @@
 	<Sidebar {queries} {dataUrl} />
 	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
 		{#if showEntries}
-			{#each clusters as cluster (cluster?.[0])}
+			{#each clusters as cluster, i (`${$query}-${$lang}-${i}`)}
 				<Link url={getUrl(cluster)} class="contents">
 					<CirclePacking {cluster} />
 				</Link>
@@ -83,7 +90,7 @@
 		min-height: calc(var(--vh) * 100 - var(--nav-height) - 1px);
 		background: var(--color-grey);
 		@media (--l) {
-			border-left: var(--border-default);
+			/* border-left: var(--border-default); */
 			grid-template-rows: min-content;
 		}
 	}

@@ -10,7 +10,7 @@
 
 <button
 	on:click={() => (isOpen = true)}
-	class="thumb p-s flex-col-start-btw gap-s text-left"
+	class="thumb p-s flex-col-start-stretch gap-s text-left"
 >
 	<div class="img">
 		<img src="/tiktok/thumbs/{video.id}.webp" alt={video.title} />
@@ -21,7 +21,7 @@
 		content={video.video_description}
 		class="max-lines mb-xs"
 	/>
-	<div class="grid-2-xs">
+	<div class="grid-3-xs">
 		<div class="flex gap-xs">
 			<Play width="14" />
 			<Text tag="p" typo="p" content={video.view_count} />
