@@ -22,10 +22,10 @@ jobs:
           node-version: 21.x
 
       - name: Install dependencies
-        run: pnpm i
+        run: npm i
 
       - name: Build app
-        run: pnpm run build
+        run: npm run build
         env:
           BASE_PATH: /ee-research
 
