@@ -20,7 +20,7 @@
 	$: selectedLang = languages?.[$lang] || languages?.us
 	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
 
-	$: baseUrl = `${base}/tiktok/${selectedLang?.code}`
+	$: baseUrl = `${base}/tiktokAssets/${selectedLang?.code}`
 
 	$: dataUrl = selectedLang
 		? `${baseUrl}/clusters_${selectedLang.code}.csv`
@@ -68,7 +68,7 @@
 
 	const getUrl = (cluster) => {
 		const clusterSlug = cluster?.[0]
-		return `${baseUrl}/${$query}/${clusterSlug}`
+		return `${base}/tiktok/${$lang}/${$query}/${clusterSlug}`
 	}
 </script>
 
