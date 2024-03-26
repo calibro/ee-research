@@ -68,7 +68,7 @@
 
 	const getUrl = (cluster) => {
 		const clusterSlug = cluster?.[0]
-		return `${base}/tiktok/${$lang}/${$query}/${clusterSlug}`
+		return `/tiktok/${$lang}/${$query}/${clusterSlug}`
 	}
 </script>
 
