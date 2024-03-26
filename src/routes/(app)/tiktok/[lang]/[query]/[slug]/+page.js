@@ -4,6 +4,10 @@ import { csvParse } from "d3"
 import { error } from "@sveltejs/kit"
 import { base } from "$app/paths"
 
+export const prerender = false
+export const csr = true
+export const ssr = false
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, fetch }) {
 	const { lang, query, slug } = params

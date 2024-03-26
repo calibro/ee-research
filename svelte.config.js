@@ -19,7 +19,6 @@ const config = {
 			strict: false,
 			fallback: "404.html",
 		}),
-		appDir: "appDir",
 		paths: {
 			base: process.env.BASE_PATH || "",
 		},
