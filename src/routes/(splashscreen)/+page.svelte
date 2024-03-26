@@ -63,7 +63,7 @@
 			/>
 		</div>
 		<div class="item col-[span-5] flex-start-center p-l case-upper">
-			<Link url="/about">
+			<Link url="/">
 				<Text tag="h3" content="About" typo="2" />
 			</Link>
 		</div>
