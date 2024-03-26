@@ -68,7 +68,7 @@
 			/>
 		</div>
 		<div class="item l:col-[span-5] flex-start-center px-s py-l case-upper">
-			<Link url="/">
+			<Link url="/about">
 				<Text tag="h3" content="About" typo="2" />
 			</Link>
 		</div>
