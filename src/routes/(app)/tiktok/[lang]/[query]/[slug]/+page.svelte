@@ -1,5 +1,4 @@
 <script>
-	import { languages } from "~/config.json"
 	import Text from "~/components/elements/text.svelte"
 	import DonwloadIcon from "~/assets/icons/download.svg?component"
 	import Close from "~/assets/icons/close.svg?component"
