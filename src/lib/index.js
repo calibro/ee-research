@@ -14,6 +14,45 @@ export const getRelativeUrl = (urlValue = "") => {
 	return `${base}${url}`
 }
 
+export const generateSvgPlaceholder = ({
+	width = 150,
+	height = 300,
+	bgColor = "#ddd",
+	dataUri = true,
+	charset = "UTF-8",
+	fluid = false,
+} = {}) => {
+	const str = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" ${
+		fluid ? 'preserveAspectRatio="none"' : ""
+	}>
+			<rect fill="${bgColor}" width="${width}" height="${height}"/>
+		</svg>`
+
+	// Thanks to: filamentgroup/directory-encoder
+	const cleaned = str
+		.replace(/[\t\n\r]/gim, "") // Strip newlines and tabs
+		.replace(/\s\s+/g, " ") // Condense multiple spaces
+		.replace(/'/gim, "\\i") // Normalize quotes
+
+	if (dataUri) {
+		const encoded = encodeURIComponent(cleaned)
+			.replace(/\(/g, "%28") // Encode brackets
+			.replace(/\)/g, "%29")
+
+		return `data:image/svg+xml;charset=${charset},${encoded}`
+	}
+
+	return cleaned
+}
+
+export const repeatArray = (array, times) => {
+	let result = []
+	for (let i = 0; i <= times; i++) {
+		result = [...result, ...array]
+	}
+	return result
+}
+
 export const slugify = (string) => {
 	const a =
 		"àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìıİłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;"

@@ -4,6 +4,7 @@
 	import Text from "../elements/text.svelte"
 	import Modal from "../elements/modal.svelte"
 	import { base } from "$app/paths"
+	import Image from "../elements/image.svelte"
 	export let video = {}
 	let isOpen = false
 </script>
@@ -13,7 +14,7 @@
 	class="thumb p-s flex-col-start-stretch gap-s text-left"
 >
 	<div class="img">
-		<img src="{base}/tiktokAssets/thumbs/{video.id}.webp" alt={video.title} />
+		<Image src="{base}/tiktokAssets/thumbs/{video.id}.webp" alt={video.title} />
 	</div>
 	<Text
 		tag="p"
@@ -81,7 +82,7 @@
 			aspect-ratio: 9 / 16;
 			border-radius: var(--border-radius-inner);
 			overflow: hidden;
-			img {
+			:global(img) {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
