@@ -22,10 +22,10 @@
 	$: {
 		if (browser) {
 			document.body.style.setProperty("--nav-height", `${navHeight}px`)
-			document.body.classList.toggle("scroll-lock", openMenu)
 			if (innerWidth > extractNumber(breakpoint.l)) {
 				openMenu = false
 			}
+			document.body.classList.toggle("scroll-lock", openMenu)
 		}
 	}
 </script>
@@ -60,7 +60,7 @@
 		background: var(--color-white);
 		top: 0;
 		border-bottom: var(--border-default);
-		z-index: 200;
+		z-index: 202;
 
 		.logo {
 			width: 42px;
