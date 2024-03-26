@@ -142,7 +142,8 @@
 			outline: none;
 			@media (--hover) {
 				&:hover {
-					fill: var(--color-blue);
+					stroke: var(--color-black);
+					stroke-width: 1px;
 				}
 			}
 		}

@@ -54,9 +54,11 @@
 			display: block;
 			width: 100%;
 			height: 100%;
-			&:hover {
-				background-color: var(--color-black);
-				color: var(--color-white);
+			@media (--hover) {
+				&:hover {
+					background-color: var(--color-black);
+					color: var(--color-white);
+				}
 			}
 		}
 
@@ -97,9 +99,11 @@
 			transition:
 				background-color 0.3s,
 				color 0.3s;
-			&:hover {
-				background-color: var(--color-black);
-				color: var(--color-white);
+			@media (--hover) {
+				&:hover {
+					background-color: var(--color-black);
+					color: var(--color-white);
+				}
 			}
 		}
 

@@ -92,7 +92,7 @@
 		background: var(--color-grey);
 		padding-bottom: calc(var(--nav-height) + var(--space-m));
 		@media (--l) {
-			padding-bottom: 0;
+			padding-bottom: var(--space-s);
 			grid-template-rows: min-content;
 		}
 	}
