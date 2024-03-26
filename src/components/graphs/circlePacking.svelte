@@ -1,5 +1,7 @@
 <script>
 	import { hierarchy, pack } from "d3"
+	import { fade } from "svelte/transition"
+
 	import Text from "../elements/text.svelte"
 
 	export let cluster
@@ -18,13 +20,65 @@
 
 		return nodes
 	}
+
+	const circles = createCirclePacking(cluster, 200, 200)
+
+	let m = { x: 0, y: 0 }
+
+	function handleMousemove(event) {
+		m.x = event.clientX
+		m.y = event.clientY
+	}
+
+	let activeNode
+	const handleOver = (node) => {
+		activeNode = node
+	}
 </script>
 
-<div class="circle-packing flex-col-center-start">
+<div
+	class="circle-packing flex-col-center-start"
+	on:mousemove={handleMousemove}
+	role="button"
+	tabindex="0"
+>
+	{#if activeNode}
+		<div
+			class="tooltip"
+			style="--top: {m.y}px; --left: {m.x}px"
+			transition:fade={{ duration: 150 }}
+		>
+			<Text
+				typo="small"
+				content={activeNode.data?.text}
+				class="px-xs py-xxs"
+				ellipsis={true}
+			/>
+		</div>
+	{/if}
+
 	<svg width="100%" viewBox="0 0 200 200" class="ratio-square">
-		{#each createCirclePacking(cluster, 200, 200) as node}
-			<g>
-				<circle cx={node.x} cy={node.y} r={node.r} />
+		{#each circles as node}
+			{#if node.r / 3 > 6}
+				<circle cx={node.x} cy={node.y} r={node.r} fill={node.data?.color} />
+			{:else}
+				<circle
+					class="tooltip-actor"
+					cx={node.x}
+					cy={node.y}
+					r={node.r}
+					role="tooltip"
+					fill={node.data?.color}
+					tabindex="-1"
+					on:mouseover={() => handleOver(node)}
+					on:focus={() => handleOver(node)}
+					on:mouseout={() => handleOver(null)}
+					on:blur={() => handleOver(null)}
+				/>
+			{/if}
+		{/each}
+		{#each circles as node}
+			{#if node.r / 3 > 6}
 				<text
 					x={node.x}
 					y={node.y}
@@ -34,7 +88,7 @@
 				>
 					{node.data?.text}
 				</text>
-			</g>
+			{/if}
 		{/each}
 	</svg>
 	<!-- TODO: group with title and not as array -->
@@ -76,12 +130,19 @@
 		@media (--hover) {
 			&:hover {
 				box-shadow: 0px 8px 8px 0 var(--color-ice);
-				/* .title {
-					background: var(--color-ice);
-				} */
+
 				circle {
 					fill: var(--color-ice);
 					stroke-width: 0;
+				}
+			}
+		}
+
+		circle.tooltip-actor {
+			outline: none;
+			@media (--hover) {
+				&:hover {
+					fill: var(--color-blue);
 				}
 			}
 		}
@@ -90,5 +151,16 @@
 	.title {
 		width: 100%;
 		border-top: 1px solid var(--color-grey);
+	}
+
+	.tooltip {
+		position: fixed;
+		top: var(--top);
+		left: var(--left);
+		transform: translate(-50%, -100%);
+		background: var(--color-black);
+		color: var(--color-white);
+		pointer-events: none;
+		border-radius: var(--border-radius);
 	}
 </style>
