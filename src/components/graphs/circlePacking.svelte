@@ -162,5 +162,9 @@
 		color: var(--color-white);
 		pointer-events: none;
 		border-radius: var(--border-radius);
+		display: none;
+		@media (--hover) {
+			display: block;
+		}
 	}
 </style>

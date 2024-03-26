@@ -90,6 +90,7 @@
 		flex: 1 1 0;
 		min-height: calc(var(--vh, 1vh) * 100 - var(--nav-height, 0px) - 1px);
 		background: var(--color-grey);
+		padding-bottom: calc(var(--nav-height) + var(--space-m));
 		@media (--l) {
 			/* border-left: var(--border-default); */
 			grid-template-rows: min-content;
