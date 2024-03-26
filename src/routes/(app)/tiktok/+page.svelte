@@ -75,7 +75,7 @@
 	<Sidebar {queries} {dataUrl} />
 	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
 		{#if showEntries}
-			{#each clusters as cluster, i (`${$query}-${$lang}-${i}`)}
+			{#each clusters as cluster, i (`${$query}-${$lang}-${i}-${cluster?.[0]}`)}
 				<Link url={getUrl(cluster)} class="contents">
 					<CirclePacking {cluster} />
 				</Link>
@@ -87,7 +87,7 @@
 <style lang="postcss">
 	.container {
 		flex: 1 1 0;
-		min-height: calc(var(--vh) * 100 - var(--nav-height) - 1px);
+		min-height: calc(var(--vh, 1vh) * 100 - var(--nav-height, 0px) - 1px);
 		background: var(--color-grey);
 		@media (--l) {
 			/* border-left: var(--border-default); */

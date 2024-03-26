@@ -33,11 +33,16 @@ export async function load({ params, fetch }) {
 		return error(404, "Not found")
 	}
 
+	console.log(clusterData);
 	let videosIds = []
+	const unfilteredEntries = csvParse(clusterData)
 
-	const entries = csvParse(clusterData)?.filter?.(
-		(entry) => entry?.querySlug === query && entry?.cluster === slug
-	)
+	const entries = unfilteredEntries?.filter?.((entry) => {
+		console.log(entry);
+		return entry?.querySlug === query && entry?.cluster === slug
+	})
+
+	console.log(entries)
 
 	const cluster = {
 		label: entries[0]?.clusterLabel,
