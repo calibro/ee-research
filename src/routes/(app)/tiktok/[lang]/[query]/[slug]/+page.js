@@ -2,6 +2,7 @@ import { languages } from "~/config.json"
 import { getAsyncData } from "~/lib/data"
 import { csvParse } from "d3"
 import { error } from "@sveltejs/kit"
+import { base } from "$app/paths"
 
 export const prerender = false
 export const ssr = false
@@ -16,7 +17,7 @@ export async function load({ params, fetch }) {
 		return error(404, "Not found")
 	}
 
-	const baseUrl = `/tiktok/${langData.code}`
+	const baseUrl = `${base}/tiktok/${langData.code}`
 	const clusterUrl = `${baseUrl}/clusters_${langData.code}.csv`
 
 	const { data: clusterData, error: clusterError } = await getAsyncData(
@@ -33,16 +34,12 @@ export async function load({ params, fetch }) {
 		return error(404, "Not found")
 	}
 
-	console.log(clusterData);
 	let videosIds = []
-	const unfilteredEntries = csvParse(clusterData)
 
+	const unfilteredEntries = csvParse(clusterData)
 	const entries = unfilteredEntries?.filter?.((entry) => {
-		console.log(entry);
 		return entry?.querySlug === query && entry?.cluster === slug
 	})
-
-	console.log(entries)
 
 	const cluster = {
 		label: entries[0]?.clusterLabel,
@@ -58,11 +55,11 @@ export async function load({ params, fetch }) {
 		return error(404, "Not found")
 	}
 
-	const videosUrl = `${baseUrl}/videos_${langData.code}.csv`
+	const videosUrl = `${base}/tiktok/videos.csv`
 
 	const { data: videosData, error: videosError } = await getAsyncData(
 		{
-			key: `tiktok-${langData.code}-videos`,
+			key: `tiktok-videos`,
 			url: videosUrl,
 			type: "text",
 		},

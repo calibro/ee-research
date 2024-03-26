@@ -1,3 +1,5 @@
+import { base } from "$app/paths"
+
 // place files you want to import through the `$lib` alias in this folder.
 export const getRelativeUrl = (urlValue = "") => {
 	if (!urlValue) {
@@ -5,8 +7,11 @@ export const getRelativeUrl = (urlValue = "") => {
 	}
 
 	const url = urlValue.replace(import.meta.env.BASE_URL, "/")
+	if (url.startsWith("http")) {
+		return url
+	}
 
-	return url
+	return `${base}${url}`
 }
 
 export const slugify = (string) => {

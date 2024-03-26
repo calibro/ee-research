@@ -7,6 +7,7 @@
 	import { browser } from "$app/environment"
 	import Sidebar from "~/components/elements/sidebar.svelte"
 	import Link from "~/components/elements/link.svelte"
+	import { base } from "$app/paths"
 
 	let queries,
 		entries,
@@ -19,7 +20,7 @@
 	$: selectedLang = languages?.[$lang] || languages?.us
 	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
 
-	$: baseUrl = `/tiktok/${selectedLang?.code}`
+	$: baseUrl = `${base}/tiktok/${selectedLang?.code}`
 
 	$: dataUrl = selectedLang
 		? `${baseUrl}/clusters_${selectedLang.code}.csv`

@@ -3,7 +3,7 @@
 	import Like from "~/assets/icons/like.svg?component"
 	import Text from "../elements/text.svelte"
 	import Modal from "../elements/modal.svelte"
-
+	import { base } from "$app/paths"
 	export let video = {}
 	let isOpen = false
 </script>
@@ -13,7 +13,7 @@
 	class="thumb p-s flex-col-start-stretch gap-s text-left"
 >
 	<div class="img">
-		<img src="/tiktok/thumbs/{video.id}.webp" alt={video.title} />
+		<img src="{base}/tiktok/thumbs/{video.id}.webp" alt={video.title} />
 	</div>
 	<Text
 		tag="p"
