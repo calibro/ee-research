@@ -22,10 +22,10 @@
 	}
 
 	const circles = createCirclePacking(cluster, 200, 200)
+	const getFontSize = (r) => Math.min(r / 3, 13)
 
 	let m = { x: 0, y: 0 }
-
-	function handleMousemove(event) {
+	const handleMousemove = (event) => {
 		m.x = event.clientX
 		m.y = event.clientY
 	}
@@ -59,7 +59,7 @@
 
 	<svg width="100%" viewBox="0 0 200 200" class="ratio-square">
 		{#each circles as node}
-			{#if node.r / 3 > 6}
+			{#if getFontSize(node.r) > 6}
 				<circle cx={node.x} cy={node.y} r={node.r} fill={node.data?.color} />
 			{:else}
 				<circle
@@ -78,13 +78,13 @@
 			{/if}
 		{/each}
 		{#each circles as node}
-			{#if node.r / 3 > 6}
+			{#if getFontSize(node.r) > 6}
 				<text
 					x={node.x}
 					y={node.y}
 					text-anchor="middle"
 					dominant-baseline="middle"
-					font-size={node.r / 3}
+					font-size={getFontSize(node.r)}
 				>
 					{node.data?.text}
 				</text>
