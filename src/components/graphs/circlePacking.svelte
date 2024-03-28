@@ -34,6 +34,7 @@
 	const handleOver = (node) => {
 		activeNode = node
 	}
+
 </script>
 
 <div
@@ -95,10 +96,16 @@
 	<div class="title">
 		<Text
 			typo="p"
-			content={cluster[1][0].clusterLabel}
-			class="px-m py-xs"
+			content={`${cluster[1][0].clusterLabel}`}
+			class="px-s py-xs"
 			ellipsis={true}
 		/>
+		<Text
+		typo="p"
+		content={`tiktoks: ${cluster[2]}`}
+		class="px-s py-xs"
+		ellipsis={false}
+	/>
 	</div>
 </div>
 
@@ -152,6 +159,8 @@
 	.title {
 		width: 100%;
 		border-top: 1px solid var(--color-grey);
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.tooltip {

@@ -11,13 +11,13 @@
 
 <div class="sidebar flex flex-col gap-l py-m px-s">
 	<div class="group">
-		<Text typo="h2" content="Looking at pollution on stock photos platforms" />
+		<Text typo="h2" content="Which topics are connected to different substances, practices and devices?" />
 	</div>
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="WHAT AM I LOOKING AT?" />
 		<Text
 			typo="p"
-			content="Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus."
+			content="On TikTok users share fears, practices, and information about toxicities. This page collects clusters of similar hashtags, resized based on their frequency of use. By clicking on a cluster, users can explore videos associated with those hashtags."
 		/>
 	</div>
 	<Filters {queries} />
