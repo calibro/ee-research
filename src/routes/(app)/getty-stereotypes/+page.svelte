@@ -1,7 +1,7 @@
 <script>
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
-	import { csvParse, descending, groups } from "d3"
+	import { csvParse, groups } from "d3"
 	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
