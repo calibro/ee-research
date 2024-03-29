@@ -1,0 +1,1 @@
+.container.svelte-1bhb5im{flex:1 1 0;min-height:calc(100vh - 1px);min-height:calc(var(--vh, 1vh) * 100 - var(--nav-height, 0px) - 1px);background:var(--color-grey);padding-bottom:calc(var(--nav-height) + var(--space-m))}@media (min-width: 1024px){.container.svelte-1bhb5im{padding-bottom:var(--space-s);grid-template-rows:min-content}}
