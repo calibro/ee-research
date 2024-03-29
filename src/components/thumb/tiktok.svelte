@@ -14,7 +14,7 @@
 	class="thumb p-s flex-col-start-stretch gap-s text-left"
 >
 	<div class="img">
-		<Image src="{base}/assets/titkok/thumbs/{video.id}.webp" alt={video.title} />
+		<Image src="{base}/assets/tiktok/thumbs/{video.id}.webp" alt={video.title} />
 	</div>
 	<Text
 		tag="p"
