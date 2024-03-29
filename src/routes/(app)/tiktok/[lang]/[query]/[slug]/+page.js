@@ -17,7 +17,7 @@ export async function load({ params, fetch }) {
 		return error(404, "Not found")
 	}
 
-	const baseUrl = `${base}/tiktokAssets/${langData.code}`
+	const baseUrl = `${base}/assets/titkok/${langData.code}`
 	const clusterUrl = `${baseUrl}/clusters_${langData.code}.csv`
 
 	const { data: clusterData, error: clusterError } = await getAsyncData(
@@ -55,7 +55,7 @@ export async function load({ params, fetch }) {
 		return error(404, "Not found")
 	}
 
-	const videosUrl = `${base}/tiktokAssets/videos.csv`
+	const videosUrl = `${base}/assets/titkok/videos.csv`
 
 	const { data: videosData, error: videosError } = await getAsyncData(
 		{

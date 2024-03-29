@@ -20,7 +20,7 @@
 	$: selectedLang = languages?.[$lang] || languages?.us
 	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
 
-	$: baseUrl = `${base}/tiktokAssets/${selectedLang?.code}`
+	$: baseUrl = `${base}/assets/titkok/${selectedLang?.code}`
 
 	$: dataUrl = selectedLang
 		? `${baseUrl}/clusters_${selectedLang.code}.csv`
