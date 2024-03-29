@@ -60,7 +60,7 @@
 		background: var(--color-white);
 		top: 0;
 		border-bottom: var(--border-default);
-		z-index: 202;
+		z-index: 100;
 
 		.logo {
 			width: 42px;

@@ -64,15 +64,13 @@
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
-	{#key $query}
-		<div class="container p-s grid-1-s">
-			{#if clusters.length}
-				{#each clusters as cluster, i (`${$query}-${i}-${cluster?.[0]}`)}
-					<GettyStereo {cluster} query={$query} />
-				{/each}
-			{/if}
-		</div>
-	{/key}
+	<div class="container p-s grid-1-s">
+		{#if clusters.length}
+			{#each clusters as cluster, i (`${$query}-${i}-${cluster?.[0]}`)}
+				<GettyStereo {cluster} query={$query} />
+			{/each}
+		{/if}
+	</div>
 </div>
 
 <style lang="postcss">

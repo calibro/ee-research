@@ -16,20 +16,18 @@
 	let query = queryParam("query"),
 		lang = queryParam("lang")
 
-	let openFilters = false
+	let isOpen = false
 
 	$: browser
 		? innerWidth > extractNumber(breakpoint.l)
-			? (openFilters = false)
+			? (isOpen = false)
 			: undefined
 		: undefined
 
-	$: browser
-		? document.body.classList.toggle("scroll-lock", openFilters)
-		: undefined
+	$: browser ? document.body.classList.toggle("scroll-lock", isOpen) : undefined
 </script>
 
-<div class:show={openFilters} class="filters px-s py-m l:p-0">
+<div class:show={isOpen} class="filters px-s py-m l:p-0">
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="Query" class="case-upper" />
 		<Dropdown items={queries} bind:value={$query} />
@@ -41,13 +39,13 @@
 		</div>
 	{/if}
 </div>
-<div class="cta pointer-events-none l:hidden">
+<div class="cta pointer-events-none l:hidden" class:open={isOpen}>
 	<Link
 		class="button pointer-events-initial"
-		fn={() => (openFilters = !openFilters)}
+		fn={() => (isOpen = !isOpen)}
 		theme="cta"
 	>
-		{#if openFilters}
+		{#if isOpen}
 			<Text content="Confirm" typo="small" />
 		{:else}
 			<FilterIcon height="16" />
@@ -88,8 +86,11 @@
 		padding: var(--space-m) var(--space-s);
 		display: flex;
 		justify-content: center;
-		z-index: 201;
+		z-index: 10;
 
+		&.open {
+			z-index: 201;
+		}
 		@media (--l) {
 			display: none;
 		}
