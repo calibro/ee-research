@@ -1,16 +1,62 @@
 <script>
+	import { browser } from "$app/environment"
+	import { base } from "$app/paths"
+	import { csvParse, descending, groups } from "d3"
+	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
+	import GettyStereo from "~/components/graphs/gettyStereo.svelte"
+	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
 
 	export let data
 	const { queries } = data
-	console.log(queries);
+
 	const tl = getTopicLabels("getty_stereotypes")
 
 	let entries,
+		clusters,
 		loading = false
 	let query = queryParam("query")
+
+	onMount(() => {
+		if (!$query) {
+			$query = queries[0]?.query
+		}
+	})
+
+	const baseUrl = `${base}/assets/gettyimages`
+
+	$: dataUrl = `${baseUrl}/${$query}/${$query}.csv`
+
+	const watchQuery = async () => {
+		if (loading || !browser) return
+
+		loading = true
+		if (!$query) {
+			loading = false
+			entries = null
+			return
+		}
+		const { data, error } = await getAsyncData({
+			key: `getty-stereotypes-data`,
+			url: dataUrl,
+			type: "text",
+		})
+
+		if (data) {
+			entries = csvParse(data)
+		} else {
+			entries = null
+		}
+
+		loading = false
+	}
+
+	$: clusters = entries?.length ? groups(entries, (d) => d.cluster) : []
+	$: dataUrl, watchQuery()
+
+	$: clusters, console.log(clusters)
 </script>
 
 <div class="page l:flex-start-start">
@@ -20,7 +66,13 @@
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
-	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s"></div>
+	<div class="container p-s grid-1-s">
+		{#if clusters.length}
+			{#each clusters as cluster}
+				<GettyStereo {cluster} query={$query} />
+			{/each}
+		{/if}
+	</div>
 </div>
 
 <style lang="postcss">

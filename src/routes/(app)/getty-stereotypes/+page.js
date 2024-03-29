@@ -27,6 +27,5 @@ export async function load({ params, fetch }) {
 
 	const queries = csvParse(data)
 
-	console.log(queries)
 	return { queries }
 }
