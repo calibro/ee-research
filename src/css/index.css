@@ -8,3 +8,6 @@
 @import "typography";
 @import "main";
 @import "utils";
+
+
+@import 'swiper/css/bundle'

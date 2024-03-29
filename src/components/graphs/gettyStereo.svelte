@@ -1,5 +1,6 @@
 <script>
 	import { base } from "$app/paths"
+	import { swipe } from "~/lib/swipe"
 	import Text from "../elements/text.svelte"
 
 	export let cluster
@@ -14,9 +15,9 @@
 		() => "30px"
 	).join(" ")
 
-	const handleMouseOver = (i) => {
+	const handleMouseOver = (e, i) => {
 		gridColumns = Array.from({ length: cluster[1]?.length }, (_, j) =>
-			j === i ? "300px" : "30px"
+			j === i ? `${e.target.clientWidth}px` : "30px"
 		).join(" ")
 	}
 </script>
@@ -33,16 +34,21 @@
 			class="case-upper"
 		/>
 	</div>
-	<div class="images col-[span-7] scrollbar-hide" style="--columns: {gridColumns}">
+	<div
+		class="images col-[span-7] scrollbar-hide scroll-container"
+		style="--columns: {gridColumns}"
+		use:swipe
+	>
 		{#each cluster[1] as item, i}
 			<img
 				src={getImageUrl(item.id)}
 				alt={item.title}
 				loading="lazy"
-				on:mouseover={() => handleMouseOver(i)}
-				on:focus={() => handleMouseOver(i)}
-				on:mouseout={() => handleMouseOver()}
-				on:blur={() => handleMouseOver()}
+				on:mouseover={(e) => handleMouseOver(e, i)}
+				on:focus={(e) => handleMouseOver(e, i)}
+				on:mouseout={(e) => handleMouseOver()}
+				on:blur={(e) => handleMouseOver()}
+				draggable="false"
 			/>
 		{/each}
 	</div>
@@ -55,6 +61,7 @@
 		height: 200px;
 		overflow: hidden;
 	}
+
 	.images {
 		background: var(--color-blue);
 		display: grid;
@@ -63,11 +70,14 @@
 		grid-template-rows: 1fr;
 		overflow: auto;
 		height: 100%;
+		overflow-y: hidden;
 		:global(img) {
 			height: 100%;
-			width: 100%;
+			width: fit-content;
 			object-fit: cover;
+			object-position: left;
 			overflow: hidden;
+			max-width: fit-content;
 		}
 	}
 </style>
