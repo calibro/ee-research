@@ -57,17 +57,17 @@
 		}
 
 		loading = false
-
-		// if (selectedLang?.code !== lang) {
-		// 	watchLang(selectedLang?.code)
-		// }
 	}
 
 	$: watchLang(selectedLang?.code)
-	$: clusters = showEntries ? groups(filteredEntries, (d) => d.cluster).map(d=>{
-		d[2] = [...new Set(d[1].map(d=>d.ids.split("|")).flat())].length
-		return d
-	}).sort((a,b)=>descending(a[2], b[2])) : []
+	$: clusters = showEntries
+		? groups(filteredEntries, (d) => d.cluster)
+				.map((d) => {
+					d[2] = [...new Set(d[1].map((d) => d.ids.split("|")).flat())].length
+					return d
+				})
+				.sort((a, b) => descending(a[2], b[2]))
+		: []
 
 	const getUrl = (cluster) => {
 		const clusterSlug = cluster?.[0]

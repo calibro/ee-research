@@ -5,20 +5,20 @@
 
 	import Filters from "./filters.svelte"
 
+	import { getTopicLabels } from "~/lib/metadata"
+	const tl = getTopicLabels("tiktok")
+
 	export let queries
 	export let dataUrl
 </script>
 
 <div class="sidebar flex flex-col gap-l py-m px-s">
 	<div class="group">
-		<Text typo="h2" content="Which topics are connected to different substances, practices and devices?" />
+		<Text typo="h2" content={tl("research_question")} />
 	</div>
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="WHAT AM I LOOKING AT?" />
-		<Text
-			typo="p"
-			content="On TikTok users share fears, practices, and information about toxicities. This page collects clusters of similar hashtags, resized based on their frequency of use. By clicking on a cluster, users can explore videos associated with those hashtags."
-		/>
+		<Text typo="p" content={tl("description")} />
 	</div>
 	<Filters {queries} />
 	<div class="group flex flex-col gap-xs">

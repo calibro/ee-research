@@ -30,7 +30,7 @@
 	}
 </script>
 
-<nav class="grid" bind:clientHeight={navHeight}>
+<nav class="grid-12-0" bind:clientHeight={navHeight}>
 	<div class="item col-[span-1] flex-center-center">
 		<Link url="/">
 			<div class="logo">
