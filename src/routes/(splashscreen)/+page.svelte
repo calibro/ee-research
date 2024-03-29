@@ -41,7 +41,7 @@
 			<ThumbHome
 				title="GETTYIMAGES STEREOTYPES"
 				description="Which visual tropes emerges in connection to different pollution routes, practices and substances?"
-				url="/tiktok"
+				url="/getty-stereotypes"
 			/>
 		</div>
 		<div class="item l:col-[span-3]">
@@ -64,7 +64,7 @@
 			<ThumbHome
 				title="GETTYIMAGES CIRCULATION"
 				description="By which web pages are the most significant stock photos used?"
-				url="/tiktok"
+				url="/getty-circulation"
 			/>
 		</div>
 		<div class="item l:col-[span-5] flex-start-center px-s py-l case-upper">

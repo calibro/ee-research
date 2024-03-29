@@ -9,6 +9,9 @@
 	import Link from "~/components/elements/link.svelte"
 	import { base } from "$app/paths"
 
+	import { getTopicLabels } from "~/lib/metadata"
+	const tl = getTopicLabels("tiktok")
+
 	let queries,
 		entries,
 		loading = false
@@ -76,7 +79,12 @@
 </script>
 
 <div class="page l:flex-start-start">
-	<Sidebar {queries} {dataUrl} />
+	<Sidebar
+		{queries}
+		{dataUrl}
+		description={tl("description")}
+		question={tl("research_question")}
+	/>
 	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
 		{#if showEntries}
 			{#each clusters as cluster, i (`${$query}-${$lang}-${i}-${cluster?.[0]}`)}

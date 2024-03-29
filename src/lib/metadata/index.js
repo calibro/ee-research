@@ -1,13 +1,13 @@
-import getty_circular from "./getty_circular.json"
-import getty_stereotype from "./getty_stereotype.json"
+import getty_circulation from "./getty_circulation.json"
+import getty_stereotypes from "./getty_stereotypes.json"
 import tiktok from "./tiktok.json"
 import youtube_language from "./youtube_language.json"
 import youtube_network from "./youtube_network.json"
 import globals from "./globals.json"
 
 const labels = {
-	getty_circular,
-	getty_stereotype,
+	getty_circulation,
+	getty_stereotypes,
 	tiktok,
 	youtube_language,
 	youtube_network,

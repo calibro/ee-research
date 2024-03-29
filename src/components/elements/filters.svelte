@@ -10,6 +10,7 @@
 	import { breakpoint } from "~/css/tokens.json"
 	import { extractNumber } from "~/lib"
 
+	export let showLang = true
 	export let queries
 
 	let query = queryParam("query"),
@@ -33,10 +34,12 @@
 		<Text typo="label" content="Query" class="case-upper" />
 		<Dropdown items={queries} bind:value={$query} />
 	</div>
-	<div class="group flex flex-col gap-xs">
-		<Text typo="label" content="Language" class="case-upper" />
-		<Radio items={languages} bind:value={$lang} />
-	</div>
+	{#if showLang}
+		<div class="group flex flex-col gap-xs">
+			<Text typo="label" content="Language" class="case-upper" />
+			<Radio items={languages} bind:value={$lang} />
+		</div>
+	{/if}
 </div>
 <div class="cta pointer-events-none l:hidden">
 	<Link

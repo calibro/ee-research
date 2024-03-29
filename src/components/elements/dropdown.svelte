@@ -14,7 +14,7 @@
 		menuOpen = false
 	}
 
-	$: selectedItem = items?.find?.((item) => item.slug === value)
+	$: selectedItem = items?.find?.((item) => (item.slug || item.query) === value)
 
 	let dropdownRef
 
@@ -39,7 +39,9 @@
 	>
 		<Text
 			class={!selectedItem ? "opacity-50" : ""}
-			content={!items?.length ? "Loading..." : selectedItem?.title || "Select"}
+			content={!items?.length
+				? "Loading..."
+				: selectedItem?.title || selectedItem?.queryLabel || "Select"}
 			typo="p"
 		/>
 		<ArrowDown width={12} />
@@ -50,8 +52,8 @@
 			{#each items as item}
 				<Link
 					class={`button p-xs ${item.slug === value ? "selected" : ""}`}
-					text={item.title}
-					fn={() => handleLink(item.slug)}
+					text={item.title || item.queryLabel}
+					fn={() => handleLink(item.slug || item.query)}
 				/>
 			{/each}
 		</div>
