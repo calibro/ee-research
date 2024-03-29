@@ -55,8 +55,6 @@
 
 	$: clusters = entries?.length ? groups(entries, (d) => d.cluster) : []
 	$: dataUrl, watchQuery()
-
-	$: clusters, console.log(clusters)
 </script>
 
 <div class="page l:flex-start-start">

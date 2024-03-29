@@ -40,16 +40,21 @@
 		use:swipe
 	>
 		{#each cluster[1] as item, i}
-			<img
-				src={getImageUrl(item.id)}
-				alt={item.title}
-				loading="lazy"
+			<div
+				class="image-container"
 				on:mouseover={(e) => handleMouseOver(e, i)}
 				on:focus={(e) => handleMouseOver(e, i)}
 				on:mouseout={(e) => handleMouseOver()}
 				on:blur={(e) => handleMouseOver()}
-				draggable="false"
-			/>
+				role="img"
+			>
+				<img
+					src={getImageUrl(item.id)}
+					alt={item.title}
+					loading="lazy"
+					draggable="false"
+				/>
+			</div>
 		{/each}
 	</div>
 </div>
@@ -62,6 +67,10 @@
 		overflow: hidden;
 	}
 
+	.image-container {
+		width: 100%;
+		overflow: hidden;
+	}
 	.images {
 		background: var(--color-blue);
 		display: grid;
