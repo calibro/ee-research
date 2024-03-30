@@ -31,10 +31,8 @@
 		"sveltekit-search-params": "^2.1.2",
 		"typescript": "^5.4.3",
 		"unocss": "^0.58.6",
-		"vite": "^5.2.5"
-	},
-	"type": "module",
-	"dependencies": {
+		"vite": "^5.2.5",
 		"swiper": "^11.1.0"
-	}
+	},
+	"type": "module"
 }

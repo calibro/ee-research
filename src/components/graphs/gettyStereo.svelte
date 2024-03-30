@@ -1,19 +1,15 @@
 <script>
-	import { base } from "$app/paths"
-	import { swipe } from "~/lib/swipe"
+	import { handleClick, swipe } from "~/lib/customSwipe"
 	import Text from "../elements/text.svelte"
 	import { onMount } from "svelte"
 	import { fade } from "svelte/transition"
+	import { getImageUrl } from "~/lib/stereotypes"
 
 	export let cluster
 	export let query
-
-	const getImageUrl = (image) => {
-		return `${base}/assets/gettyimages/${query}/images/${image}.jpg`
-	}
+	export let openGallery = (cluster, i) => {}
 
 	const items = cluster[1].sort((a, b) => a.rank - b.rank)
-
 	let el
 	const handleMouseOver = (e, i) => {
 		const canHover = window.matchMedia("(hover: hover)").matches //true or false
@@ -69,24 +65,26 @@
 		<div
 			class="images col-[span-9] l:col-[span-7] scrollbar-hide scroll-container"
 			use:swipe
-			transition:fade
 		>
-			{#each items as item, i}
-				<div
+			{#each items as item, i (`${item.id}-${cluster[0]}-${i}`)}
+				<button
 					class="image-container"
 					on:mouseover={(e) => handleMouseOver(e, i)}
 					on:focus={(e) => handleMouseOver(e, i)}
 					on:mouseout={(e) => handleMouseOver()}
 					on:blur={(e) => handleMouseOver()}
-					role="img"
+					tabindex="0"
 				>
-					<img
-						src={getImageUrl(item.id)}
-						alt={item.title}
-						loading="lazy"
-						draggable="false"
-					/>
-				</div>
+					{#key `${item.id}-${cluster[0]}-${i}`}
+						<img
+							src={getImageUrl(item.id, query)}
+							alt={item.title}
+							loading="lazy"
+							draggable="false"
+							use:handleClick={{ fn: () => openGallery(i, cluster) }}
+						/>
+					{/key}
+				</button>
 			{/each}
 		</div>
 	{/if}
@@ -120,13 +118,6 @@
 			height: 100%;
 			object-fit: cover;
 			max-width: fit-content;
-			transform: translateX(-50%);
-			@media (--hover) {
-				transition: transform 0.6s 0.09s ease;
-				&:hover {
-					transform: translateX(0);
-				}
-			}
 		}
 	}
 </style>

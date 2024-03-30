@@ -12,11 +12,7 @@
 			setViewport()
 		}
 		document.body.classList.add("loaded")
-		console.log("app mounted")
 	})
 </script>
 
-<!-- <svelte:head
-	><script async src="https://www.tiktok.com/embed.js"></script>
-</svelte:head> -->
 <slot />

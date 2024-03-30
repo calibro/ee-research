@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  swiper:
-    specifier: ^11.1.0
-    version: 11.1.0
-
 devDependencies:
   '@poppanator/sveltekit-svg':
     specifier: ^4.2.1
@@ -67,6 +62,9 @@ devDependencies:
   sveltekit-search-params:
     specifier: ^2.1.2
     version: 2.1.2(@sveltejs/kit@2.5.4)(svelte@4.2.12)(vite@5.2.5)
+  swiper:
+    specifier: ^11.1.0
+    version: 11.1.0
   typescript:
     specifier: ^5.4.3
     version: 5.4.3
@@ -3600,7 +3598,7 @@ packages:
   /swiper@11.1.0:
     resolution: {integrity: sha512-Pm78CgU7Wvg+w/MgIL/1NwMSLgx0XqFof25EnVyX8iZFCYJv5CppH7LHkBj43qW2k5Cp3Iz7FcdBxrox7XX2AQ==}
     engines: {node: '>= 4.7.0'}
-    dev: false
+    dev: true
 
   /tiny-glob@0.2.9:
     resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}

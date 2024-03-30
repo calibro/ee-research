@@ -70,11 +70,6 @@ export const swipe = (node) => {
 		ele.style.cursor = "grab"
 		ele.style.removeProperty("user-select")
 	}
-	const handleClick = (event) => {
-		if (!node.contains(event.target)) {
-			node.dispatchEvent(new CustomEvent("outclick"))
-		}
-	}
 
 	document.addEventListener("mousedown", handleMouseDown, true)
 	document.addEventListener("touchstart", handleTouchStart, true)
@@ -85,4 +80,46 @@ export const swipe = (node) => {
 			document.removeEventListener("touchstart", handleTouchStart, true)
 		},
 	}
+}
+
+export const handleClick = (node, options) => {
+	let isClicked = false
+	let isDragging = false
+	let startX = 0
+	let startY = 0
+	let el = node
+
+	const handleMouseMove = (e) => {
+		if (!isClicked) return
+
+		const currentX = e.clientX
+		const currentY = e.clientY
+
+		const distanceX = Math.abs(currentX - startX)
+		const distanceY = Math.abs(currentY - startY)
+
+		if (distanceX > 100 || distanceY > 100) {
+			isDragging = true
+		}
+	}
+
+	const handleMouseUp = () => {
+		isClicked = false
+		if (!isDragging) {
+			options.fn()
+		}
+		isDragging = false
+		el.removeEventListener("mouseup", handleMouseUp)
+		el.removeEventListener("mousemove", handleMouseMove)
+	}
+
+	const handleMouseDown = (event) => {
+		isClicked = true
+		startX = event.clientX
+		startY = event.clientY
+		el.addEventListener("mouseup", handleMouseUp)
+		el.addEventListener("mousemove", handleMouseMove)
+	}
+
+	node.addEventListener("mousedown", handleMouseDown)
 }
