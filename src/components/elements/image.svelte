@@ -1,6 +1,8 @@
 <script>
 	import { generateSvgPlaceholder } from "~/lib"
-	export let src, alt, loading
+	export let src,
+		alt,
+		loading = "lazy"
 
 	const fallback = (e) => {
 		e.target.src = generateSvgPlaceholder()

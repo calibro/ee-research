@@ -6,6 +6,7 @@
 	import Close from "~/assets/icons/close.svg?component"
 	import { onDestroy, onMount } from "svelte"
 	import { getImageUrl } from "~/lib/stereotypes"
+	import Image from "../elements/image.svelte"
 
 	export let query
 	export let gallery
@@ -44,6 +45,11 @@
 	onDestroy(() => {
 		swiper?.destroy?.()
 	})
+
+	const getPlaces = (keyword) => {
+		const places = keyword.split("|")
+		return places.map((place) => place.trim()).join(", ")
+	}
 </script>
 
 {#if totalSlides}
@@ -70,16 +76,33 @@
 				</div>
 			</div>
 		</div>
-		<div class="swiper" bind:this={swiperEl}>
-			<div class="swiper-wrapper">
-				{#each cluster[1] as item, i}
-					<div class="swiper-slide">
-						<img src={getImageUrl(item.id, query)} alt="" />
-					</div>
-				{/each}
+		<div class="container pt-s">
+			<div class="swiper" bind:this={swiperEl}>
+				<div class="swiper-wrapper">
+					{#each cluster[1] as item, i}
+						<div class="swiper-slide">
+							<Image src={getImageUrl(item.id, query)} alt={item.title} />
+
+							<!-- <div class="info grid-3-gap py-s">
+								<div>
+									<Text
+										content="Caption"
+										typo="label"
+										class="case-upper pb-xs"
+									/>
+									<Text content={item.title} typo="p" />
+								</div>
+								<div class="col-[span-2]">
+									<Text content="Place" typo="label" class="case-upper pb-xs" />
+									<Text content={getPlaces(item.keyword_Location)} typo="p" />
+								</div>
+							</div> -->
+						</div>
+					{/each}
+				</div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
 			</div>
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
 		</div>
 	</div>
 {/if}
@@ -103,16 +126,19 @@
 	}
 
 	.swiper-slide {
-		height: calc(var(--vh, 1vh) * 50);
-		min-width: 200px;
-		&:not(.swiper-slide-active) {
-			opacity: 0.3;
-		}
+		min-width: 100px;
 		width: auto;
-		:global(img) {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+	}
+
+	.swiper-slide,
+	.info {
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	.swiper-slide:not(.swiper-slide-active) {
+		opacity: 0.3;
+		.info {
+			opacity: 0;
 		}
 	}
 </style>

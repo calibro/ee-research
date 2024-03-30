@@ -17,7 +17,7 @@
 
 		if (e?.target) {
 			e.target.closest(".image-container").style.minWidth =
-				`${e.target.clientWidth}px`
+				`${e.target.clientWidth - 1}px`
 		} else {
 			el.querySelectorAll(".image-container").forEach((el) => {
 				el.removeAttribute("style")
