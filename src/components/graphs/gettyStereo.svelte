@@ -2,7 +2,7 @@
 	import { base } from "$app/paths"
 	import { swipe } from "~/lib/swipe"
 	import Text from "../elements/text.svelte"
-	import { onDestroy, onMount } from "svelte"
+	import { onMount } from "svelte"
 	import { fade } from "svelte/transition"
 
 	export let cluster
@@ -11,6 +11,8 @@
 	const getImageUrl = (image) => {
 		return `${base}/assets/gettyimages/${query}/images/${image}.jpg`
 	}
+
+	const items = cluster[1].sort((a, b) => a.rank - b.rank)
 
 	let el
 	const handleMouseOver = (e, i) => {
@@ -69,7 +71,7 @@
 			use:swipe
 			transition:fade
 		>
-			{#each cluster[1] as item, i}
+			{#each items as item, i}
 				<div
 					class="image-container"
 					on:mouseover={(e) => handleMouseOver(e, i)}
