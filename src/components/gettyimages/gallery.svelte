@@ -51,6 +51,8 @@
 		return places.map((place) => place.trim()).join(", ")
 	}
 	$: activeSlide = cluster?.[1][currentSlide]
+	$: place = getPlaces(activeSlide?.keyword_Location)
+	$: caption = activeSlide?.title
 </script>
 
 {#if totalSlides}
@@ -97,14 +99,18 @@
 			</div>
 			<div class="info">
 				<div class="l:grid-2-gap py-s px-s l:px-0">
-					<div class="pb-s">
-						<Text content="Caption" typo="label" class="case-upper pb-xs" />
-						<Text content={activeSlide.title} typo="p" />
-					</div>
-					<div>
-						<Text content="Place" typo="label" class="case-upper pb-xs" />
-						<Text content={getPlaces(activeSlide.keyword_Location)} typo="p" />
-					</div>
+					{#if caption}
+						<div>
+							<Text content="Caption" typo="label" class="case-upper pb-xs" />
+							<Text content={caption} typo="p" />
+						</div>
+					{/if}
+					{#if place}
+						<div class="pt-s">
+							<Text content="Place" typo="label" class="case-upper pb-xs" />
+							<Text content={place} typo="p" />
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -180,6 +186,12 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		width: 100%;
+		overflow: hidden;
+		.swiper {
+			width: 100%;
+			overflow: hidden;
+		}
 
 		@media (--l) {
 			justify-content: unset;
