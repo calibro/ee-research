@@ -50,12 +50,13 @@
 		const places = keyword.split("|")
 		return places.map((place) => place.trim()).join(", ")
 	}
+	$: activeSlide = cluster?.[1][currentSlide]
 </script>
 
 {#if totalSlides}
 	<div class="gallery">
 		<div class="navbar">
-			<div class="content grid-4-0 xl:grid-12-gap">
+			<div class="content grid-4-0 auto-flow-dense xl:grid-12-gap">
 				<div class="title col-[span-3] py-s px-s">
 					<Text content="Topic" typo="label" class="case-upper" />
 					<Text
@@ -69,45 +70,58 @@
 					<Text content="Image" typo="label" class="case-upper pb-xxs" />
 					<Text content="{currentSlide + 1}/{totalSlides}" />
 				</div>
-				<div class="col-4 xl:col-12 self-center justify-self-end px-s">
-					<Link fn={closeGallery} class="flex-center-center">
-						<Close width="26" />
-					</Link>
+				<div class="close col-4 xl:col-12 px-s">
+					<div class="flex-end-center h-full">
+						<Link fn={closeGallery} class="flex-center-center">
+							<Close width="26" />
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container pt-s">
+		<div class="container flex flex-col pt-s">
 			<div class="swiper" bind:this={swiperEl}>
 				<div class="swiper-wrapper">
 					{#each cluster[1] as item, i}
 						<div class="swiper-slide">
-							<Image src={getImageUrl(item.id, query)} alt={item.title} />
-
-							<!-- <div class="info grid-3-gap py-s">
-								<div>
-									<Text
-										content="Caption"
-										typo="label"
-										class="case-upper pb-xs"
-									/>
-									<Text content={item.title} typo="p" />
-								</div>
-								<div class="col-[span-2]">
-									<Text content="Place" typo="label" class="case-upper pb-xs" />
-									<Text content={getPlaces(item.keyword_Location)} typo="p" />
-								</div>
-							</div> -->
+							<Image
+								src={getImageUrl(item.id, query)}
+								alt={item.title}
+								loading="lazy"
+							/>
 						</div>
 					{/each}
 				</div>
 				<div class="swiper-button-next"></div>
 				<div class="swiper-button-prev"></div>
 			</div>
+			<div class="info">
+				<div class="l:grid-2-gap py-s px-s l:px-0">
+					<div class="pb-s">
+						<Text content="Caption" typo="label" class="case-upper pb-xs" />
+						<Text content={activeSlide.title} typo="p" />
+					</div>
+					<div>
+						<Text content="Place" typo="label" class="case-upper pb-xs" />
+						<Text content={getPlaces(activeSlide.keyword_Location)} typo="p" />
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}
 
 <style lang="postcss">
+	.title {
+		border-right: var(--border-default);
+	}
+	.title,
+	.close {
+		border-bottom: var(--border-default);
+		@media (--l) {
+			border-bottom: none;
+		}
+	}
 	.navbar {
 		border-bottom: var(--border-default);
 	}
@@ -121,24 +135,54 @@
 		z-index: 300;
 		:global(.swiper-button-next),
 		:global(.swiper-button-prev) {
+			display: none;
 			color: var(--color-black);
+			@media (--l) {
+				display: flex;
+			}
+		}
+		display: grid;
+		grid-template-rows: auto 1fr;
+	}
+
+	.info {
+		margin-inline: auto;
+		border-top: var(--border-default);
+		width: 100%;
+		@media (--l) {
+			border-top: none;
+			width: 60%;
+		}
+	}
+	.swiper-slide {
+		width: calc(100% - var(--space-s) * 4);
+		height: calc(var(--vh, 1vh) * 30);
+		@media (--l) {
+			width: 60%;
+			height: calc(var(--vh, 1vh) * 60);
+		}
+		:global(img) {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			overflow: hidden;
 		}
 	}
 
 	.swiper-slide {
-		min-width: 100px;
-		width: auto;
-	}
-
-	.swiper-slide,
-	.info {
 		transition: opacity 0.3s ease-in-out;
+		&:not(.swiper-slide-active) {
+			opacity: 0.3;
+		}
 	}
 
-	.swiper-slide:not(.swiper-slide-active) {
-		opacity: 0.3;
-		.info {
-			opacity: 0;
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		@media (--l) {
+			justify-content: unset;
 		}
 	}
 </style>
