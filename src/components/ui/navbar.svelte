@@ -10,7 +10,7 @@
 	const items = [
 		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/tiktok" },
 		{ title: "YOUTUBE NETWORK", url: "/tiktok" },
-		{ title: "GETTYIMAGES STEREOTYPES", url: "/tiktok" },
+		{ title: "GETTYIMAGES STEREOTYPES", url: "/getty-stereotypes" },
 		{ title: "GETTYIMAGES CIRCULATION", url: "/tiktok" },
 		{ title: "TIKTOK TOPICS", url: "/tiktok" },
 	]
