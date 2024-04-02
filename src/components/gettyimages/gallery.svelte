@@ -108,7 +108,7 @@
 						</div>
 					{/if}
 					{#if place}
-						<div class="pt-s">
+						<div class="pt-s l:pt-0">
 							<Text content="Place" typo="label" class="case-upper pb-xs" />
 							<Text content={place} typo="p" />
 						</div>
