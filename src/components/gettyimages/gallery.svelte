@@ -96,8 +96,8 @@
 						</div>
 					{/each}
 				</div>
-				<div ref="nextEl" class="swiper-button-next"></div>
-				<div ref="prevEl" class="swiper-button-prev"></div>
+				<div bind:this={nextEl} class="swiper-button-next"></div>
+				<div bind:this={prevEl} class="swiper-button-prev"></div>
 			</div>
 			<div class="info">
 				<div class="l:grid-2-gap py-s px-s l:px-0">
