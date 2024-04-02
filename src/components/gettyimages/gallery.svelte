@@ -17,6 +17,8 @@
 	let swiperEl
 	let totalSlides = cluster?.[1]?.length
 	let currentSlide = index
+	let nextEl
+	let prevEl
 
 	onMount(() => {
 		if (totalSlides) {
@@ -26,8 +28,8 @@
 					enabled: true,
 				},
 				navigation: {
-					nextEl: ".swiper-button-next",
-					prevEl: ".swiper-button-prev",
+					nextEl,
+					prevEl,
 				},
 				slidesPerView: "auto",
 				centeredSlides: true,
@@ -94,8 +96,8 @@
 						</div>
 					{/each}
 				</div>
-				<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>
+				<div ref="nextEl" class="swiper-button-next"></div>
+				<div ref="prevEl" class="swiper-button-prev"></div>
 			</div>
 			<div class="info">
 				<div class="l:grid-2-gap py-s px-s l:px-0">
