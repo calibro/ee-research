@@ -52,10 +52,18 @@
 		const places = keyword.split("|")
 		return places.map((place) => place.trim()).join(", ")
 	}
+
+	const onKeyDown = (e) => {
+		if (e.key === "Escape") {
+			closeGallery()
+		}
+	}
 	$: activeSlide = cluster?.[1][currentSlide]
 	$: place = getPlaces(activeSlide?.keyword_Location)
 	$: caption = activeSlide?.title
 </script>
+
+<svelte:window on:keydown|preventDefault={onKeyDown} />
 
 {#if totalSlides}
 	<div class="gallery">
@@ -74,7 +82,7 @@
 					<Text content="Image" typo="label" class="case-upper pb-xxs" />
 					<Text content="{currentSlide + 1}/{totalSlides}" />
 				</div>
-				<div class="close col-4 xl:col-12 px-s">
+				<div class="close col-4 xl:col-12 px-s" role="button">
 					<div class="flex-end-center h-full">
 						<Link fn={closeGallery} class="flex-center-center">
 							<Close width="26" />
