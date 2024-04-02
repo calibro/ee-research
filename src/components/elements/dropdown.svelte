@@ -30,12 +30,6 @@
 			menuOpen = false
 		}
 	}
-
-	$: orderedItems = items?.sort?.(
-		(a, b) =>
-			a.title?.localeCompare(b.title) ||
-			a.queryLabel?.localeCompare(b.queryLabel)
-	)
 </script>
 
 <div class="dropdown" ref={dropdownRef}>
@@ -55,7 +49,7 @@
 
 	{#if items?.length}
 		<div class:show={menuOpen} class="list scrollbar-hide">
-			{#each orderedItems as item}
+			{#each items as item}
 				<Link
 					class={`button p-xs ${item.slug === value ? "selected" : ""}`}
 					text={item.title || item.queryLabel}

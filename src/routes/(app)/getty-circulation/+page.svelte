@@ -81,7 +81,6 @@
 <div class="page l:flex-start-start">
 	<Sidebar
 		{queries}
-		{dataUrl}
 		description={tl("description")}
 		question={tl("research_question")}
 	/>

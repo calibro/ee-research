@@ -7,7 +7,6 @@
 
 	export let queries
 	export let showLang = true
-	// export let dataUrl
 	export let question
 	export let description
 </script>

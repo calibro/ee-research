@@ -26,6 +26,7 @@ export async function load({ params, fetch }) {
 	}
 
 	const queries = csvParse(data)
+	queries.sort((a, b) => a.queryLabel.localeCompare(b.queryLabel))
 
 	return { queries }
 }

@@ -15,7 +15,6 @@
 
 	let query = queryParam("query"),
 		lang = queryParam("lang")
-
 	let isOpen = false
 
 	$: browser

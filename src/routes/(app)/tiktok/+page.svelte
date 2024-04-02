@@ -48,6 +48,13 @@
 						queries.push({ slug: el.querySlug, title: el.query })
 					}
 				})
+				
+				queries.sort(
+					(a, b) =>
+						a.title.localeCompare(b.title) ||
+						a.queryLabel.localeCompare(b.queryLabel)
+				)
+
 				if (!$query) {
 					$query = queries[0]?.slug
 				}
@@ -81,7 +88,6 @@
 <div class="page l:flex-start-start">
 	<Sidebar
 		{queries}
-		{dataUrl}
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
