@@ -26,7 +26,7 @@
 	$: browser ? document.body.classList.toggle("scroll-lock", isOpen) : undefined
 </script>
 
-<div class:show={isOpen} class="filters px-s py-m l:p-0">
+<div class:show={isOpen} class="filters px-s py-m xl:p-0">
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="Query" class="case-upper" />
 		<Dropdown items={queries} bind:value={$query} />
@@ -38,7 +38,7 @@
 		</div>
 	{/if}
 </div>
-<div class="cta pointer-events-none l:hidden" class:open={isOpen}>
+<div class="cta pointer-events-none xl:hidden" class:open={isOpen}>
 	<Link
 		class="button pointer-events-initial"
 		fn={() => (isOpen = !isOpen)}
@@ -68,7 +68,7 @@
 			gap: var(--space-l);
 		}
 
-		@media (--l) {
+		@media (--xl) {
 			position: static;
 			width: auto;
 			height: auto;
@@ -90,7 +90,7 @@
 		&.open {
 			z-index: 201;
 		}
-		@media (--l) {
+		@media (--xl) {
 			display: none;
 		}
 	}

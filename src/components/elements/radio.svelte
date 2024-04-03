@@ -7,7 +7,7 @@
 	$: computedItems = !Array.isArray(items) ? Object.values(items) : items
 </script>
 
-<div role="radiogroup" class="grid-2-xs l:flex flex-wrap items-center gap-xs">
+<div role="radiogroup" class="grid-2-xs xl:flex flex-wrap items-center gap-xs">
 	{#each computedItems as { label, code, color }}
 		<input
 			class="sr-only"

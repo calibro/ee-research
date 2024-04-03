@@ -1,20 +1,20 @@
 <script>
+	import { lockscroll, createLockScrollStore } from "@svelte-put/lockscroll"
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { csvParse, groups } from "d3"
 	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
-	import Gallery from "~/components/gettyimages/gallery.svelte"
-	import News from "~/components/gettyimages/news.svelte"
+	import News from "~/components/gettyimages/news/index.svelte"
 	import GettyCirculation from "~/components/graphs/gettyCirculation.svelte"
-	import GettyStereo from "~/components/graphs/gettyStereo.svelte"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
 
 	export let data
 	const { queries } = data
 
+	const locked = createLockScrollStore()
 	const tl = getTopicLabels("getty_circulation")
 
 	let entries,
@@ -71,15 +71,20 @@
 	const close = () => {
 		news.isOpen = false
 		news.cluster = []
+		news.rank = null
+		locked.toggle(false)
 	}
 
-	const open = (d) => {
+	const open = (d, rank) => {
 		news.isOpen = true
 		news.cluster = d
+		news.rank = rank
+		locked.toggle(true)
 	}
 </script>
 
-<div class="page l:flex-start-start">
+<svelte:body use:lockscroll={locked} />
+<div class="page xl:flex-start-start">
 	<Sidebar
 		{queries}
 		showLang={false}
@@ -116,7 +121,7 @@
 		min-height: calc(var(--vh, 1vh) * 100 - var(--nav-height, 0px) - 1px);
 		background: var(--color-grey);
 		padding-bottom: calc(var(--nav-height) + var(--space-m));
-		@media (--l) {
+		@media (--xl) {
 			padding-bottom: var(--space-s);
 			grid-template-rows: min-content;
 		}

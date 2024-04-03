@@ -36,7 +36,7 @@
 
 <style lang="postcss">
 	.sidebar {
-		@media (--l) {
+		@media (--xl) {
 			position: sticky;
 			top: var(--nav-height, 74px);
 			width: 360px;

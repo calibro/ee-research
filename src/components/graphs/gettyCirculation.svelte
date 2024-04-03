@@ -2,12 +2,11 @@
 	import { base } from "$app/paths"
 	import Label from "../elements/label.svelte"
 	import Text from "../elements/text.svelte"
-	import News from "../gettyimages/news.svelte"
 
 	export let cluster
 	export let query
 
-	export let open = (d) => {}
+	export let open = (d, rank) => {}
 
 	const getImg = (key) => {
 		return `${base}/assets/gettyimages/${query}/images/${key}.jpg`
@@ -16,7 +15,7 @@
 
 <div class="getty grid-9-gap">
 	<div
-		class="h-full overflow-hidden col-[span-9] l:col-[span-2] flex-btw-start l:flex-col-btw-start p-s"
+		class="h-full overflow-hidden col-[span-9] xl:col-[span-2] flex-btw-start xl:flex-col-btw-start p-s"
 	>
 		<div>
 			<Text typo="label" content="Query" class="case-upper" />
@@ -27,10 +26,10 @@
 			/>
 		</div>
 	</div>
-	<div class="h-full overflow-hidden col-[span-9] l:col-[span-7] grid-3-0">
+	<div class="h-full overflow-hidden col-[span-9] xl:col-[span-7] grid-3-0">
 		{#each cluster[1] as [key, d], i (`${key}-${cluster[0]}-${query}`)}
-			<button class="img relative" on:click={() => open(d)}>
-				<div class="absolute top-0 left-0 p-s">
+			<button class="img relative" on:click={() => open(d, i + 1)}>
+				<div class="hidden m:block absolute top-0 left-0 p-xs xl:p-s">
 					<Label label="RANK #{i + 1}" typo="label" />
 				</div>
 				<img src={getImg(key)} alt="" />
@@ -45,7 +44,7 @@
 		border-radius: var(--border-radius);
 		overflow: hidden;
 		grid-template-rows: auto 200px;
-		@media (--l) {
+		@media (--xl) {
 			height: 200px;
 			grid-template-rows: 1fr;
 		}

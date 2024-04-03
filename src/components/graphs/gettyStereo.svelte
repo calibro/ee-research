@@ -48,7 +48,7 @@
 
 <div class="getty grid-9-gap" bind:this={el}>
 	<div
-		class="col-[span-9] l:col-[span-2] flex-btw-start l:flex-col-btw-start p-s"
+		class="col-[span-9] xl:col-[span-2] flex-btw-start xl:flex-col-btw-start p-s"
 	>
 		<div>
 			<Text typo="label" content="Stereotype" class="case-upper" />
@@ -62,7 +62,7 @@
 	</div>
 	{#if inViewport}
 		<div
-			class="images col-[span-9] l:col-[span-7] scrollbar-hide scroll-container"
+			class="images col-[span-9] xl:col-[span-7] scrollbar-hide scroll-container"
 			use:swipe
 		>
 			{#each items as item, i (`${item.id}-${cluster[0]}-${i}`)}
@@ -95,7 +95,7 @@
 		border-radius: var(--border-radius);
 		overflow: hidden;
 		grid-template-rows: auto 200px;
-		@media (--l) {
+		@media (--xl) {
 			height: 200px;
 			grid-template-rows: none;
 		}

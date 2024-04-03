@@ -53,7 +53,7 @@
 	</div>
 	<div class="container">
 		<div
-			class="p-s grid-1-s s:grid-2-s l:grid-3-s l:grid-4-s xl:grid-5-s xxl:grid-6-s"
+			class="p-s grid-1-s s:grid-2-s l:grid-3-s xl:grid-4-s xl:grid-5-s xxl:grid-6-s"
 		>
 			{#each videos as video}
 				<TiktokThumb {video} />

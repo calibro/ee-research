@@ -48,7 +48,7 @@
 						queries.push({ slug: el.querySlug, title: el.query })
 					}
 				})
-				
+
 				queries.sort(
 					(a, b) =>
 						a.title.localeCompare(b.title) ||
@@ -85,7 +85,7 @@
 	}
 </script>
 
-<div class="page l:flex-start-start">
+<div class="page xl:flex-start-start">
 	<Sidebar
 		{queries}
 		description={tl("description")}
@@ -108,7 +108,7 @@
 		min-height: calc(var(--vh, 1vh) * 100 - var(--nav-height, 0px) - 1px);
 		background: var(--color-grey);
 		padding-bottom: calc(var(--nav-height) + var(--space-m));
-		@media (--l) {
+		@media (--xl) {
 			padding-bottom: var(--space-s);
 			grid-template-rows: min-content;
 		}

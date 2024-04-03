@@ -1,4 +1,5 @@
 <script>
+	import { navigating } from "$app/stores"
 	import Swiper from "swiper"
 	import { Keyboard, Navigation } from "swiper/modules"
 	import Text from "../elements/text.svelte"
@@ -45,6 +46,7 @@
 	})
 
 	onDestroy(() => {
+		console.log("here")
 		swiper?.destroy?.()
 	})
 
@@ -61,9 +63,12 @@
 	$: activeSlide = cluster?.[1][currentSlide]
 	$: place = getPlaces(activeSlide?.keyword_Location)
 	$: caption = activeSlide?.title
+	$: if ($navigating) {
+		close()
+	}
 </script>
 
-<svelte:window on:keydown|preventDefault={onKeyDown} />
+<svelte:window on:keydown={onKeyDown} />
 
 {#if totalSlides}
 	<div class="gallery">
@@ -82,9 +87,9 @@
 					<Text content="Image" typo="label" class="case-upper pb-xxs" />
 					<Text content="{currentSlide + 1}/{totalSlides}" />
 				</div>
-				<div class="close col-4 xl:col-12 px-s" role="button">
-					<div class="flex-end-center h-full">
-						<Link fn={close} class="flex-center-center">
+				<div class="close col-4 xl:col-12" role="button">
+					<div class="flex-end p-s">
+						<Link fn={close} class="p-xs">
 							<Close width="26" />
 						</Link>
 					</div>
@@ -108,7 +113,7 @@
 				<div bind:this={prevEl} class="swiper-button-prev"></div>
 			</div>
 			<div class="info">
-				<div class="l:grid-2-gap py-s px-s l:px-0">
+				<div class="l:grid-2-gap py-s px-s xl:px-0">
 					{#if caption}
 						<div>
 							<Text content="Caption" typo="label" class="case-upper pb-xs" />
@@ -116,7 +121,7 @@
 						</div>
 					{/if}
 					{#if place}
-						<div class="pt-s l:pt-0">
+						<div class="pt-s xl:pt-0">
 							<Text content="Place" typo="label" class="case-upper pb-xs" />
 							<Text content={place} typo="p" />
 						</div>
@@ -134,7 +139,7 @@
 	.title,
 	.close {
 		border-bottom: var(--border-default);
-		@media (--l) {
+		@media (--xl) {
 			border-bottom: none;
 		}
 	}
@@ -153,7 +158,7 @@
 		:global(.swiper-button-prev) {
 			display: none;
 			color: var(--color-black);
-			@media (--l) {
+			@media (--xl) {
 				display: flex;
 			}
 		}
@@ -165,7 +170,7 @@
 		margin-inline: auto;
 		border-top: var(--border-default);
 		width: 100%;
-		@media (--l) {
+		@media (--xl) {
 			border-top: none;
 			width: 60%;
 		}
@@ -173,7 +178,7 @@
 	.swiper-slide {
 		width: calc(100% - var(--space-s) * 4);
 		height: calc(var(--vh, 1vh) * 30);
-		@media (--l) {
+		@media (--xl) {
 			width: 60%;
 			height: calc(var(--vh, 1vh) * 60);
 		}
@@ -203,7 +208,7 @@
 			overflow: hidden;
 		}
 
-		@media (--l) {
+		@media (--xl) {
 			justify-content: unset;
 		}
 	}

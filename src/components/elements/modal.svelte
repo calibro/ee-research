@@ -38,7 +38,7 @@
 			overflow: hidden;
 			width: 100%;
 			height: 100%;
-			@media (--l) {
+			@media (--xl) {
 				height: calc(var(--vh, 1vh) * 90);
 				width: calc(var(--vw, 1vw) * 80);
 			}

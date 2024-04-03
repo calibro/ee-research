@@ -1,4 +1,6 @@
 <script>
+	import { lockscroll, createLockScrollStore } from "@svelte-put/lockscroll"
+
 	import Logo from "~/assets/icons/logo.svg?component"
 	import Burger from "~/assets/icons/burger.svg?component"
 	import Close from "~/assets/icons/close.svg?component"
@@ -6,6 +8,8 @@
 	import { browser } from "$app/environment"
 	import { breakpoint } from "~/css/tokens.json"
 	import { extractNumber } from "~/lib"
+
+	const locked = createLockScrollStore()
 
 	const items = [
 		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/tiktok" },
@@ -25,12 +29,14 @@
 			if (innerWidth > extractNumber(breakpoint.l)) {
 				openMenu = false
 			}
-			document.body.classList.toggle("scroll-lock", openMenu)
+			locked.toggle(openMenu)
 		}
 	}
 </script>
 
-<nav class="grid-12-0" bind:clientHeight={navHeight}>
+<svelte:body use:lockscroll={locked} />
+
+<nav class="grid-12-0" bind:clientHeight={navHeight} class:isOpen={openMenu}>
 	<div class="item col-[span-1] flex-center-center">
 		<Link url="/">
 			<div class="logo">
@@ -38,7 +44,7 @@
 			</div>
 		</Link>
 	</div>
-	<div class="item col-[10/span-3] l:hidden flex-end-center">
+	<div class="item col-[10/span-3] xl:hidden flex-end-center">
 		<Link fn={() => (openMenu = !openMenu)}>
 			{#if openMenu}
 				<Close width="26" />
@@ -62,13 +68,16 @@
 		border-bottom: var(--border-default);
 		z-index: 100;
 
+		&.isOpen {
+			position: fixed;
+		}
 		.logo {
 			width: 42px;
 		}
 
 		.item {
 			padding: var(--space-s) var(--space-s);
-			@media (--l) {
+			@media (--xl) {
 				padding: var(--space-s) var(--space-m);
 			}
 		}
@@ -86,7 +95,7 @@
 		&.show {
 			display: block;
 		}
-		@media (--l) {
+		@media (--xl) {
 			position: static;
 			display: flex;
 			border-top: none;

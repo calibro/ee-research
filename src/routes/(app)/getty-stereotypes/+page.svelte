@@ -1,4 +1,5 @@
 <script>
+	import { lockscroll, createLockScrollStore } from "@svelte-put/lockscroll"
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { csvParse, groups } from "d3"
@@ -13,6 +14,7 @@
 	export let data
 	const { queries } = data
 
+	const locked = createLockScrollStore()
 	const tl = getTopicLabels("getty_stereotypes")
 
 	let entries,
@@ -58,9 +60,12 @@
 
 	const openGallery = (index, cluster) => {
 		gallery = { isOpen: true, index, cluster }
+		locked.toggle(true)
 	}
+
 	const closeGallery = () => {
 		gallery = { isOpen: false, index: 0, cluster: [] }
+		locked.toggle(false)
 	}
 
 	$: clusters =
@@ -75,7 +80,8 @@
 	$: dataUrl, watchQuery()
 </script>
 
-<div class="page l:flex-start-start">
+<svelte:body use:lockscroll={locked} />
+<div class="page xl:flex-start-start">
 	<Sidebar
 		{queries}
 		showLang={false}
@@ -114,7 +120,7 @@
 		min-height: calc(var(--vh, 1vh) * 100 - var(--nav-height, 0px) - 1px);
 		background: var(--color-grey);
 		padding-bottom: calc(var(--nav-height) + var(--space-m));
-		@media (--l) {
+		@media (--xl) {
 			padding-bottom: var(--space-s);
 			grid-template-rows: min-content;
 		}

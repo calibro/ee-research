@@ -11,6 +11,9 @@ devDependencies:
   '@rawgraphs/rawgraphs-core':
     specifier: 1.0.0-beta.17
     version: 1.0.0-beta.17
+  '@svelte-put/lockscroll':
+    specifier: ^1.0.1
+    version: 1.0.1
   '@sveltejs/adapter-auto':
     specifier: ^3.2.0
     version: 3.2.0(@sveltejs/kit@2.5.5)
@@ -1294,6 +1297,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@svelte-put/lockscroll@1.0.1:
+    resolution: {integrity: sha512-b2whlOVtshrvfqhHLqi9DVU9Fzy3to4q/6MYRLc0HCJr7h0uFkksk7QZlDTxXYh//ey1UmQvQCeL51X/CkEu2w==}
+    dev: true
 
   /@sveltejs/adapter-auto@3.2.0(@sveltejs/kit@2.5.5):
     resolution: {integrity: sha512-She5nKT47kwHE18v9NMe6pbJcvULr82u0V3yZ0ej3n1laWKGgkgdEABE9/ak5iDPs93LqsBkuIo51kkwCLBjJA==}
