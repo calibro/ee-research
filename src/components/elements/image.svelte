@@ -9,4 +9,10 @@
 	}
 </script>
 
-<img {src} {alt} {loading} on:error={fallback} />
+<img
+	class={$$restProps.class || ""}
+	{src}
+	{alt}
+	{loading}
+	on:error={fallback}
+/>

@@ -102,9 +102,14 @@
 					{#each cluster[1] as item, i}
 						<div class="swiper-slide">
 							<Image
+								class="bg-image"
 								src={getImageUrl(item.id, query)}
 								alt={item.title}
-								loading="lazy"
+							/>
+							<Image
+								class="image"
+								src={getImageUrl(item.id, query)}
+								alt={item.title}
 							/>
 						</div>
 					{/each}
@@ -178,15 +183,34 @@
 	.swiper-slide {
 		width: calc(100% - var(--space-s) * 4);
 		height: calc(var(--vh, 1vh) * 30);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+
 		@media (--xl) {
 			width: 60%;
 			height: calc(var(--vh, 1vh) * 60);
 		}
-		:global(img) {
+		:global(.bg-image) {
+			position: absolute;
+			top: 0;
+			left: 0;
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
 			overflow: hidden;
+			filter: blur(8px);
+			opacity: 0.5;
+		}
+		:global(.image) {
+			position: relative;
+			object-fit: contain;
+			z-index: 1;
+			@media (--xl) {
+				width: 80%;
+				height: 80%;
+			}
 		}
 	}
 
