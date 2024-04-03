@@ -103,7 +103,7 @@
 
 	{#key $query}
 		{#if gallery.isOpen}
-			<Gallery {gallery} {closeGallery} query={$query} />
+			<Gallery {gallery} close={closeGallery} query={$query} />
 		{/if}
 	{/key}
 </div>

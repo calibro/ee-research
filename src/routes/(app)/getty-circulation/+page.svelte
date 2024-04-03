@@ -1,60 +1,53 @@
 <script>
-	import { queryParam } from "sveltekit-search-params"
-	import { languages } from "~/config.json"
-	import { getAsyncData } from "~/lib/data.js"
-	import { csvParse, descending, groups } from "d3"
-	import CirclePacking from "~/components/graphs/circlePacking.svelte"
 	import { browser } from "$app/environment"
-	import Sidebar from "~/components/elements/sidebar.svelte"
-	import Link from "~/components/elements/link.svelte"
 	import { base } from "$app/paths"
-
+	import { csvParse, groups } from "d3"
+	import { onMount } from "svelte"
+	import { queryParam } from "sveltekit-search-params"
+	import Sidebar from "~/components/elements/sidebar.svelte"
+	import Gallery from "~/components/gettyimages/gallery.svelte"
+	import News from "~/components/gettyimages/news.svelte"
+	import GettyCirculation from "~/components/graphs/gettyCirculation.svelte"
+	import GettyStereo from "~/components/graphs/gettyStereo.svelte"
+	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
+
+	export let data
+	const { queries } = data
+
 	const tl = getTopicLabels("getty_circulation")
 
-	let queries,
-		entries,
+	let entries,
 		loading = false
-
 	let query = queryParam("query")
-	let lang = queryParam("lang")
 
-	$: showEntries = entries?.length && $query && $lang
-	$: selectedLang = languages?.[$lang] || languages?.us
-	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
+	onMount(() => {
+		if (!$query) {
+			$query = queries[0]?.query
+		}
+	})
 
-	$: baseUrl = `${base}/assets/tiktok/${selectedLang?.code}`
+	const baseUrl = `${base}/assets/gettyimages`
 
-	$: dataUrl = selectedLang
-		? `${baseUrl}/clusters_${selectedLang.code}.csv`
-		: null
+	$: dataUrl = `${baseUrl}/${$query}/reverse_image_search/${$query}.csv`
 
-	const watchLang = async (langVal = Object.keys(languages)?.[0]) => {
+	const watchQuery = async () => {
 		if (loading || !browser) return
 
 		loading = true
+		if (!$query) {
+			loading = false
+			entries = null
+			return
+		}
 		const { data, error } = await getAsyncData({
-			key: `tiktok-${langVal}-data`,
+			key: `getty-stereotypes-data`,
 			url: dataUrl,
 			type: "text",
 		})
 
 		if (data) {
 			entries = csvParse(data)
-			if (!queries?.length) {
-				queries = []
-				entries.forEach((el) => {
-					if (!queries.find((query) => query.slug === el.querySlug)) {
-						queries.push({ slug: el.querySlug, title: el.query })
-					}
-				})
-				if (!$query) {
-					$query = queries[0]?.slug
-				}
-				if (!$lang) {
-					$lang = langVal
-				}
-			}
 		} else {
 			entries = null
 		}
@@ -62,37 +55,59 @@
 		loading = false
 	}
 
-	$: watchLang(selectedLang?.code)
-	$: clusters = showEntries
-		? groups(filteredEntries, (d) => d.cluster)
-				.map((d) => {
-					d[2] = [...new Set(d[1].map((d) => d.ids.split("|")).flat())].length
-					return d
-				})
-				.sort((a, b) => descending(a[2], b[2]))
-		: []
+	$: clusters =
+		entries?.length && !loading
+			? groups(
+					entries,
+					(d) => d.cluster,
+					(d) => d.image_id
+				)
+			: []
 
-	const getUrl = (cluster) => {
-		const clusterSlug = cluster?.[0]
-		return `/tiktok/${$lang}/${$query}/${clusterSlug}`
+	$: dataUrl, watchQuery()
+
+	const news = { isOpen: false, cluster: [] }
+
+	const close = () => {
+		news.isOpen = false
+		news.cluster = []
+	}
+
+	const open = (d) => {
+		news.isOpen = true
+		news.cluster = d
 	}
 </script>
 
 <div class="page l:flex-start-start">
 	<Sidebar
 		{queries}
+		showLang={false}
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
-	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
-		{#if showEntries}
-			{#each clusters as cluster, i (`${$query}-${$lang}-${i}-${cluster?.[0]}`)}
-				<Link url={getUrl(cluster)} class="contents">
-					<CirclePacking {cluster} />
-				</Link>
+
+	{#if loading}
+		<div class="container flex-center-center">
+			<p>Loading...</p>
+		</div>
+	{:else if !entries?.length}
+		<div class="container flex-center-center">
+			<p>No data available</p>
+		</div>
+	{:else}
+		<div class="container p-s grid-1-s">
+			{#each clusters as cluster}
+				<GettyCirculation {cluster} query={$query} {open} />
 			{/each}
+		</div>
+	{/if}
+
+	{#key query}
+		{#if news.isOpen}
+			<News {news} {close} query={$query} />
 		{/if}
-	</div>
+	{/key}
 </div>
 
 <style lang="postcss">

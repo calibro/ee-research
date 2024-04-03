@@ -2,7 +2,6 @@
 	import { handleClick, swipe } from "~/lib/customSwipe"
 	import Text from "../elements/text.svelte"
 	import { onMount } from "svelte"
-	import { fade } from "svelte/transition"
 	import { getImageUrl } from "~/lib/stereotypes"
 
 	export let cluster

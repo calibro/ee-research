@@ -10,7 +10,7 @@
 
 	export let query
 	export let gallery
-	export let closeGallery = () => {}
+	export let close = () => {}
 
 	const { cluster, index } = gallery
 	let swiper
@@ -55,7 +55,7 @@
 
 	const onKeyDown = (e) => {
 		if (e.key === "Escape") {
-			closeGallery()
+			close()
 		}
 	}
 	$: activeSlide = cluster?.[1][currentSlide]
@@ -84,7 +84,7 @@
 				</div>
 				<div class="close col-4 xl:col-12 px-s" role="button">
 					<div class="flex-end-center h-full">
-						<Link fn={closeGallery} class="flex-center-center">
+						<Link fn={close} class="flex-center-center">
 							<Close width="26" />
 						</Link>
 					</div>

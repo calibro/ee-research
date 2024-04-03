@@ -1,4 +1,6 @@
 <script>
+	import Label from "./label.svelte"
+
 	export let items
 	export let value = null
 
@@ -14,26 +16,11 @@
 			bind:group={value}
 			value={code}
 		/>
-		<label
-			class="typo-small"
-			for={code}
-			style={`--background: var(--color-${color})`}
-		>
-			{label}
-		</label>
+		<Label {label} rel={code} {color} />
 	{/each}
 </div>
 
 <style lang="postcss">
-	label {
-		user-select: none;
-		line-height: 1;
-		background: var(--background);
-		padding: 5px 10px 8px 10px;
-		border-radius: var(--border-radius);
-		cursor: pointer;
-	}
-
 	.sr-only {
 		position: absolute;
 		clip: rect(1px, 1px, 1px, 1px);
@@ -48,13 +35,13 @@
 		position: absolute;
 	}
 
-	input[type="radio"] + label {
+	input[type="radio"] + :global(label) {
 		display: block;
 		position: relative;
 		text-align: left;
 	}
 
-	input[type="radio"] + label::before {
+	input[type="radio"] + :global(label)::before {
 		content: "";
 		position: relative;
 		display: inline-block;
@@ -67,7 +54,7 @@
 		top: 0.1em;
 	}
 
-	input[type="radio"] + label::after {
+	input[type="radio"] + :global(label)::after {
 		content: "";
 		position: absolute;
 		display: block;
@@ -80,7 +67,7 @@
 		opacity: 0;
 	}
 
-	input[type="radio"]:checked + label::after {
+	input[type="radio"]:checked + :global(label)::after {
 		opacity: 1;
 	}
 </style>

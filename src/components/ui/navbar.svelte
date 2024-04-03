@@ -11,7 +11,7 @@
 		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/tiktok" },
 		{ title: "YOUTUBE NETWORK", url: "/tiktok" },
 		{ title: "GETTYIMAGES STEREOTYPES", url: "/getty-stereotypes" },
-		{ title: "GETTYIMAGES CIRCULATION", url: "/tiktok" },
+		{ title: "GETTYIMAGES CIRCULATION", url: "/getty-circulation" },
 		{ title: "TIKTOK TOPICS", url: "/tiktok" },
 	]
 
