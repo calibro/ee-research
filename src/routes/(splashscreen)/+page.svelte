@@ -34,7 +34,7 @@
 			<ThumbHome
 				title="YOUTUBE LANGUAGE COMPARISON"
 				description="How do video results about substances change according to the language of the query?"
-				url="/tiktok"
+				url="/youtube-lang-compare"
 			/>
 		</div>
 		<div class="item xl:col-[span-3]">
@@ -57,7 +57,7 @@
 			<ThumbHome
 				title="YOUTUBE NETWORK"
 				description="What topics are substances connected to through the recommendation algorithm?"
-				url="/tiktok"
+				url="/youtube-network"
 			/>
 		</div>
 		<div class="item xl:col-[span-3]">

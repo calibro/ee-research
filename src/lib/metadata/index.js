@@ -1,9 +1,9 @@
 import getty_circulation from "./getty_circulation.json"
 import getty_stereotypes from "./getty_stereotypes.json"
+import globals from "./globals.json"
 import tiktok from "./tiktok.json"
 import youtube_language from "./youtube_language.json"
 import youtube_network from "./youtube_network.json"
-import globals from "./globals.json"
 
 const labels = {
 	getty_circulation,

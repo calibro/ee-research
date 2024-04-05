@@ -11,8 +11,8 @@
 	const locked = createLockScrollStore()
 
 	const items = [
-		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/tiktok" },
-		{ title: "YOUTUBE NETWORK", url: "/tiktok" },
+		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/youtube-lang-compare" },
+		{ title: "YOUTUBE NETWORK", url: "/youtube-network" },
 		{ title: "GETTYIMAGES STEREOTYPES", url: "/getty-stereotypes" },
 		{ title: "GETTYIMAGES CIRCULATION", url: "/getty-circulation" },
 		{ title: "TIKTOK TOPICS", url: "/tiktok" },

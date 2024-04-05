@@ -72,9 +72,9 @@
 			box-shadow 0.3s,
 			filter 0.3s;
 		cursor: pointer;
-		filter: grayscale(1);
-		box-shadow: 0px 0px 0px 0px var(--color-ice);
 		@media (--hover) {
+			filter: grayscale(1);
+			box-shadow: 0px 0px 0px 0px var(--color-ice);
 			&:hover {
 				box-shadow: 0px 8px 8px 0 var(--color-ice);
 				filter: grayscale(0);
