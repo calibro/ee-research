@@ -1,8 +1,6 @@
-import { languages } from "~/config.json"
-import { getAsyncData } from "~/lib/data"
-import { csvParse } from "d3"
-import { error } from "@sveltejs/kit"
 import { base } from "$app/paths"
+import { csvParse } from "d3"
+import { getAsyncData } from "~/lib/data"
 
 export const prerender = false
 export const csr = true

@@ -1,7 +1,7 @@
 <script>
+	import { fade } from "svelte/transition"
 	import Close from "~/assets/icons/close.svg?component"
 	import Link from "../elements/link.svelte"
-	import { fade } from "svelte/transition"
 
 	export let fn = () => {}
 </script>

@@ -1,10 +1,10 @@
 <script>
-	import Play from "~/assets/icons/play.svg?component"
-	import Like from "~/assets/icons/like.svg?component"
-	import Text from "../elements/text.svelte"
-	import Modal from "../elements/modal.svelte"
 	import { base } from "$app/paths"
+	import Like from "~/assets/icons/like.svg?component"
+	import Play from "~/assets/icons/play.svg?component"
 	import Image from "../elements/image.svelte"
+	import Modal from "../elements/modal.svelte"
+	import Text from "../elements/text.svelte"
 	export let video = {}
 	let isOpen = false
 </script>
@@ -14,7 +14,10 @@
 	class="thumb p-s flex-col-start-stretch gap-s text-left"
 >
 	<div class="img">
-		<Image src="{base}/assets/tiktok/thumbs/{video.id}.webp" alt={video.title} />
+		<Image
+			src="{base}/assets/tiktok/thumbs/{video.id}.webp"
+			alt={video.title}
+		/>
 	</div>
 	<Text
 		tag="p"

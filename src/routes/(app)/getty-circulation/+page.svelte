@@ -1,7 +1,7 @@
 <script>
-	import { lockscroll, createLockScrollStore } from "@svelte-put/lockscroll"
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
+	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
 	import { csvParse, groups } from "d3"
 	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"

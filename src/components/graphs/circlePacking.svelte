@@ -34,7 +34,6 @@
 	const handleOver = (node) => {
 		activeNode = node
 	}
-
 </script>
 
 <div
@@ -101,11 +100,11 @@
 			ellipsis={true}
 		/>
 		<Text
-		typo="p"
-		content={`tiktoks: ${cluster[2]}`}
-		class="px-s py-xs"
-		ellipsis={false}
-	/>
+			typo="p"
+			content={`tiktoks: ${cluster[2]}`}
+			class="px-s py-xs"
+			ellipsis={false}
+		/>
 	</div>
 </div>
 

@@ -1,6 +1,6 @@
 <script>
-	import { createEventDispatcher } from "svelte"
 	import { base } from "$app/paths"
+	import { createEventDispatcher } from "svelte"
 	import Close from "~/assets/icons/close.svg?component"
 	import Link from "~/components/elements/link.svelte"
 	import Text from "~/components/elements/text.svelte"

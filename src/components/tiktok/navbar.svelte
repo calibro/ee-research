@@ -1,6 +1,6 @@
 <script>
-	import DonwloadIcon from "~/assets/icons/download.svg?component"
 	import Close from "~/assets/icons/close.svg?component"
+	import DonwloadIcon from "~/assets/icons/download.svg?component"
 	import Link from "../elements/link.svelte"
 	import Text from "../elements/text.svelte"
 

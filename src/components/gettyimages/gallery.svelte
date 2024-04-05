@@ -1,13 +1,13 @@
 <script>
 	import { navigating } from "$app/stores"
+	import { onDestroy, onMount } from "svelte"
 	import Swiper from "swiper"
 	import { Keyboard, Navigation } from "swiper/modules"
-	import Text from "../elements/text.svelte"
-	import Link from "../elements/link.svelte"
 	import Close from "~/assets/icons/close.svg?component"
-	import { onDestroy, onMount } from "svelte"
 	import { getImageUrl } from "~/lib/stereotypes"
 	import Image from "../elements/image.svelte"
+	import Link from "../elements/link.svelte"
+	import Text from "../elements/text.svelte"
 
 	export let query
 	export let gallery

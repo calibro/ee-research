@@ -1,7 +1,7 @@
 <script>
 	import Arrow from "~/assets/icons/arrow.svg?component"
-	import Text from "../elements/text.svelte"
 	import Link from "../elements/link.svelte"
+	import Text from "../elements/text.svelte"
 
 	export let data
 </script>

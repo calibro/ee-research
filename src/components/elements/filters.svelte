@@ -1,14 +1,14 @@
 <script>
+	import { browser } from "$app/environment"
 	import { queryParam } from "sveltekit-search-params"
-	import Dropdown from "./dropdown.svelte"
 	import FilterIcon from "~/assets/icons/filter.svg?component"
+	import { languages } from "~/config.json"
+	import { breakpoint } from "~/css/tokens.json"
+	import { extractNumber } from "~/lib"
+	import Dropdown from "./dropdown.svelte"
 	import Link from "./link.svelte"
 	import Radio from "./radio.svelte"
 	import Text from "./text.svelte"
-	import { languages } from "~/config.json"
-	import { browser } from "$app/environment"
-	import { breakpoint } from "~/css/tokens.json"
-	import { extractNumber } from "~/lib"
 
 	export let showLang = true
 	export let queries

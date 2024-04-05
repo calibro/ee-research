@@ -1,8 +1,8 @@
 <script>
-	import { handleClick, swipe } from "~/lib/customSwipe"
-	import Text from "../elements/text.svelte"
 	import { onMount } from "svelte"
+	import { handleClick, swipe } from "~/lib/customSwipe"
 	import { getImageUrl } from "~/lib/stereotypes"
+	import Text from "../elements/text.svelte"
 
 	export let cluster
 	export let query

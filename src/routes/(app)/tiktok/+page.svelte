@@ -1,14 +1,13 @@
 <script>
+	import { browser } from "$app/environment"
+	import { base } from "$app/paths"
+	import { csvParse, descending, groups } from "d3"
 	import { queryParam } from "sveltekit-search-params"
+	import Link from "~/components/elements/link.svelte"
+	import Sidebar from "~/components/elements/sidebar.svelte"
+	import CirclePacking from "~/components/graphs/circlePacking.svelte"
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
-	import { csvParse, descending, groups } from "d3"
-	import CirclePacking from "~/components/graphs/circlePacking.svelte"
-	import { browser } from "$app/environment"
-	import Sidebar from "~/components/elements/sidebar.svelte"
-	import Link from "~/components/elements/link.svelte"
-	import { base } from "$app/paths"
-
 	import { getTopicLabels } from "~/lib/metadata"
 	const tl = getTopicLabels("tiktok")
 

@@ -1,13 +1,12 @@
 <script>
-	import { lockscroll, createLockScrollStore } from "@svelte-put/lockscroll"
-
-	import Logo from "~/assets/icons/logo.svg?component"
+	import { browser } from "$app/environment"
+	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
 	import Burger from "~/assets/icons/burger.svg?component"
 	import Close from "~/assets/icons/close.svg?component"
-	import Link from "../elements/link.svelte"
-	import { browser } from "$app/environment"
+	import Logo from "~/assets/icons/logo.svg?component"
 	import { breakpoint } from "~/css/tokens.json"
 	import { extractNumber } from "~/lib"
+	import Link from "../elements/link.svelte"
 
 	const locked = createLockScrollStore()
 

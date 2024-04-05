@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from "svelte"
-	import Link from "./link.svelte"
 	import ArrowDown from "~/assets/icons/arrow-down.svg?component"
+	import Link from "./link.svelte"
 	import Text from "./text.svelte"
 
 	export let items
