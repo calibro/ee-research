@@ -1,5 +1,4 @@
 <script>
-	import {languages} from '~/config'
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
@@ -7,8 +6,8 @@
 	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
-	import Gallery from "~/components/gettyimages/gallery.svelte"
-	import GettyStereo from "~/components/graphs/gettyStereo.svelte"
+	import YoutubeLang from "~/components/graphs/youtubeLang.svelte"
+	import { languages } from "~/config"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
 
@@ -24,7 +23,7 @@
 
 	let query = queryParam("query")
 	let lang = queryParam("lang")
-	$: selectedLang = languages?.[$lang] || languages?.us
+	$: selectedLang = languages?.[$lang] || languages?.en
 
 	onMount(() => {
 		if (!$query) {
@@ -35,12 +34,14 @@
 		}
 	})
 
-	const baseUrl = `${base}/assets/gettyimages`
+	const baseUrl = `${base}/assets/youtube`
 
-	$: dataUrl = `${baseUrl}/${$query}/${$query}.csv`
+	$: dataUrl = selectedLang?.code
+		? `${baseUrl}/clusters/${$query}_${selectedLang?.code?.toUpperCase()}.csv`
+		: undefined
 
 	const watchQuery = async () => {
-		if (loading || !browser) return
+		if (loading || !browser || !dataUrl) return
 
 		loading = true
 		if (!$query) {
@@ -49,7 +50,7 @@
 			return
 		}
 		const { data, error } = await getAsyncData({
-			key: `getty-stereotypes-data`,
+			key: `youtube-comparison-data`,
 			url: dataUrl,
 			type: "text",
 		})
@@ -63,18 +64,6 @@
 		loading = false
 	}
 
-	let gallery = { isOpen: false, index: 0, cluster: [] }
-
-	const openGallery = (index, cluster) => {
-		gallery = { isOpen: true, index, cluster }
-		locked.toggle(true)
-	}
-
-	const closeGallery = () => {
-		gallery = { isOpen: false, index: 0, cluster: [] }
-		locked.toggle(false)
-	}
-
 	$: clusters =
 		entries?.length && !loading
 			? groups(entries, (d) => d.cluster).sort((a, b) => {
@@ -85,6 +74,7 @@
 			: []
 
 	$: dataUrl, watchQuery()
+	$: clusters, console.log(clusters)
 </script>
 
 <svelte:body use:lockscroll={locked} />
@@ -105,19 +95,13 @@
 		</div>
 	{:else}
 		<div class="container p-s grid-1-s">
-			{#if clusters.length}
+			{#if clusters.length && query}
 				{#each clusters as cluster, i (`${i}-${cluster?.[0]}`)}
-					<GettyStereo {cluster} query={$query} {openGallery} />
+					<YoutubeLang {cluster} query={$query} />
 				{/each}
 			{/if}
 		</div>
 	{/if}
-
-	{#key $query}
-		{#if gallery.isOpen}
-			<Gallery {gallery} close={closeGallery} query={$query} />
-		{/if}
-	{/key}
 </div>
 
 <style lang="postcss">
@@ -128,7 +112,7 @@
 		padding-bottom: calc(var(--nav-height) + var(--space-m));
 		@media (--xl) {
 			padding-bottom: var(--space-s);
-			grid-template-rows: min-content;
+			grid-template-rows: auto;
 		}
 	}
 </style>

@@ -19,7 +19,7 @@
 	let lang = queryParam("lang")
 
 	$: showEntries = entries?.length && $query && $lang
-	$: selectedLang = languages?.[$lang] || languages?.us
+	$: selectedLang = languages?.[$lang] || languages?.en
 	$: filteredEntries = entries?.filter?.((entry) => entry?.querySlug === $query)
 
 	$: baseUrl = `${base}/assets/tiktok/${selectedLang?.code}`

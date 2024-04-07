@@ -1,8 +1,6 @@
-import { languages } from "~/config.json"
-import { getAsyncData } from "~/lib/data"
-import { csvParse } from "d3"
-import { error } from "@sveltejs/kit"
 import { base } from "$app/paths"
+import { csvParse } from "d3"
+import { getAsyncData } from "~/lib/data"
 
 export const prerender = false
 export const csr = true
@@ -10,10 +8,10 @@ export const ssr = false
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, fetch }) {
-	const url = `${base}/assets/gettyimages/queries.csv`
+	const url = `${base}/assets/youtube/queries.csv`
 	const { data, error } = await getAsyncData(
 		{
-			key: `gettyimages-queries`,
+			key: `youtube-queries`,
 			url,
 			type: "text",
 		},

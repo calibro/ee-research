@@ -1,7 +1,7 @@
 {
   "languages": {
-    "us": {
-      "code": "us",
+    "en": {
+      "code": "en",
       "label": "English",
       "color": "green"
     },
@@ -15,8 +15,8 @@
       "label": "French",
       "color": "yellow"
     },
-    "ph": {
-      "code": "ph",
+    "tl": {
+      "code": "tl",
       "label": "Tagalog",
       "color": "pink"
     }

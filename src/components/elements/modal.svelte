@@ -4,11 +4,20 @@
 	import Link from "../elements/link.svelte"
 
 	export let fn = () => {}
+	export let theme = "default"
+
+	const onKeyDown = (e) => {
+		if (e.key === "Escape") {
+			fn()
+		}
+	}
 </script>
 
+<svelte:window on:keydown={onKeyDown} />
+
 <div class="modal flex-center-center" transition:fade={{ duration: 300 }}>
-	<div class="relative modal-content flex-center-center">
-		<div class="close">
+	<div class="relative modal-content flex-center-center {theme}">
+		<div class="close {theme}">
 			<Link {fn}>
 				<Close width="24" />
 			</Link>
@@ -22,6 +31,12 @@
 		position: absolute;
 		top: var(--space-s);
 		right: var(--space-s);
+		&.no-bg {
+			@media (--xl) {
+				top: calc(-1 * var(--space-l));
+				right: var(--space-0);
+			}
+		}
 	}
 	.modal {
 		position: fixed;
@@ -38,9 +53,23 @@
 			overflow: hidden;
 			width: 100%;
 			height: 100%;
-			@media (--xl) {
-				height: calc(var(--vh, 1vh) * 90);
-				width: calc(var(--vw, 1vw) * 80);
+			&.no-bg {
+				width: auto;
+				height: auto;
+				@media (--xl) {
+					overflow: visible;
+					:global(iframe) {
+						border-radius: var(--border-radius);
+						overflow: hidden;
+						display: block;
+					}
+				}
+			}
+			&.default {
+				@media (--xl) {
+					height: calc(var(--vh, 1vh) * 90);
+					width: calc(var(--vw, 1vw) * 80);
+				}
 			}
 		}
 	}
