@@ -54,9 +54,9 @@
 			width: 100%;
 			height: 100%;
 			&.no-bg {
-				width: auto;
-				height: auto;
 				@media (--xl) {
+					width: auto;
+					height: auto;
 					overflow: visible;
 					:global(iframe) {
 						border-radius: var(--border-radius);

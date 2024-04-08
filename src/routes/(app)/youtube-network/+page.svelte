@@ -75,8 +75,6 @@
 					(d) => d.name
 				).sort((a, b) => b[1].length - a[1].length)
 			: undefined
-
-	$: console.log(filteredEntries)
 </script>
 
 <svelte:body use:lockscroll={locked} />
@@ -84,6 +82,7 @@
 	<Sidebar
 		{queries}
 		checkbox
+		order
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
@@ -98,9 +97,9 @@
 		</div>
 	{:else}
 		<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
-			{#each filteredEntries as entry}
+			{#each filteredEntries as entry, i (`${entry[0]}-${i}`)}
 				<YoutubeThumb
-					id={entry[0]}
+					tubeId={entry[0]}
 					title={entry[1][0].label}
 					thumb={entry[1][0].thumb}
 					langs={entry[1].map((d) => d.language)}

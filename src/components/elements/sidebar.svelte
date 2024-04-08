@@ -5,6 +5,7 @@
 
 	import Filters from "./filters.svelte"
 	export let checkbox = false
+	export let order = false
 	export let queries
 	export let showLang = true
 	export let question
@@ -19,7 +20,7 @@
 		<Text typo="label" content="WHAT AM I LOOKING AT?" />
 		<Text typo="p" content={description} />
 	</div>
-	<Filters {queries} {showLang} {checkbox} />
+	<Filters {queries} {showLang} {checkbox} {order} />
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="Resources" class="case-upper" />
 		<div class="flex gap-xs">

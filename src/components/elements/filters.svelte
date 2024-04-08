@@ -15,11 +15,13 @@
 	export let showLang = true
 	export let queries
 	export let checkbox = false
+	export let order = false
 
 	let query = queryParam("query"),
-		lang = queryParam("lang")
-	let isOpen = false
+		lang = queryParam("lang"),
+		orderBy = queryParam("order")
 
+	let isOpen = false
 	let langValue = $lang ? (checkbox ? $lang?.split?.(" ") : $lang) : []
 
 	onMount(async () => {
@@ -36,6 +38,24 @@
 
 	$: browser ? document.body.classList.toggle("scroll-lock", isOpen) : undefined
 
+	const orders = [
+		{
+			label: "Views",
+			code: "views",
+		},
+		{
+			label: "Comments",
+			code: "comments",
+		},
+		{
+			label: "Likes",
+			code: "likes",
+		},
+		{
+			label: "Date",
+			code: "date",
+		},
+	]
 	$: $lang = langValue?.join?.(" ") || langValue
 </script>
 
@@ -51,6 +71,10 @@
 				<Checkbox items={languages} bind:value={langValue} />
 			{:else}
 				<Radio items={languages} bind:value={langValue} />
+			{/if}
+			{#if order}
+				<Text typo="label" content="Order" class="case-upper" />
+				<Radio items={orders} bind:value={$orderBy} noDot={true} />
 			{/if}
 		</div>
 	{/if}

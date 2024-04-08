@@ -6,20 +6,29 @@
 	import { languages } from "~/config.json"
 	import { convertUnixTime } from "~/lib"
 	import Label from "../elements/label.svelte"
+	import Modal from "../elements/modal.svelte"
 	import Text from "../elements/text.svelte"
 
 	export let thumb
 	export let title
-	export let id
+	export let tubeId
 	export let channel
 	export let langs
 	export let views
 	export let likes
 	export let comments
 	export let date
+
+	let isOpen = false
 </script>
 
-<div class="youtube-thumb">
+<button
+	class="youtube-thumb text-left"
+	on:click={() => (isOpen = true)}
+	on:keydown={(e) => {
+		if (e.key === "Enter") isOpen = true
+	}}
+>
 	<div class="relative img-container">
 		<div class="langs flex gap-xs">
 			{#each langs as lang}
@@ -31,8 +40,7 @@
 	<div class="info">
 		<div class="title py-s">
 			<Text content={title} typo="p" />
-			<!-- <p>{id}</p> -->
-			<p>{channel}</p>
+			<Text content={channel} typo="p" />
 		</div>
 		<div class="interactions">
 			<div class="flex gap-xxs">
@@ -53,9 +61,40 @@
 			</div>
 		</div>
 	</div>
-</div>
+</button>
+
+{#if isOpen}
+	<Modal
+		theme="no-bg"
+		fn={() => {
+			isOpen = false
+			tubeId = false
+		}}
+	>
+		<div class="youtube-iframe">
+			<iframe
+				src="https://www.youtube.com/embed/{tubeId}"
+				title=""
+				frameBorder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				allowFullScreen
+			/>
+		</div>
+	</Modal>
+{/if}
 
 <style lang="postcss">
+	.youtube-iframe,
+	iframe {
+		width: 100%;
+		aspect-ratio: 16/9;
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		display: block;
+		@media (--xl) {
+			width: 720px;
+		}
+	}
 	.youtube-thumb {
 		width: 100%;
 		background: var(--color-white);

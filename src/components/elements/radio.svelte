@@ -3,6 +3,7 @@
 
 	export let items
 	export let value = null
+	export let noDot = false
 
 	$: computedItems = !Array.isArray(items) ? Object.values(items) : items
 </script>
@@ -11,6 +12,7 @@
 	{#each computedItems as { label, code, color }}
 		<input
 			class="sr-only"
+			class:noDot
 			type="radio"
 			id={code}
 			bind:group={value}
@@ -69,5 +71,21 @@
 
 	input[type="radio"]:checked + :global(label)::after {
 		opacity: 1;
+	}
+
+	input.noDot + :global(label) {
+		background: white;
+		border: var(--border-default);
+	}
+
+	input.noDot:checked + :global(label) {
+		background: var(--color-black);
+		border: var(--border-black);
+		color: var(--color-white);
+	}
+
+	input.noDot + :global(label)::before,
+	input.noDot + :global(label)::after {
+		display: none;
 	}
 </style>
