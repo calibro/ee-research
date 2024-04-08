@@ -1,4 +1,13 @@
 <script>
+	import Comment from "~/assets/icons/comment.svg?component"
+	import Like from "~/assets/icons/like.svg?component"
+	import Play from "~/assets/icons/play.svg?component"
+	import Time from "~/assets/icons/time.svg?component"
+	import { languages } from "~/config.json"
+	import { convertUnixTime } from "~/lib"
+	import Label from "../elements/label.svelte"
+	import Text from "../elements/text.svelte"
+
 	export let thumb
 	export let title
 	export let id
@@ -10,18 +19,74 @@
 	export let date
 </script>
 
-<div>
-	<div class="thumb">
+<div class="youtube-thumb">
+	<div class="relative img-container">
+		<div class="langs flex gap-xs">
+			{#each langs as lang}
+				<Label label={lang} color={languages[lang.toLowerCase()].color} />
+			{/each}
+		</div>
 		<img src={thumb} alt={title} />
 	</div>
 	<div class="info">
-		<h3>{title}</h3>
-		<p>{id}</p>
-		<p>{channel}</p>
-		<p>{langs}</p>
-		<p>{views}</p>
-		<p>{likes}</p>
-		<p>{comments}</p>
-		<p>{date}</p>
+		<div class="title py-s">
+			<Text content={title} typo="p" />
+			<!-- <p>{id}</p> -->
+			<p>{channel}</p>
+		</div>
+		<div class="interactions">
+			<div class="flex gap-xxs">
+				<Play width="14" />
+				<Text content={views} typo="xs"></Text>
+			</div>
+			<div class="flex gap-xxs">
+				<Like width="14" />
+				<Text content={likes} typo="xs"></Text>
+			</div>
+			<div class="flex gap-xxs">
+				<Comment width="14" />
+				<Text content={comments || 0} typo="xs"></Text>
+			</div>
+			<div class="flex gap-xxs">
+				<Time width="14" />
+				<Text content={convertUnixTime(date)} typo="xs"></Text>
+			</div>
+		</div>
 	</div>
 </div>
+
+<style lang="postcss">
+	.youtube-thumb {
+		width: 100%;
+		background: var(--color-white);
+		border-radius: var(--border-radius);
+		padding: var(--space-s);
+	}
+
+	.interactions {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: var(--space-s);
+	}
+	.info .title {
+		height: 100px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.img-container {
+		.langs {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: var(--space-xs);
+		}
+	}
+	img {
+		width: 100%;
+		aspect-ratio: 16/9;
+		overflow: hidden;
+		border-radius: var(--border-radius);
+	}
+</style>

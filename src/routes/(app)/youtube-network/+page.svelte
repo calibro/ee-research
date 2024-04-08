@@ -97,7 +97,7 @@
 			<p>No data available</p>
 		</div>
 	{:else}
-		<div class="container p-s flex-col-start gap-s">
+		<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
 			{#each filteredEntries as entry}
 				<YoutubeThumb
 					id={entry[0]}

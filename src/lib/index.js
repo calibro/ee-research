@@ -76,3 +76,8 @@ export const extractNumber = (str) => {
 	var num = str.replace(/[^0-9]/g, "")
 	return parseInt(num, 10)
 }
+
+export const convertUnixTime = (unixTime) => {
+	const date = new Date(unixTime * 1000)
+	return date.toISOString().split("T")[0]
+}
