@@ -2,10 +2,11 @@
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse, groups } from "d3"
+	import { csvParse, group, groups } from "d3"
 	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
+	import YoutubeThumb from "~/components/thumb/youtube.svelte"
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
@@ -57,7 +58,7 @@
 		})
 
 		if (data) {
-			entries = groups(csvParse(data), (d) => d.language)
+			entries = group(csvParse(data), (d) => d.language)
 		} else {
 			entries = null
 		}
@@ -67,13 +68,13 @@
 
 	$: dataUrl, watchQuery()
 
-	$: filteredEntries = selectedLangs?.length
-		? selectedLangs
-				.map(
-					(l) => entries?.find?.((el) => el[0] === l.code.toUpperCase())?.[1]
-				)
-				?.flat()
-		: undefined
+	$: filteredEntries =
+		selectedLangs?.length && entries?.size
+			? groups(
+					selectedLangs?.map?.((l) => entries.get(l.code.toUpperCase())).flat(),
+					(d) => d.name
+				).sort((a, b) => b[1].length - a[1].length)
+			: undefined
 
 	$: console.log(filteredEntries)
 </script>
@@ -91,12 +92,26 @@
 		<div class="container flex-center-center">
 			<p>Loading...</p>
 		</div>
-	{:else if !entries?.length}
+	{:else if !filteredEntries?.length}
 		<div class="container flex-center-center">
 			<p>No data available</p>
 		</div>
 	{:else}
-		<div class="container p-s flex-col-start gap-s">data here</div>
+		<div class="container p-s flex-col-start gap-s">
+			{#each filteredEntries as entry}
+				<YoutubeThumb
+					id={entry[0]}
+					title={entry[1][0].label}
+					thumb={entry[1][0].thumb}
+					langs={entry[1].map((d) => d.language)}
+					channel={entry[1][0].channelTitle}
+					views={entry[1][0].viewCount}
+					likes={entry[1][0].likeCount}
+					comments={entry[1][0].commentCount}
+					date={entry[1][0].publishedAtUnix}
+				/>
+			{/each}
+		</div>
 	{/if}
 </div>
 

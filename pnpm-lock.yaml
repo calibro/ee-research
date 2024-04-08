@@ -35,6 +35,12 @@ devDependencies:
   '@unocss/transformer-directives':
     specifier: ^0.58.9
     version: 0.58.9
+  csv-parser:
+    specifier: ^3.0.0
+    version: 3.0.0
+  csv-writer:
+    specifier: ^1.6.0
+    version: 1.6.0
   d3:
     specifier: ^7.9.0
     version: 7.9.0
@@ -1891,6 +1897,18 @@ packages:
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
     dependencies:
       css-tree: 2.2.1
+    dev: true
+
+  /csv-parser@3.0.0:
+    resolution: {integrity: sha512-s6OYSXAK3IdKqYO33y09jhypG/bSDHPuyCme/IdEHfWpLf/jKcpitVFyOC6UemgGk8v7Q5u2XE0vvwmanxhGlQ==}
+    engines: {node: '>= 10'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.8
+    dev: true
+
+  /csv-writer@1.6.0:
+    resolution: {integrity: sha512-NOx7YDFWEsM/fTRAJjRpPp8t+MKRVvniAg9wQlUKx20MFrPs73WLJhFf5iteqrxNYnsy924K3Iroh3yNHeYd2g==}
     dev: true
 
   /d3-array@1.0.1:

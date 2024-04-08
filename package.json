@@ -20,6 +20,8 @@
 		"@unocss/extractor-svelte": "^0.58.9",
 		"@unocss/postcss": "^0.58.9",
 		"@unocss/transformer-directives": "^0.58.9",
+		"csv-parser": "^3.0.0",
+		"csv-writer": "^1.6.0",
 		"d3": "^7.9.0",
 		"modern-normalize": "^2.0.0",
 		"postcss": "^8.4.38",
