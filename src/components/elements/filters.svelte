@@ -1,10 +1,12 @@
 <script>
 	import { browser } from "$app/environment"
+	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import FilterIcon from "~/assets/icons/filter.svg?component"
 	import { languages } from "~/config.json"
 	import { breakpoint } from "~/css/tokens.json"
 	import { extractNumber } from "~/lib"
+	import Checkbox from "./checkbox.svelte"
 	import Dropdown from "./dropdown.svelte"
 	import Link from "./link.svelte"
 	import Radio from "./radio.svelte"
@@ -12,11 +14,18 @@
 
 	export let showLang = true
 	export let queries
+	export let checkbox = false
 
 	let query = queryParam("query"),
 		lang = queryParam("lang")
 	let isOpen = false
 
+	let langValue = $lang ? (checkbox ? $lang?.split?.(" ") : $lang) : []
+	onMount(async () => {
+		setTimeout(() => {
+			langValue = checkbox ? $lang?.split?.(" ") || [] : $lang
+		}, 100)
+	})
 	$: browser
 		? innerWidth > extractNumber(breakpoint.l)
 			? (isOpen = false)
@@ -24,6 +33,8 @@
 		: undefined
 
 	$: browser ? document.body.classList.toggle("scroll-lock", isOpen) : undefined
+
+	$: $lang = langValue?.join?.(" ") || langValue
 </script>
 
 <div class:show={isOpen} class="filters px-s py-m xl:p-0">
@@ -34,7 +45,11 @@
 	{#if showLang}
 		<div class="group flex flex-col gap-xs">
 			<Text typo="label" content="Language" class="case-upper" />
-			<Radio items={languages} bind:value={$lang} />
+			{#if checkbox}
+				<Checkbox items={languages} bind:value={langValue} />
+			{:else}
+				<Radio items={languages} bind:value={langValue} />
+			{/if}
 		</div>
 	{/if}
 </div>

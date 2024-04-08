@@ -46,7 +46,6 @@
 	})
 
 	onDestroy(() => {
-		console.log("here")
 		swiper?.destroy?.()
 	})
 

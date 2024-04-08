@@ -2,12 +2,11 @@
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse, groups } from "d3"
-	import { onMount } from "svelte"
+	import { csvParse } from "d3"
+	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
-	import News from "~/components/gettyimages/news/index.svelte"
-	import GettyCirculation from "~/components/graphs/gettyCirculation.svelte"
+	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
 
@@ -15,24 +14,35 @@
 	const { queries } = data
 
 	const locked = createLockScrollStore()
-	const tl = getTopicLabels("getty_circulation")
+	const tl = getTopicLabels("youtube_language")
 
 	let entries,
+		clusters,
 		loading = false
-	let query = queryParam("query")
 
-	onMount(() => {
+	let query = queryParam("query")
+	let lang = queryParam("lang")
+
+	$: selectedLangs = $lang ? $lang?.split?.(" ").map?.((l) => languages[l]) : []
+
+	onMount(async () => {
+		await tick()
 		if (!$query) {
 			$query = queries[0]?.query
 		}
+		if (!$lang) {
+			$lang = "en"
+		}
 	})
 
-	const baseUrl = `${base}/assets/gettyimages`
+	const baseUrl = `${base}/assets/youtube`
 
-	$: dataUrl = `${baseUrl}/${$query}/reverse_image_search/${$query}.csv`
+	$: dataUrl = selectedLangs?.length
+		? `${baseUrl}/data/${$query}.csv`
+		: undefined
 
 	const watchQuery = async () => {
-		if (loading || !browser) return
+		if (loading || !browser || !dataUrl) return
 
 		loading = true
 		if (!$query) {
@@ -41,7 +51,7 @@
 			return
 		}
 		const { data, error } = await getAsyncData({
-			key: `getty-stereotypes-data`,
+			key: `youtube-comparison-data`,
 			url: dataUrl,
 			type: "text",
 		})
@@ -55,39 +65,14 @@
 		loading = false
 	}
 
-	$: clusters =
-		entries?.length && !loading
-			? groups(
-					entries,
-					(d) => d.cluster,
-					(d) => d.image_id
-				)
-			: []
-
 	$: dataUrl, watchQuery()
-
-	const news = { isOpen: false, cluster: [] }
-
-	const close = () => {
-		news.isOpen = false
-		news.cluster = []
-		news.rank = null
-		locked.toggle(false)
-	}
-
-	const open = (d, rank) => {
-		news.isOpen = true
-		news.cluster = d
-		news.rank = rank
-		locked.toggle(true)
-	}
 </script>
 
 <svelte:body use:lockscroll={locked} />
 <div class="page xl:flex-start-start">
 	<Sidebar
 		{queries}
-		showLang={false}
+		checkbox
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
@@ -101,18 +86,8 @@
 			<p>No data available</p>
 		</div>
 	{:else}
-		<div class="container p-s flex-col-start gap-s">
-			{#each clusters as cluster}
-				<GettyCirculation {cluster} query={$query} {open} />
-			{/each}
-		</div>
+		<div class="container p-s flex-col-start gap-s">data here</div>
 	{/if}
-
-	{#key query}
-		{#if news.isOpen}
-			<News {news} {close} query={$query} />
-		{/if}
-	{/key}
 </div>
 
 <style lang="postcss">
@@ -123,7 +98,7 @@
 		padding-bottom: calc(var(--nav-height) + var(--space-m));
 		@media (--xl) {
 			padding-bottom: var(--space-s);
-			grid-template-rows: min-content;
+			grid-template-rows: auto;
 		}
 	}
 </style>

@@ -3,7 +3,7 @@
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
 	import { csvParse, groups } from "d3"
-	import { onMount } from "svelte"
+	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
 	import YoutubeLang from "~/components/graphs/youtubeLang.svelte"
@@ -25,7 +25,8 @@
 	let lang = queryParam("lang")
 	$: selectedLang = languages?.[$lang] || languages?.en
 
-	onMount(() => {
+	onMount(async () => {
+		await tick()
 		if (!$query) {
 			$query = queries[0]?.query
 		}
@@ -74,7 +75,6 @@
 			: []
 
 	$: dataUrl, watchQuery()
-	$: clusters, console.log(clusters)
 </script>
 
 <svelte:body use:lockscroll={locked} />
@@ -94,7 +94,7 @@
 			<p>No data available</p>
 		</div>
 	{:else}
-		<div class="container p-s grid-1-s">
+		<div class="container p-s flex-col-start gap-s">
 			{#if clusters.length && query}
 				{#each clusters as cluster, i (`${i}-${cluster?.[0]}`)}
 					<YoutubeLang {cluster} query={$query} />
