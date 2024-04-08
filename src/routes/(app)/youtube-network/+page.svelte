@@ -2,7 +2,7 @@
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse } from "d3"
+	import { csvParse, groups } from "d3"
 	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
@@ -57,7 +57,7 @@
 		})
 
 		if (data) {
-			entries = csvParse(data)
+			entries = groups(csvParse(data), (d) => d.language)
 		} else {
 			entries = null
 		}
@@ -66,6 +66,16 @@
 	}
 
 	$: dataUrl, watchQuery()
+
+	$: filteredEntries = selectedLangs?.length
+		? selectedLangs
+				.map(
+					(l) => entries?.find?.((el) => el[0] === l.code.toUpperCase())?.[1]
+				)
+				?.flat()
+		: undefined
+
+	$: console.log(filteredEntries)
 </script>
 
 <svelte:body use:lockscroll={locked} />

@@ -21,11 +21,13 @@
 	let isOpen = false
 
 	let langValue = $lang ? (checkbox ? $lang?.split?.(" ") : $lang) : []
+
 	onMount(async () => {
 		setTimeout(() => {
 			langValue = checkbox ? $lang?.split?.(" ") || [] : $lang
 		}, 100)
 	})
+
 	$: browser
 		? innerWidth > extractNumber(breakpoint.l)
 			? (isOpen = false)
