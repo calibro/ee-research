@@ -80,7 +80,7 @@
 
 	input.noDot:checked + :global(label) {
 		background: var(--color-black);
-		border: var(--border-black);
+		border: 1px solid var(--color-black);
 		color: var(--color-white);
 	}
 

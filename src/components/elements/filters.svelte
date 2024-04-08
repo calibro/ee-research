@@ -72,10 +72,12 @@
 			{:else}
 				<Radio items={languages} bind:value={langValue} />
 			{/if}
-			{#if order}
-				<Text typo="label" content="Order" class="case-upper" />
-				<Radio items={orders} bind:value={$orderBy} noDot={true} />
-			{/if}
+		</div>
+	{/if}
+	{#if order}
+		<div class="group flex flex-col gap-xs">
+			<Text typo="label" content="Order" class="case-upper" />
+			<Radio items={orders} bind:value={$orderBy} noDot={true} />
 		</div>
 	{/if}
 </div>

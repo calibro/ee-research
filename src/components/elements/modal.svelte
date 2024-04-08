@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte"
 	import { fade } from "svelte/transition"
 	import Close from "~/assets/icons/close.svg?component"
 	import Link from "../elements/link.svelte"
@@ -8,6 +9,22 @@
 
 	const onKeyDown = (e) => {
 		if (e.key === "Escape") {
+			fn()
+		}
+	}
+
+	onMount(async () => {
+		document.addEventListener("click", handleClickOutside)
+		return () => {
+			document.removeEventListener("click", handleClickOutside)
+		}
+	})
+
+	const handleClickOutside = (event) => {
+		if (
+			!event.target.closest(".modal-inner") &&
+			event.target.closest(".modal")
+		) {
 			fn()
 		}
 	}
@@ -22,7 +39,7 @@
 				<Close width="24" />
 			</Link>
 		</div>
-		<slot />
+		<slot class="modal-inner" />
 	</div>
 </div>
 

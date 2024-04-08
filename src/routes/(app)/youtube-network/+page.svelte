@@ -23,6 +23,7 @@
 
 	let query = queryParam("query")
 	let lang = queryParam("lang")
+	let order = queryParam("order")
 
 	$: selectedLangs = $lang ? $lang?.split?.(" ").map?.((l) => languages[l]) : []
 
@@ -33,6 +34,9 @@
 		}
 		if (!$lang) {
 			$lang = "en"
+		}
+		if (!$order) {
+			$order = "views"
 		}
 	})
 
@@ -73,7 +77,20 @@
 			? groups(
 					selectedLangs?.map?.((l) => entries.get(l.code.toUpperCase())).flat(),
 					(d) => d.name
-				).sort((a, b) => b[1].length - a[1].length)
+				).sort((a, b) => {
+					switch ($order) {
+						case "views":
+							return b[1][0].viewCount - a[1][0].viewCount
+						case "likes":
+							return b[1][0].likeCount - a[1][0].likeCount
+						case "comments":
+							return b[1][0].commentCount - a[1][0].commentCount
+						case "date":
+							return b[1][0].publishedAtUnix - a[1][0].publishedAtUnix
+						default:
+							return 0
+					}
+				})
 			: undefined
 </script>
 
