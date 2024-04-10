@@ -9,7 +9,8 @@
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
-	const tl = getTopicLabels("tiktok")
+	const topic = "tiktok"
+	const tl = getTopicLabels(topic)
 
 	let queries,
 		entries,
@@ -89,6 +90,7 @@
 		{queries}
 		description={tl("description")}
 		question={tl("research_question")}
+		{topic}
 	/>
 	<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
 		{#if showEntries}

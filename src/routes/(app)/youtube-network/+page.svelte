@@ -15,7 +15,8 @@
 	const { queries } = data
 
 	const locked = createLockScrollStore()
-	const tl = getTopicLabels("youtube_network")
+	const topic = "youtube_network"
+	const tl = getTopicLabels(topic)
 
 	let entries,
 		clusters,
@@ -83,6 +84,7 @@
 		{queries}
 		description={tl("description")}
 		question={tl("research_question")}
+		{topic}
 	/>
 
 	{#if loading}

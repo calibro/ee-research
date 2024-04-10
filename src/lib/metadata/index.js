@@ -27,3 +27,7 @@ export const t = (topic = "globals", key, subkey) => {
 export const getTopicLabels = (topic) => {
 	return (key, subkey) => t(topic, key, subkey)
 }
+
+export const getProtocol = (topic) => {
+	return labels[topic]?.protocol
+}

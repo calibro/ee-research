@@ -15,7 +15,8 @@
 	const { queries } = data
 
 	const locked = createLockScrollStore()
-	const tl = getTopicLabels("getty_circulation")
+	const topic = "getty_circulation"
+	const tl = getTopicLabels(topic)
 
 	let entries,
 		loading = false
@@ -90,6 +91,7 @@
 		showLang={false}
 		description={tl("description")}
 		question={tl("research_question")}
+		{topic}
 	/>
 
 	{#if loading}

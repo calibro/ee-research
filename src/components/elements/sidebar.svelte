@@ -4,15 +4,17 @@
 	import Text from "./text.svelte"
 
 	import Filters from "./filters.svelte"
+	import Protocol from "./protocol.svelte"
 	export let checkbox = false
 	export let order = false
 	export let queries
 	export let showLang = true
 	export let question
 	export let description
+	export let topic
 </script>
 
-<div class="sidebar flex flex-col gap-l py-m px-s">
+<div class="sidebar flex flex-col gap-l py-m px-s scrollbar-hide">
 	<div class="group">
 		<Text typo="h2" content={question} />
 	</div>
@@ -28,10 +30,10 @@
 				<Text typo="small" content="download data" />
 				<DownloadIcon width="8" />
 			</Link>
-			<Link url="#" theme="download" class="flex gap-xs items-center">
-				<Text typo="small" content="view protocol" />
-			</Link>
 		</div>
+	</div>
+	<div class="group flex flex-col gap-xs">
+		<Protocol {topic} />
 	</div>
 </div>
 
@@ -40,7 +42,9 @@
 		@media (--xl) {
 			position: sticky;
 			top: var(--nav-height, 74px);
-			width: 360px;
+			height: calc((var(--vh, 1vh) * 100) - var(--nav-height, 74px));
+			overflow: auto;
+			width: 380px;
 		}
 		@media (--xxl) {
 			width: 400px;
