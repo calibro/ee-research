@@ -19,6 +19,7 @@
 		<div class="text">
 			<Text content="Protocol" />
 		</div>
+		<Text content={open ? "–" : "+"} />
 	</button>
 	{#if open}
 		<ol class="details" transition:slide>
@@ -48,9 +49,6 @@
 		display: inline-flex;
 		list-style-type: none;
 		counter-increment: item;
-		p {
-			display: inline;
-		}
 	}
 
 	li:before {
@@ -63,6 +61,7 @@
 	}
 
 	.header {
+		display: flex;
 		width: 100%;
 		.text {
 			flex: 1;
