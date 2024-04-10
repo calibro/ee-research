@@ -2,9 +2,9 @@
   "title": "Youtube network",
   "research_question": "What topics are substances connected to through the recommendation algorithm?",
   "description": "TBD",
-  "protocol": {
-    "search": "Search term on YouTube (with language and country filter activated)",
-    "collect": "Collect recommended videos to the top 50 videos",
-    "identify": "Identify and characterise clusters of similar videos in dataset"
-  }
+  "protocol": [
+    "Search term on YouTube (with language and country filter activated)",
+    "Collect recommended videos to the top 50 videos",
+    "Identify and characterise clusters of similar videos in dataset"
+  ]
 }

@@ -32,9 +32,9 @@
 		<div class="item hidden xl:block"></div>
 		<div class="item xl:col-[span-3]">
 			<ThumbHome
-				title="YOUTUBE LANGUAGE COMPARISON"
+				title="YOUTUBE NETWORK"
 				description="How do video results about substances change according to the language of the query?"
-				url="/youtube-lang-compare"
+				url="/youtube-network"
 			/>
 		</div>
 		<div class="item xl:col-[span-3]">
@@ -55,9 +55,9 @@
 		<div class="item hidden xl:block"></div>
 		<div class="item xl:col-[span-3]">
 			<ThumbHome
-				title="YOUTUBE NETWORK"
+				title="YOUTUBE LANGUAGE COMPARISON"
 				description="What topics are substances connected to through the recommendation algorithm?"
-				url="/youtube-network"
+				url="/youtube-lang-compare"
 			/>
 		</div>
 		<div class="item xl:col-[span-3]">

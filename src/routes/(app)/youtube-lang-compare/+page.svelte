@@ -2,12 +2,12 @@
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse, groups } from "d3"
+	import { csvParse, group, groups } from "d3"
 	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
-	import YoutubeLang from "~/components/graphs/youtubeLang.svelte"
-	import { languages } from "~/config"
+	import YoutubeThumb from "~/components/thumb/youtube.svelte"
+	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
 
@@ -23,7 +23,9 @@
 
 	let query = queryParam("query")
 	let lang = queryParam("lang")
-	$: selectedLang = languages?.[$lang] || languages?.en
+	let order = queryParam("order")
+
+	$: selectedLangs = $lang ? $lang?.split?.(" ").map?.((l) => languages[l]) : []
 
 	onMount(async () => {
 		await tick()
@@ -31,14 +33,17 @@
 			$query = queries[0]?.query
 		}
 		if (!$lang) {
-			$lang = selectedLang?.code
+			$lang = "en"
+		}
+		if (!$order) {
+			$order = "views"
 		}
 	})
 
 	const baseUrl = `${base}/assets/youtube`
 
-	$: dataUrl = selectedLang?.code
-		? `${baseUrl}/clusters/${$query}_${selectedLang?.code?.toUpperCase()}.csv`
+	$: dataUrl = selectedLangs?.length
+		? `${baseUrl}/data/${$query}.csv`
 		: undefined
 
 	const watchQuery = async () => {
@@ -57,7 +62,7 @@
 		})
 
 		if (data) {
-			entries = csvParse(data)
+			entries = group(csvParse(data), (d) => d.language)
 		} else {
 			entries = null
 		}
@@ -65,22 +70,36 @@
 		loading = false
 	}
 
-	$: clusters =
-		entries?.length && !loading
-			? groups(entries, (d) => d.cluster).sort((a, b) => {
-					if (a[0] === "other") return 1
-					if (b[0] === "other") return -1
-					return a[0] > b[0] ? 1 : -1
-				})
-			: []
-
 	$: dataUrl, watchQuery()
+
+	$: filteredEntries =
+		selectedLangs?.length && entries?.size
+			? groups(
+					selectedLangs?.map?.((l) => entries.get(l.code.toUpperCase())).flat(),
+					(d) => d.name
+				).sort((a, b) => {
+					switch ($order) {
+						case "views":
+							return b[1][0].viewCount - a[1][0].viewCount
+						case "likes":
+							return b[1][0].likeCount - a[1][0].likeCount
+						case "comments":
+							return b[1][0].commentCount - a[1][0].commentCount
+						case "date":
+							return b[1][0].publishedAtUnix - a[1][0].publishedAtUnix
+						default:
+							return 0
+					}
+				})
+			: undefined
 </script>
 
 <svelte:body use:lockscroll={locked} />
 <div class="page xl:flex-start-start">
 	<Sidebar
 		{queries}
+		checkbox
+		order
 		description={tl("description")}
 		question={tl("research_question")}
 	/>
@@ -89,17 +108,25 @@
 		<div class="container flex-center-center">
 			<p>Loading...</p>
 		</div>
-	{:else if !entries?.length}
+	{:else if !filteredEntries?.length}
 		<div class="container flex-center-center">
 			<p>No data available</p>
 		</div>
 	{:else}
-		<div class="container p-s flex-col-start gap-s">
-			{#if clusters.length && query}
-				{#each clusters as cluster, i (`${i}-${cluster?.[0]}`)}
-					<YoutubeLang {cluster} query={$query} />
-				{/each}
-			{/if}
+		<div class="container p-s grid-1-s s:grid-2-s xl:grid-3-s xxl:grid-4-s">
+			{#each filteredEntries as entry, i (`${entry[0]}-${i}`)}
+				<YoutubeThumb
+					tubeId={entry[0]}
+					title={entry[1][0].label}
+					thumb={entry[1][0].thumb}
+					langs={entry[1].map((d) => d.language)}
+					channel={entry[1][0].channelTitle}
+					views={entry[1][0].viewCount}
+					likes={entry[1][0].likeCount}
+					comments={entry[1][0].commentCount}
+					date={entry[1][0].publishedAtUnix}
+				/>
+			{/each}
 		</div>
 	{/if}
 </div>
