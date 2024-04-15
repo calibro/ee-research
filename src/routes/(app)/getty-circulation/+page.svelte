@@ -62,7 +62,11 @@
 					entries,
 					(d) => d.cluster,
 					(d) => d.image_id
-				)
+				).sort((a, b) => {
+					if (a[0] === "other") return 1
+					if (b[0] === "other") return -1
+					return a[0] > b[0] ? 1 : -1
+				})
 			: []
 
 	$: dataUrl, watchQuery()

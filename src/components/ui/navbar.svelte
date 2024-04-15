@@ -12,7 +12,7 @@
 
 	const items = [
 		{ title: "YOUTUBE LANGUAGE COMPARISON", url: "/youtube-lang-compare" },
-		{ title: "YOUTUBE NETWORK", url: "/youtube-network" },
+		{ title: "YOUTUBE CLUSTERS", url: "/youtube-clusters" },
 		{ title: "GETTYIMAGES STEREOTYPES", url: "/getty-stereotypes" },
 		{ title: "GETTYIMAGES CIRCULATION", url: "/getty-circulation" },
 		{ title: "TIKTOK TOPICS", url: "/tiktok" },

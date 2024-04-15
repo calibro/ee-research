@@ -1,4 +1,5 @@
 <script>
+	import { format } from "d3"
 	import Comment from "~/assets/icons/comment.svg?component"
 	import Like from "~/assets/icons/like.svg?component"
 	import Play from "~/assets/icons/play.svg?component"
@@ -8,7 +9,6 @@
 	import Label from "../elements/label.svelte"
 	import Modal from "../elements/modal.svelte"
 	import Text from "../elements/text.svelte"
-
 	export let thumb
 	export let title
 	export let tubeId
@@ -20,6 +20,8 @@
 	export let date
 
 	let isOpen = false
+
+	const formatValue = (value) => format(".0s")(value)
 </script>
 
 <button
@@ -35,7 +37,7 @@
 				<Label label={lang} color={languages[lang.toLowerCase()].color} />
 			{/each}
 		</div>
-		<img src={thumb} alt={title} />
+		<img class="thumb" src={thumb} alt={title} />
 	</div>
 	<div class="info">
 		<div class="title py-s">
@@ -45,15 +47,15 @@
 		<div class="interactions">
 			<div class="flex gap-xxs">
 				<Play width="14" />
-				<Text content={views} typo="xs"></Text>
+				<Text content={formatValue(views)} typo="xs"></Text>
 			</div>
 			<div class="flex gap-xxs">
 				<Like width="14" />
-				<Text content={likes} typo="xs"></Text>
+				<Text content={formatValue(likes)} typo="xs"></Text>
 			</div>
 			<div class="flex gap-xxs">
 				<Comment width="14" />
-				<Text content={comments || 0} typo="xs"></Text>
+				<Text content={formatValue(comments) || 0} typo="xs"></Text>
 			</div>
 			<div class="flex gap-xxs">
 				<Time width="14" />
@@ -100,6 +102,22 @@
 		background: var(--color-white);
 		border-radius: var(--border-radius);
 		padding: var(--space-s);
+
+		@media (--hover) {
+			.thumb {
+				filter: grayscale(1);
+				opacity: 0.75;
+				transition:
+					opacity 0.3s,
+					filter 0.3s;
+			}
+			&:hover {
+				.thumb {
+					filter: grayscale(0);
+					opacity: 1;
+				}
+			}
+		}
 	}
 
 	.interactions {

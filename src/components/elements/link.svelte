@@ -1,4 +1,5 @@
 <script>
+	import { page } from "$app/stores"
 	import { getRelativeUrl } from "$lib"
 
 	export let url = null
@@ -26,6 +27,7 @@
 	on:click={fn}
 	role="button"
 	tabindex="0"
+	class:active={$page.url.pathname.includes(to)}
 >
 	{#if $$slots.default}
 		<slot />
@@ -75,6 +77,10 @@
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: hidden;
+			}
+			&.active {
+				background: var(--color-black);
+				color: var(--color-white);
 			}
 
 			border-bottom: var(--border-default);

@@ -1,6 +1,5 @@
 <script>
 	import { base } from "$app/paths"
-	import Label from "../elements/label.svelte"
 	import Text from "../elements/text.svelte"
 
 	export let cluster
@@ -29,9 +28,9 @@
 	<div class="h-full overflow-hidden col-[span-9] xl:col-[span-7] grid-3-0">
 		{#each cluster[1] as [key, d], i (`${key}-${cluster[0]}-${query}`)}
 			<button class="img relative" on:click={() => open(d, i + 1)}>
-				<div class="hidden m:block absolute top-0 left-0 p-xs xl:p-s">
+				<!-- <div class="hidden m:block absolute top-0 left-0 p-xs xl:p-s">
 					<Label label="RANK #{i + 1}" typo="label" />
-				</div>
+				</div> -->
 				<img src={getImg(key)} alt="" />
 			</button>
 		{/each}

@@ -32,10 +32,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="hidden xl:block xl:col-[8/span-2] py-s px-s xl:px-0">
+		<!-- <div class="hidden xl:block xl:col-[8/span-2] py-s px-s xl:px-0">
 			<Text content="Rank" typo="label" class="case-upper" />
 			<Text content={rank} />
-		</div>
+		</div> -->
 		<div class="hidden xl:block xl:col-[10/span-2] py-s px-s xl:px-0">
 			<Text content="Results" typo="label" class="case-upper" />
 			<Text content={cluster?.length} />
@@ -55,10 +55,10 @@
 		<img src={getImg(cluster[0].image_id)} alt="" />
 	</div>
 	<div class="grid-4-0 p-s info">
-		<div class="col-[span-2]">
+		<!-- <div class="col-[span-2]">
 			<Text content="Rank" typo="label" class="case-upper" />
 			<Text content={rank} />
-		</div>
+		</div> -->
 		<div class="col-[span-2]">
 			<Text content="Results" typo="label" class="case-upper" />
 			<Text content={cluster?.length} />

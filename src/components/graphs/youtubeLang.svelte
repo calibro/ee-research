@@ -50,12 +50,12 @@
 		class="col-[span-9] xl:col-[span-2] flex-btw-start xl:flex-col-btw-start p-s"
 	>
 		<div>
-			<Text typo="label" content="Stereotype" class="case-upper" />
+			<Text typo="label" content="Cluster" class="case-upper" />
 			<Text typo="h3" content={cluster[1][0].clusterLabel} class="mb-xs" />
 		</div>
 		<Text
 			typo="label"
-			content="Images: {cluster[1]?.length}"
+			content="Videos: {cluster[1]?.length}"
 			class="case-upper"
 		/>
 	</div>

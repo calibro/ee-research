@@ -32,9 +32,9 @@
 		<div class="item hidden xl:block"></div>
 		<div class="item xl:col-[span-3]">
 			<ThumbHome
-				title="YOUTUBE NETWORK"
+				title="YOUTUBE CLUSTERS"
 				description="How do video results about substances change according to the language of the query?"
-				url="/youtube-network"
+				url="/youtube-clusters"
 			/>
 		</div>
 		<div class="item xl:col-[span-3]">

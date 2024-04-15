@@ -34,7 +34,7 @@
 			$query = queries[0]?.query
 		}
 		if (!$lang) {
-			$lang = "en"
+			$lang = "en fr nl ph"
 		}
 		if (!$order) {
 			$order = "views"

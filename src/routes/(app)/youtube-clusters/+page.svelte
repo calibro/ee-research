@@ -15,7 +15,7 @@
 	const { queries } = data
 
 	const locked = createLockScrollStore()
-	const topic = "youtube_network"
+	const topic = "youtube_clusters"
 	const tl = getTopicLabels(topic)
 
 	let entries,
@@ -71,7 +71,7 @@
 			? groups(entries, (d) => d.cluster).sort((a, b) => {
 					if (a[0] === "other") return 1
 					if (b[0] === "other") return -1
-					return a[0] > b[0] ? 1 : -1
+					return a[1]?.[0]?.clusterLabel > b[1]?.[0]?.clusterLabel ? 1 : -1
 				})
 			: []
 
