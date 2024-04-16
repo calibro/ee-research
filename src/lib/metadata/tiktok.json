@@ -3,9 +3,11 @@
 	"research_question": "Which topics are connected to different substances, practices and devices?",
 	"description": "On TikTok users share fears, practices, and information about toxicities. This page collects clusters of similar hashtags, resized based on their frequency of use. By clicking on a cluster, users can explore videos associated with those hashtags.",
 	"protocol": [
-		"Query term on TikTok in the local language",
-		"Collect a set of videos per each query",
+		"Search terms on TikTok in the local language",
+		"Collect top videos per query",
 		"Collect hashtags for each video",
-		"Identify and characterise clusters of similar hashtags"
+		"Clusters similar hashtags using clustering sentence embeddings",
+		"Delete unrelated clusters of hashtags",
+		"Fine tune and name identified clusters of videos"
 	]
 }
