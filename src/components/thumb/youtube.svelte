@@ -138,6 +138,7 @@
 			top: 0;
 			left: 0;
 			padding: var(--space-xs);
+			z-index: 1;
 		}
 	}
 	img {
