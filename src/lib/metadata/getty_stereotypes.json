@@ -1,11 +1,11 @@
 {
   "title": "Getty Images stereotypes",
   "research_question": "Which visual tropes emerge in connection to different pollution routes, practices and substances?",
-  "description": "GettyImages provides insight into the visual repertoire associated with toxicities. This page shows images returned by GettyImages for each query. Images are grouped into clusters of stereotypes. Clusters of stereotypes are ordered alphabetically.",
+  "description": "GettyImages provides insight into the visual repertoire associated with toxicities. This page displays images retrieved from Getty Images for each query (in English). Images are organized using a visual similarity algorithm and then manually grouped into stereotypes. Stereotype clusters are arranged alphabetically from top to bottom. By clicking on a thumbnail, you can explore images along with their metadata, including location tags. Data collected in January 2024.",
   "protocol": [
     "Search term on Getty Images",
     "Collect top 1000 images per search term using a custom script",
-    "Cluster images in each dataset based on formal similarity",
-    "Identify most recurrent visual stereotypes and name each cluster"
+    "Cluster images in each dataset based on visual similarity",
+    "Identify most recurrent visual stereotypes and name clusters of similar images"
   ]
 }

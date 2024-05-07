@@ -1,7 +1,7 @@
 {
 	"title": "TikTok topics",
 	"research_question": "Which topics are connected to different substances, practices and devices?",
-	"description": "On TikTok users share fears, practices, and information about toxicities. This page collects clusters of similar hashtags, resized based on their frequency of use. By clicking on a cluster, users can explore videos associated with those hashtags.",
+	"description": "On TikTok, users share fears, practices, and information regarding toxicities. Each term is searched in different languages on the platform to collect a list of videos and associated hashtags. This page displays clusters of similar hashtags, resized according to their frequency of use. You can explore videos shared with those hashtags by clicking on a hashtag cluster. Data collected in Junuary 2024.",
 	"protocol": [
 		"Search terms on TikTok in the local language",
 		"Collect top videos per query",

@@ -1,7 +1,7 @@
 {
   "title": "Getty Images circulation",
   "research_question": "By which web pages are the most significant stock photos used?",
-  "description": "When stock images travel online, their meaning shifts. This page showcases the contextual usage of some of the most frequently encountered visual stereotypes sourced from Getty Images for each query. By selecting an image, users can explore a list of websites where the image is hosted.",
+  "description": "As stock images circulate online, their meanings evolve. This page highlights the contextual usage of commonly encountered visual stereotypes sourced from Getty Images for each query. By selecting an image, you can explore a list of websites where the image is featured. Data collected in January 2024.",
   "protocol": [
     "For each stereotype, collect the 3 highest ranked images",
     "Reverse search images on Google Image Search",
