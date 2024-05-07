@@ -4,7 +4,13 @@
 	import Link from "../elements/link.svelte"
 	import Text from "../elements/text.svelte"
 
-	export let viewCount, likeCount, cluster, videos, query, lang
+	export let viewCount,
+		likeCount,
+		cluster,
+		videos,
+		query,
+		lang,
+		download = () => {}
 </script>
 
 <div class="navbar">
@@ -27,7 +33,7 @@
 		</div>
 		<div class="hidden xl:block xl:col-[10/span-2] py-s px-s xl:px-0">
 			<Text content="Resources" typo="label" class="case-upper pb-xxs" />
-			<Link theme="download" class="flex gap-xxs items-center">
+			<Link theme="download" class="flex gap-xxs items-center" fn={download}>
 				<Text typo="1" content="download data" />
 				<DonwloadIcon width="8" />
 			</Link>

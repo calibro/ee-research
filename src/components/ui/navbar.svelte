@@ -25,7 +25,7 @@
 	$: {
 		if (browser) {
 			document.body.style.setProperty("--nav-height", `${navHeight}px`)
-			if (innerWidth > extractNumber(breakpoint.l)) {
+			if (innerWidth > extractNumber(breakpoint.xl)) {
 				openMenu = false
 			}
 			locked.toggle(openMenu)
@@ -68,6 +68,7 @@
 		z-index: 100;
 
 		&.isOpen {
+			width: 100%;
 			position: fixed;
 		}
 		.logo {

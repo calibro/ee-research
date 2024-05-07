@@ -12,7 +12,7 @@
 	export let question
 	export let description
 	export let topic
-	export let download
+	export let download = false
 </script>
 
 <div class="sidebar flex flex-col gap-l py-m px-s scrollbar-hide">
