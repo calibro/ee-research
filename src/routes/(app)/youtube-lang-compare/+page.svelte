@@ -98,7 +98,11 @@
 	const download = () => {
 		if (filteredEntries?.length) {
 			const rows = filteredEntries.map((el) => {
-				return el[1][0]
+				const languages =
+					el[1].length > 1
+						? el[1].map((d) => d.language?.split?.("|")).join("|")
+						: el[1][0].language
+				return { ...el[1][0], languages }
 			})
 
 			const csvString = [
@@ -113,21 +117,26 @@
 					"query",
 					"languages",
 				],
-				...rows.map((item) => [
-					item.label,
-					item.channelTitle,
-					`https://www.youtube.com/v/${item.name}`,
-					item.viewCount,
-					convertUnixTime(item.publishedAtUnix),
-					queries.find((q) => q.query === $query).queryLabel,
-					selectedLangs.map((l) => l.label).join("|"),
-				]),
+				...rows.map((item) => {
+					return [
+						item.label,
+						item.channelTitle,
+						`https://www.youtube.com/v/${item.name}`,
+						item.viewCount || "---",
+						item.commentCount || "---",
+						item.likeCount || "---",
+						convertUnixTime(item.publishedAtUnix) || "---",
+						queries.find((q) => q.query === $query).queryLabel || "---",
+						item.languages || "---",
+					]
+				}),
 			]
 				.map((e) => e.join(","))
 				.join("\n")
 
-			const csvContent = "data:text/csv;charset=utf-8," + csvString
-			var encodedUri = encodeURI(csvContent)
+			const csvContent =
+				"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
+			var encodedUri = csvContent
 			var link = document.createElement("a")
 			link.setAttribute("href", encodedUri)
 			link.setAttribute("download", "my_data.csv")
