@@ -34,7 +34,6 @@
 
 <style>
 	.accordion {
-		margin: 1rem 0;
 		border: var(--border-default);
 		border-radius: var(--border-radius);
 	}

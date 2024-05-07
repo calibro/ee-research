@@ -9,6 +9,7 @@
 	import YoutubeThumb from "~/components/thumb/youtube.svelte"
 	import { languages } from "~/config.json"
 	import { getAsyncData } from "~/lib/data.js"
+	import { convertUnixTime } from "~/lib/index.js"
 	import { getTopicLabels } from "~/lib/metadata"
 
 	export let data
@@ -93,6 +94,47 @@
 					}
 				})
 			: undefined
+
+	const download = () => {
+		if (filteredEntries?.length) {
+			const rows = filteredEntries.map((el) => {
+				return el[1][0]
+			})
+
+			const csvString = [
+				[
+					"title",
+					"author",
+					"link",
+					"views",
+					"comments",
+					"likes",
+					"date",
+					"query",
+					"languages",
+				],
+				...rows.map((item) => [
+					item.label,
+					item.channelTitle,
+					`https://www.youtube.com/v/${item.name}`,
+					item.viewCount,
+					convertUnixTime(item.publishedAtUnix),
+					queries.find((q) => q.query === $query).queryLabel,
+					selectedLangs.map((l) => l.label).join("|"),
+				]),
+			]
+				.map((e) => e.join(","))
+				.join("\n")
+
+			const csvContent = "data:text/csv;charset=utf-8," + csvString
+			var encodedUri = encodeURI(csvContent)
+			var link = document.createElement("a")
+			link.setAttribute("href", encodedUri)
+			link.setAttribute("download", "my_data.csv")
+			document.body.appendChild(link) // Required for FF
+			link.click()
+		}
+	}
 </script>
 
 <svelte:body use:lockscroll={locked} />
@@ -104,6 +146,7 @@
 		description={tl("description")}
 		question={tl("research_question")}
 		{topic}
+		{download}
 	/>
 
 	{#if loading}

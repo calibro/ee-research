@@ -12,6 +12,7 @@
 	export let question
 	export let description
 	export let topic
+	export let download
 </script>
 
 <div class="sidebar flex flex-col gap-l py-m px-s scrollbar-hide">
@@ -26,12 +27,19 @@
 	<div class="group flex flex-col gap-xs">
 		<Text typo="label" content="Resources" class="case-upper" />
 		<div>
-			<div class="flex gap-xs">
-				<Link url="#" theme="download" class="flex gap-xxs items-center">
-					<Text typo="small" content="download data" />
-					<DownloadIcon width="8" />
-				</Link>
-			</div>
+			{#if download}
+				<div class="flex gap-xs pb-s">
+					<Link
+						url="#"
+						theme="download"
+						class="flex gap-xxs items-center"
+						fn={download}
+					>
+						<Text typo="small" content="download data" />
+						<DownloadIcon width="8" />
+					</Link>
+				</div>
+			{/if}
 			<Protocol {topic} />
 		</div>
 	</div>
