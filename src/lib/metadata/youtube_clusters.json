@@ -1,10 +1,12 @@
 {
   "title": "Youtube clusters",
-  "research_question": "What topics are substances connected to through the recommendation algorithm?",
-  "description": "TBD",
+  "research_question": "What topics are each substance related to through the recommendation algorithm?",
+  "description": "YouTube's algorithm suggests videos to users through the autoplay feature and its interface. Networks of suggested videos offer a window into the thematic areas that connect substances, practices, and formats. This page displays thematic clusters of videos identified among those recommended by YouTube for each substance. Clusters are ordered alphabetically. Data collected in August 2023.",
   "protocol": [
-    "Search term on YouTube (with language and country filter activated)",
-    "Collect recommended videos to the top 50 videos",
-    "Identify and characterise clusters of similar videos in dataset"
+    "Search terms on YouTube (with language and country filter activated)",
+    "Collect the top 50 results for each query term using YouTube Data Tools",
+    "Collect recommended videos to the top 50 results per language and substance",
+    "Identify clusters of similar videos in each dataset using clustering sentence embeddings",
+    "Fine tune and name identified clusters of videos"
   ]
 }

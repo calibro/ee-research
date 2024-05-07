@@ -1,10 +1,12 @@
 {
   "title": "Youtube language comparison",
   "research_question": "How do video results about substances change according to the language of the query?",
-  "description": "Video results on YouTube vary depending on the language of the query. This page displays the top 50 videos for each query across different languages, merged together. Videos can be filtered by language and ordered by view, time, and like count.",
+  "description": "Video results on YouTube vary depending on the language of the query. This page displays the top 50 videos for each query across different languages, merged together. Videos can be filtered by language and ordered by time and engagement metrics. Ordering by the number of likes or views emphasizes the popularity of videos. Ordering by the number of comments emphasizes controversial videos that might generate discussion in the comment section. Data collected in January 2024.",
   "protocol": [
     "Search term on YouTube (with language and country filter activated)",
-    "Collect the top 50 videos from the results using YouTube Data Tools",
-    "Collect metadata (likes, views, and timestamps)"
+    "Collect the top 50 results for each query term using YouTube Data Tools",
+    "Delete unrelated results from the list",
+    "Collect metadata (likes, views, and timestamps)",
+    "Compile results from different languages in one list per query"
   ]
 }

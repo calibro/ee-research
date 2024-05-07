@@ -33,14 +33,14 @@
 		<div class="item xl:col-[span-3]">
 			<ThumbHome
 				title="YOUTUBE CLUSTERS"
-				description="How do video results about substances change according to the language of the query?"
+				description="What topics are each substance related to through the recommendation algorithm?"
 				url="/youtube-clusters"
 			/>
 		</div>
 		<div class="item xl:col-[span-3]">
 			<ThumbHome
 				title="GETTYIMAGES STEREOTYPES"
-				description="Which visual tropes emerges in connection to different pollution routes, practices and substances?"
+				description="Which visual tropes emerge in connection to different pollution routes, practices and substances?"
 				url="/getty-stereotypes"
 			/>
 		</div>
@@ -56,7 +56,7 @@
 		<div class="item xl:col-[span-3]">
 			<ThumbHome
 				title="YOUTUBE LANGUAGE COMPARISON"
-				description="What topics are substances connected to through the recommendation algorithm?"
+				description="How do video results about substances change according to the language of the query?"
 				url="/youtube-lang-compare"
 			/>
 		</div>

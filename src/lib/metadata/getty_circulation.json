@@ -1,11 +1,12 @@
 {
   "title": "Getty Images circulation",
   "research_question": "By which web pages are the most significant stock photos used?",
-  "description": "Getty Images provides insight into the visual repertoire associated with toxicities. This page shows images returned by GettyImages for each query. Images are grouped into clusters of stereotypes. Clusters of stereotypes are ordered from most to least common.",
+  "description": "As stock images circulate online, their meanings evolve. This page highlights the contextual usage of commonly encountered visual stereotypes sourced from Getty Images for each query. By selecting an image, you can explore a list of websites where the image is featured. Data collected in January 2024.",
   "protocol": [
-    "Identify most significant images",
+    "For each stereotype, collect the 3 highest ranked images",
     "Reverse search images on Google Image Search",
-    "Collect web pages hosting the images",
-    "Analyse top web pages"
+    "Collect top 20 web pages hosting the images",
+    "Collect URL and Title for each web page",
+    "Delete unrelated results"
   ]
 }

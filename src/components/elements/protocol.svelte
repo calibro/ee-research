@@ -24,8 +24,8 @@
 	{#if open}
 		<ol class="details" transition:slide>
 			{#each protocol as item}
-				<li class="typo-small">
-					<Text content={item} typo="small" />
+				<li>
+					<Text content={item} />
 				</li>
 			{/each}
 		</ol>
@@ -39,24 +39,10 @@
 	}
 
 	ol {
-		counter-reset: item;
-		padding: 0;
-		margin: 0;
-		padding-top: var(--space-xs);
+		padding-inline-start: 1.5em;
 	}
 	li {
-		display: inline-flex;
-		list-style-type: none;
-		counter-increment: item;
-	}
-
-	li:before {
-		display: inline;
-		width: 1.5em;
-		padding-right: 0.5em;
-		font-weight: bold;
-		text-align: right;
-		content: counter(item) ".";
+		margin-bottom: 0.5em;
 	}
 
 	.header {
