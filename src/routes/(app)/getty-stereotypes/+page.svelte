@@ -10,6 +10,7 @@
 	import GettyStereo from "~/components/graphs/gettyStereo.svelte"
 	import { getAsyncData } from "~/lib/data.js"
 	import { getTopicLabels } from "~/lib/metadata"
+	import { getImageUrl } from "~/lib/stereotypes.js"
 
 	export let data
 	const { queries } = data
@@ -78,6 +79,34 @@
 			: []
 
 	$: dataUrl, watchQuery()
+
+	const download = () => {
+		if (entries?.length) {
+			const rows = entries
+			console.log(rows)
+			const csvString = [
+				["query", "stereotype", "link"],
+				...rows.map((item) => {
+					return [
+						queries.find((q) => q.query === $query).queryLabel,
+						item.clusterLabel,
+						getImageUrl(item.id, $query),
+					]
+				}),
+			]
+				.map((e) => e.join(","))
+				.join("\n")
+
+			const csvContent =
+				"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
+			var encodedUri = csvContent
+			var link = document.createElement("a")
+			link.setAttribute("href", encodedUri)
+			link.setAttribute("download", "my_data.csv")
+			document.body.appendChild(link)
+			link.click()
+		}
+	}
 </script>
 
 <svelte:body use:lockscroll={locked} />
@@ -88,6 +117,7 @@
 		description={tl("description")}
 		question={tl("research_question")}
 		{topic}
+		{download}
 	/>
 
 	{#if loading}
