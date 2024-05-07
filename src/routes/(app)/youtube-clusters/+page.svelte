@@ -76,6 +76,36 @@
 			: []
 
 	$: dataUrl, watchQuery()
+
+	const download = () => {
+		if (entries?.length) {
+			const rows = entries
+
+			const csvString = [
+				["title", "link", "cluster", "query", "language"],
+				...rows.map((item) => {
+					return [
+						item.label,
+						`https://www.youtube.com/v/${item.name}`,
+						item.clusterLabel,
+						queries.find((q) => q.query === $query).queryLabel,
+						item.language,
+					]
+				}),
+			]
+				.map((e) => e.join(","))
+				.join("\n")
+
+			const csvContent =
+				"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
+			var encodedUri = csvContent
+			var link = document.createElement("a")
+			link.setAttribute("href", encodedUri)
+			link.setAttribute("download", "my_data.csv")
+			document.body.appendChild(link)
+			link.click()
+		}
+	}
 </script>
 
 <svelte:body use:lockscroll={locked} />
@@ -85,6 +115,7 @@
 		description={tl("description")}
 		question={tl("research_question")}
 		{topic}
+		{download}
 	/>
 
 	{#if loading}
@@ -99,7 +130,7 @@
 		<div class="container p-s flex-col-start gap-s">
 			{#if clusters.length && query}
 				{#each clusters as cluster, i (`${i}-${cluster?.[0]}`)}
-					<YoutubeLang {cluster} query={$query} />
+					<YoutubeLang {cluster} />
 				{/each}
 			{/if}
 		</div>
