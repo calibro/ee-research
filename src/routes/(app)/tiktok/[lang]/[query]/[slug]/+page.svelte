@@ -5,13 +5,30 @@
 
 	export let data
 
-	const { videos, cluster, query, lang } = data
+	const { videos, cluster, query, lang, downloadData } = data
 
 	const viewCount = Number(sum(videos, (d) => d.view_count)).toLocaleString()
 	const likeCount = Number(sum(videos, (d) => d.like_count)).toLocaleString()
 
 	const download = () => {
-		console.log(videos)
+		const rows = downloadData[0][1]
+		const csvString = [
+			["query", "cluster", "number_of_videos", "hashtag", "language"],
+			...rows.map((item) => {
+				return [query, cluster.label, item.videosNumber, item.text, lang]
+			}),
+		]
+			.map((e) => e.join(","))
+			.join("\n")
+
+		const csvContent =
+			"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
+		var encodedUri = csvContent
+		var link = document.createElement("a")
+		link.setAttribute("href", encodedUri)
+		link.setAttribute("download", "my_data.csv")
+		document.body.appendChild(link)
+		link.click()
 	}
 </script>
 

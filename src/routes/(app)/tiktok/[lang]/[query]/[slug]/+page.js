@@ -1,6 +1,6 @@
 import { base } from "$app/paths"
 import { error } from "@sveltejs/kit"
-import { csvParse } from "d3"
+import { csvParse, groups } from "d3"
 import { languages } from "~/config.json"
 import { getAsyncData } from "~/lib/data"
 
@@ -75,5 +75,12 @@ export async function load({ params, fetch }) {
 		videosIds.includes(video.id)
 	)
 
-	return { videos, cluster, lang, query }
+	const downloadData = groups(entries, (d) => d.cluster)
+		.map((d) => {
+			d[2] = [...new Set(d[1].map((d) => d.ids.split("|")).flat())].length
+			return d
+		})
+		.sort((a, b) => descending(a[2], b[2]))
+
+	return { videos, cluster, lang, query, downloadData }
 }
