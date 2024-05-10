@@ -2,7 +2,7 @@
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse, group, groups } from "d3"
+	import { csvFormatRows, csvParse, group, groups } from "d3"
 	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
@@ -105,41 +105,45 @@
 				return { ...el[1][0], languages }
 			})
 
-			const csvString = [
+			const csvString = csvFormatRows(
 				[
-					"title",
-					"author",
-					"link",
-					"views",
-					"comments",
-					"likes",
-					"date",
-					"query",
-					"languages",
-				],
-				...rows.map((item) => {
-					return [
-						item.label,
-						item.channelTitle,
-						`https://www.youtube.com/v/${item.name}`,
-						item.viewCount || "---",
-						item.commentCount || "---",
-						item.likeCount || "---",
-						convertUnixTime(item.publishedAtUnix) || "---",
-						queries.find((q) => q.query === $query).queryLabel || "---",
-						item.languages || "---",
-					]
-				}),
-			]
-				.map((e) => e.join(","))
-				.join("\n")
+					[
+						"title",
+						"author",
+						"link",
+						"views",
+						"comments",
+						"likes",
+						"date",
+						"query",
+						"languages",
+					],
+				].concat(
+					rows.map((item) => {
+						return [
+							item.label,
+							item.channelTitle,
+							`https://www.youtube.com/v/${item.name}`,
+							item.viewCount,
+							item.commentCount,
+							item.likeCount,
+							convertUnixTime(item.publishedAtUnix),
+							queries.find((q) => q.query === $query).queryLabel,
+							item.languages,
+						]
+					})
+				)
+			)
 
 			const csvContent =
 				"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
 			var encodedUri = csvContent
 			var link = document.createElement("a")
 			link.setAttribute("href", encodedUri)
-			link.setAttribute("download", "my_data.csv")
+			link.setAttribute(
+				"download",
+				`youtube-language-comparison_${$query}_${$lang?.split(" ")?.join?.("-")}.csv`
+			)
 			document.body.appendChild(link) // Required for FF
 			link.click()
 		}

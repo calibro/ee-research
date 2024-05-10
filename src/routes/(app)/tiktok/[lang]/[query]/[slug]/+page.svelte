@@ -1,5 +1,5 @@
 <script>
-	import { sum } from "d3"
+	import { csvFormatRows, sum } from "d3"
 	import TiktokThumb from "~/components/thumb/tiktok.svelte"
 	import Navbar from "~/components/tiktok/navbar.svelte"
 
@@ -12,21 +12,21 @@
 
 	const download = () => {
 		const rows = downloadData[0][1]
-		const csvString = [
-			["query", "cluster", "number_of_videos", "hashtag", "language"],
-			...rows.map((item) => {
-				return [query, cluster.label, item.videosNumber, item.text, lang]
-			}),
-		]
-			.map((e) => e.join(","))
-			.join("\n")
+
+		const csvString = csvFormatRows(
+			[["query", "cluster", "number_of_videos", "hashtag", "language"]].concat(
+				rows.map((item) => {
+					return [query, cluster.label, item.videosNumber, item.text, lang]
+				})
+			)
+		)
 
 		const csvContent =
 			"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
 		var encodedUri = csvContent
 		var link = document.createElement("a")
 		link.setAttribute("href", encodedUri)
-		link.setAttribute("download", "my_data.csv")
+		link.setAttribute("download", `tiktok-topics-hashtags_${query}_${lang}.csv`)
 		document.body.appendChild(link)
 		link.click()
 	}

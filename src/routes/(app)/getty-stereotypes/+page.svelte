@@ -1,8 +1,9 @@
 <script>
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
+	import { env } from "$env/dynamic/public"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse, groups } from "d3"
+	import { csvFormatRows, csvParse, groups } from "d3"
 	import { onMount } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
@@ -83,26 +84,28 @@
 	const download = () => {
 		if (entries?.length) {
 			const rows = entries
-			console.log(rows)
-			const csvString = [
-				["query", "stereotype", "link"],
-				...rows.map((item) => {
-					return [
-						queries.find((q) => q.query === $query).queryLabel,
-						item.clusterLabel,
-						getImageUrl(item.id, $query),
-					]
-				}),
-			]
-				.map((e) => e.join(","))
-				.join("\n")
+
+			const csvString = csvFormatRows(
+				[["query", "stereotype", "link"]].concat(
+					rows.map((item) => {
+						const baseUrl = env.PUBLIC_WEBSITE_URL || "https://calib.ro"
+						const imgUrl = getImageUrl(item.id, $query)
+
+						return [
+							queries.find((q) => q.query === $query).queryLabel,
+							item.clusterLabel,
+							imgUrl ? `${baseUrl}${imgUrl}` : "",
+						]
+					})
+				)
+			)
 
 			const csvContent =
 				"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
 			var encodedUri = csvContent
 			var link = document.createElement("a")
 			link.setAttribute("href", encodedUri)
-			link.setAttribute("download", "my_data.csv")
+			link.setAttribute("download", `gettyimages-stereotypes_${$query}.csv`)
 			document.body.appendChild(link)
 			link.click()
 		}

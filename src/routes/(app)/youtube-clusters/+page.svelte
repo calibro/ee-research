@@ -2,7 +2,7 @@
 	import { browser } from "$app/environment"
 	import { base } from "$app/paths"
 	import { createLockScrollStore, lockscroll } from "@svelte-put/lockscroll"
-	import { csvParse, groups } from "d3"
+	import { csvFormatRows, csvParse, groups } from "d3"
 	import { onMount, tick } from "svelte"
 	import { queryParam } from "sveltekit-search-params"
 	import Sidebar from "~/components/elements/sidebar.svelte"
@@ -81,27 +81,26 @@
 		if (entries?.length) {
 			const rows = entries
 
-			const csvString = [
-				["title", "link", "cluster", "query", "language"],
-				...rows.map((item) => {
-					return [
-						item.label,
-						`https://www.youtube.com/v/${item.name}`,
-						item.clusterLabel,
-						queries.find((q) => q.query === $query).queryLabel,
-						item.language,
-					]
-				}),
-			]
-				.map((e) => e.join(","))
-				.join("\n")
+			const csvString = csvFormatRows(
+				[["title", "link", "cluster", "query", "language"]].concat(
+					rows.map((item) => {
+						return [
+							item.label,
+							`https://www.youtube.com/v/${item.name}`,
+							item.clusterLabel,
+							queries.find((q) => q.query === $query).queryLabel,
+							item.language,
+						]
+					})
+				)
+			)
 
 			const csvContent =
 				"data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
 			var encodedUri = csvContent
 			var link = document.createElement("a")
 			link.setAttribute("href", encodedUri)
-			link.setAttribute("download", "my_data.csv")
+			link.setAttribute("download", `youtube-clusters_${$query}_${$lang}.csv`)
 			document.body.appendChild(link)
 			link.click()
 		}

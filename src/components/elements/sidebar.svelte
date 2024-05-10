@@ -30,7 +30,6 @@
 			{#if download}
 				<div class="flex gap-xs pb-s">
 					<Link
-						url="#"
 						theme="download"
 						class="flex gap-xxs items-center"
 						fn={download}
