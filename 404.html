@@ -6,29 +6,35 @@
 	<link rel="icon" href="/ee-research/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-		<link rel="modulepreload" href="/ee-research/_app/immutable/entry/start.PAuYdZ9W.js">
-		<link rel="modulepreload" href="/ee-research/_app/immutable/chunks/entry.oOU0zEs6.js">
+		<link rel="modulepreload" href="/ee-research/_app/immutable/entry/start.jl1zCQE0.js">
+		<link rel="modulepreload" href="/ee-research/_app/immutable/chunks/entry.jtA1YJKr.js">
 		<link rel="modulepreload" href="/ee-research/_app/immutable/chunks/scheduler.DjmlZpBi.js">
-		<link rel="modulepreload" href="/ee-research/_app/immutable/entry/app.BX_ZRzf4.js">
+		<link rel="modulepreload" href="/ee-research/_app/immutable/entry/app.BSZexHbV.js">
 		<link rel="modulepreload" href="/ee-research/_app/immutable/chunks/index.D5mPgV2_.js">
+		<link rel="modulepreload" href="/ee-research/_app/env.js">
 </head>
 
 <body class="typo-p" data-sveltekit-preload-data="hover">
 	<div style="display: contents">
 			<script>
 				{
-					__sveltekit_1cd7li3 = {
+					__sveltekit_1ol9juf = {
 						base: "/ee-research",
-						assets: "/ee-research"
+						assets: "/ee-research",
+						env: null
 					};
 
 					const element = document.currentScript.parentElement;
 
-					Promise.all([
-						import("/ee-research/_app/immutable/entry/start.PAuYdZ9W.js"),
-						import("/ee-research/_app/immutable/entry/app.BX_ZRzf4.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element);
+					import("/ee-research/_app/env.js").then(({ env }) => {
+						__sveltekit_1ol9juf.env = env;
+
+						Promise.all([
+							import("/ee-research/_app/immutable/entry/start.jl1zCQE0.js"),
+							import("/ee-research/_app/immutable/entry/app.BSZexHbV.js")
+						]).then(([kit, app]) => {
+							kit.start(app, element);
+						});
 					});
 				}
 			</script>
