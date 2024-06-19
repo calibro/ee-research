@@ -42,7 +42,7 @@
 		background-color: var(--color-white);
 		border-radius: var(--border-radius);
 		overflow: hidden;
-		grid-template-rows: 1fr auto;
+		grid-template-rows: 1fr 200px;
 		@media (--xl) {
 			height: 200px;
 			grid-template-rows: 1fr;
