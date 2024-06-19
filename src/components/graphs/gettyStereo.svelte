@@ -94,7 +94,7 @@
 		background-color: var(--color-white);
 		border-radius: var(--border-radius);
 		overflow: hidden;
-		grid-template-rows: auto 200px;
+		grid-template-rows: 1fr auto;
 		@media (--xl) {
 			height: 200px;
 			grid-template-rows: none;
